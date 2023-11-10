@@ -394,7 +394,7 @@ O KMP visa:
 
 ```mermaid
 graph TD
-    subgraph UI["Opção 1: 100% nativa"]
+    subgraph UI["UI nativa"]
         subgraph Android_UI["&nbsp&nbspJetpack Compose&nbsp&nbsp"]
             AndroidButton[Botão <br> Gestos]
         end
@@ -409,12 +409,6 @@ graph TD
 
         subgraph Desktop_UI["&nbsp&nbspDesktop&nbsp&nbsp"]
             DesktopButton[Botão <br> ️Gestos]
-        end
-    end
-
-    subgraph UI2["Opção 2: Compose Multiplataforma"]
-        subgraph ComposeUI[" "]
-            BotaoKMP["Botão, Gestos"]
         end
     end
 
@@ -445,18 +439,16 @@ graph TD
     iOS_UI -->|Evento| KotlinMP
     Web_UI -->|Evento| KotlinMP
     Desktop_UI -->|Evento| KotlinMP
-    ComposeUI -->|Evento| KotlinMP
     KotlinMP -->|Estado| Android_UI
     KotlinMP -->|Estado| iOS_UI
     KotlinMP -->|Estado| Web_UI
     KotlinMP -->|Estado| Desktop_UI
-    KotlinMP -->|Estado| ComposeUI
     Android_Infra <--> KotlinMP
     iOS_Infra <--> KotlinMP
     Desktop_Infra <--> KotlinMP
     Web_Infra <--> KotlinMP
     classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
-    class Android_UI,iOS_UI,Web_UI,Desktop_UI,ComposeUI,KotlinMP area;
+    class Android_UI,iOS_UI,Web_UI,Desktop_UI,KotlinMP area;
     class Android_Infra,iOS_Infra,Desktop_Infra,Web_Infra area;
 ```
 ### 
