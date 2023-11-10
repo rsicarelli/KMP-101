@@ -16,7 +16,7 @@ multiplataforma", cada um com suas próprias vantagens e desafios no ecossistema
 
 ## O que é desenvolver "nativo"?
 
-Desenvolvimento nativo é a criação de aplicativos feitos para operar especificamente em uma plataforma, como Android, iOS Desktop, Web,
+Desenvolvimento nativo é a criação de aplicativos feitos para operar especificamente em uma plataforma, como Android, iOS, Desktop, Web,
 tirando proveito de todas as suas capacidades.
 
 Aplicativos nativos se integram perfeitamente com o hardware e seguem as diretrizes de design da plataforma, resultando em interfaces
@@ -24,29 +24,6 @@ responsivas e acesso imediato às últimas atualizações do sistema.
 
 Cada fabricante de plataforma ou sistema operacional disponibiliza um kit de desenvolvimento de software (SDK), com os recursos necessários
 para desenvolver aplicações específicas para aquela plataforma. Esse SDK é então utilizado para criar aplicações para uma única plataforma.
-
-```mermaid
-graph TD
-    subgraph area1 ["Código fonte da aplicação"]
-        A[Código Fonte do Software]
-        C[Recursos]
-    end
-    subgraph area2 ["Ferramentas do SDK"]
-        B[Compilador, Linker]
-        D[Empacotador]
-        B -->|Android SDK,<br> Xcode, etc| E[Executável binário] --> D
-    end
-
-    A[Software] --> B
-    D --> F[Pacote Distribuível]
-    F -->|apk, xap, <br> app, etc| G[Lojas de Aplicativos]
-    F -->|zip, wasm, etc| GG[Web]
-    C -->|png, jpg, xml, <br> json, proto, etc| D[Empacotador]
-    classDef area fill: #9b5de5, stroke: #333, stroke-width: 4px;
-    class area1,area2 area
-```
-
-### Desafios do nativo
 
 O desenvolvimento nativo enfrenta desafios como:
 
@@ -58,13 +35,39 @@ O desenvolvimento nativo enfrenta desafios como:
 
 A complexidade aumenta com a necessidade de dominar ferramentas e APIs específicas, resultando em uma manutenção mais trabalhosa.
 
-## Introduzindo frameworks "cross-platform"
+```mermaid
+graph TD
+    subgraph " "
+        subgraph area1 ["Código fonte da aplicação"]
+            A[Código Fonte do Software]
+            C[Recursos]
+        end
+        subgraph area2 ["Ferramentas do SDK"]
+            B[Compilador, Linker]
+            D[Empacotador]
+            B -->|Android SDK,<br> Xcode, etc| E[Executável binário] --> D
+        end
 
-Frameworks cross-platforma como React Native e Flutter apresentam um SDK próprio, que atua como uma camada adicional sobre o SDK nativo.
+        A[Software] --> B
+        D --> F[Pacote Distribuível]
+        F -->|apk, xap, <br> app, etc| G[Lojas de Aplicativos]
+        F -->|zip, wasm, etc| GG[Web]
+        C -->|png, jpg, xml, <br> json, proto, etc| D[Empacotador]
+        classDef area fill: #9b5de5, stroke: #333, stroke-width: px;
+        class area1,area2 area
+    end
+```
+
+> https://www.researchgate.net/publication/314165913_Decision_Framework_for_Mobile_Development_Methods
+
+## Introduzindo frameworks cross-plataforma
+
+Frameworks cross-plataforma como React Native e Flutter apresentam um SDK próprio, que pode atuar como uma camada adicional sobre o SDK
+nativo.
 
 É inegável a ascensão dessa solução no ecossistema de aplicativos. Usando dados do Flutter:
 
-- **2021**: No final de 2021, a Google Play Store alcançou um pico de 4,67 milhões de aplicativos disponíveis, dos quais mais de 150.000
+- **2021**: A Play Store alcançou um pico de 4,67 milhões de aplicativos na loja, dos quais mais de 150.000
   foram desenvolvidos com Flutter, representando cerca de 3.2% do
   total [[1](https://developers.googleblog.com/2021/03/announcing-flutter-2.html), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/)].
 - **2022**: No terceiro trimestre de 2022, o número de aplicativos disponíveis caiu para 3,55 milhões, mas o número de aplicativos Flutter
@@ -74,55 +77,59 @@ Frameworks cross-platforma como React Native e Flutter apresentam um SDK própri
   em Flutter, sugerindo que quase 35% dos aplicativos na loja são desenvolvidos usando essa
   tecnologia [[1](https://bloggersideas.com/pt/apps-statistics/#:~:text=,de%20aplicativos%20dispon%C3%ADveis%20para%20download), [2](https://www.nomtek.com/blog/flutter-app-examples)].
 
-### O que impulsiona a busca por soluções Cross-Platforma?
+### O que impulsiona a busca por soluções cross-plataforma?
 
-A demanda por soluções cross-platforma vem do desejo de simplificar o complexo processo de desenvolvimento de aplicativos para múltiplas
+A demanda por soluções cross-plataforma vem do desejo de simplificar o complexo processo de desenvolvimento de aplicativos para múltiplas
 plataformas.
 
 A necessidade de dominar linguagens e SDKs diferentes para cada plataforma, como Kotlin para Android e Swift para iOS, além das
 constantes atualizações tecnológicas, impõe um grande desafio ao longo prazo.
 
-Frameworks cross-platform, como Flutter e React Native, oferecem um caminho mais eficiente, permitindo o uso de um único código-base para
+Frameworks cross-plataforma, como Flutter e React Native, oferecem um caminho mais eficiente, permitindo o uso de um único código-base para
 várias plataformas, economizando tempo e esforço significativos.
 
 ## React Native
 
-[React Native](https://github.com/facebook/react-native) é um framework de código aberto que código React e JavaScript em componentes
+[React Native](https://github.com/facebook/react-native) é um framework de código aberto que conecta o JavaScript e React com componentes
 nativos para Android e iOS.
 
-Por exemplo:
+Essa metodologia é especialmente conveniente para devs com experiência no universo Web/React.
 
 - Um componente `Text` no React Native é convertido em um `UITextView` no iOS.
 - No Android, o mesmo componente `Text` se torna um `TextView`.
 
-Essa metodologia é especialmente conveniente para devs com experiência no universo Web/React.
-
-### Funcionamento da arquitetura no React Native
-
 Atualmente, o React Native possuí 2 tipos de arquiteturas:
-uma ["antiga" e a "nova"](https://reactnative.dev/docs/next/the-new-architecture/landing-page).
+uma [atual e a nova](https://reactnative.dev/docs/next/the-new-architecture/landing-page).
 
-#### Arquitetura "antiga"
+### Arquitetura atual (estável)
 
-Essa arquitetura opera com três threads chave: a thread JavaScript, a thread nativa principal e a thread de background que gerencia o Shadow
-Node. Essas threads são essenciais para a execução de ambientes dentro do React Native, cada uma com funções específicas para manter a
-aplicação fluindo suavemente.
+Essa arquitetura funciona com 3 threads principais, essenciais para a execução de ambientes dentro do React Native:
 
-A comunicação entre o código JavaScript e o código nativo é feita por uma biblioteca conhecida como "ponte" (bridge).
+1. Do JavaScript,
+2. Da thread nativa principal, ou "main thread"
+3. A thread de background que gerencia o Shadow Node.
 
-> "A ponte pode ser imaginada como um terminal em que o emissor envia alguns dados para a camada do consumidor. O consumidor pode ler os
-> dados, desserializá-los e executar as operações necessárias."
+A comunicação entre o código JavaScript e o código nativo é feita por uma biblioteca conhecida como "ponte" (bridge), que pode ser imaginada
+como um terminal em que o emissor envia alguns dados para a camada do consumidor, podendo desserializá-los e executar as operações
+necessárias.
 
-Esta ponte é crucial para enviar dados serializáveis de forma assíncrona entre as threads, permitindo que processos complexos ocorram sem
-interromper a
-experiência do usuário.
+#### Desafios da arquitetura antiga
 
-Quando um `UIView` no iOS ou um `TextView` no Android é acionado, os dados correspondentes são enviados através desta
-ponte ao código JavaScript, que então retorna com as informações necessárias para a atualização da interface do usuário.
+1. **Assincronicidade**: a ponte opera de forma assíncrona, o que significa que uma camada submete dados e espera "asincronamente" que a
+   outra camada os processe. Isso pode ser ineficiente quando a espera não é realmente necessária, resultando em atrasos desnecessários na
+   atualização da UI.
+
+2. **Single-threaded**: O código JavaScript é executado em uma única thread. Assim, qualquer computação realizada precisa ser feita nesta
+   thread única, levando a bloqueios (tela congelada) e atrasos, especialmente em operações intensivas.
+
+3. **Overheads adicionais**: Sempre que uma camada precisava interagir com a outra, é necessário serializar os dados a serem transferidos.
+   Na outra extremidade, esses dados precisavam ser desserializados. O formato escolhido para essa transferência era o JSON, devido à sua
+   simplicidade e legibilidade humana. No entanto, apesar do JSON ser considerado leve, o processo de serialização e desserialização
+   adiciona uma sobrecarga computacional, impactando o desempenho.
 
 ```mermaid
 graph TB
-    subgraph "Arquitetura 'antiga' do React Native"
+    subgraph "Arquitetura 'atual/estável' do React Native"
         Bridge["Ponte"]
 
         subgraph area1["Thread JavaScript"]
@@ -157,31 +164,13 @@ graph TB
 
 > Referência: https://dev.to/goodpic/understanding-react-native-architecture-22hh
 
-##### Desafios da Arquitetura Atual do React Native
+### A nova arquitetura
 
-Enquanto a "ponte" no React Native possibilita a comunicação entre as threads JavaScript e nativa, ela não está livre de limitações. Os
-problemas intrínsecos da ponte incluem:
+A nova arquitetura visa resolver esses problemas, permitindo que haja uma comunicação mais eficiente e direta entre as threads, eliminando a
+necessidade de serialização/desserialização e aproveitando múltiplas threads para melhorar o desempenho.
 
-1. **Assincronicidade**: a ponte opera de forma assíncrona, o que significa que uma camada submete dados e espera "asincronamente" que a
-   outra camada os processe. Isso pode ser ineficiente quando a espera não é realmente necessária, resultando em atrasos desnecessários na
-   atualização da UI.
-
-2. **Single-threaded**: O código JavaScript é executado em uma única thread. Assim, qualquer computação realizada precisa ser feita nesta
-   thread única, levando a bloqueios (tela congelada) e atrasos, especialmente em operações intensivas.
-
-3. **Overheads adicionais**: Sempre que uma camada precisava interagir com a outra, é necessário serializar os dados a serem transferidos.
-   Na outra extremidade, esses dados precisavam ser desserializados. O formato escolhido para essa transferência era o JSON, devido à sua
-   simplicidade e legibilidade humana. No entanto, apesar do JSON ser considerado leve, o processo de serialização e desserialização
-   adiciona uma sobrecarga computacional, impactando o desempenho.
-
-Essas limitações motivaram a equipe do React Native a trabalhar na mencionada atualização de arquitetura.
-
-#### Arquitetura "nova"
-
-A nova arquitetura, conhecida como "Fabric", visa resolver esses problemas, permitindo uma comunicação mais eficiente e direta entre as
-threads, eliminando a necessidade de serialização/desserialização e aproveitando múltiplas threads para melhorar o desempenho.
-
-O Fabric é uma reescrita completa da camada de renderização, permitindo que o React Native interaja mais diretamente com as threads nativas.
+O [Fabric](https://reactnative.dev/architecture/fabric-renderer) é uma reescrita completa da camada de renderização, permitindo que o React
+Native interaja mais diretamente com as threads nativas.
 
 - **JSI (JavaScript Interface)**: Uma camada de abstração mais leve que substitui a ponte, permitindo chamadas sincronizadas entre o
   JavaScript e o nativo.
@@ -218,14 +207,14 @@ graph TD
     class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
 ```
 
-### Benefícios do Fabric
+#### Benefícios do Fabric
 
 - **Desempenho Aumentado**: Com a eliminação da necessidade de serialização e desserialização, a comunicação entre JS e nativo é muito mais
   rápida.
 - **Chamadas Síncronas**: Permite atualizações de UI imediatas e animações mais suaves.
 - **Menos Overhead**: A arquitetura simplificada reduz a carga computacional.
 
-### TurboModules
+#### TurboModules
 
 Os `TurboModules` aprimoram os `NativeModule` no React Native, superando limitações como a inicialização antecipada e a necessidade de
 serialização de dados.
@@ -235,14 +224,14 @@ Essa abordagem permite que os módulos nativos sejam carregados sob demanda, por
 Essa abordagem resulta em um carregamento mais eficiente e uma inicialização mais rápida das funcionalidades nativas, pois os módulos são
 carregados apenas quando são realmente necessários pelo aplicativo.
 
-#### Fase experimental
+### Fase experimental
 
-O `TurboModule` ainda é experimental e está sujeita a mudanças à medida que o projeto evolui.
+Essa nova arquitetura ainda é experimental e está sujeita a mudanças à medida que o projeto evolui.
 
 É importante estar ciente de que a implementação atual inclui várias etapas manuais e não reflete a experiência final de desenvolvimento
 prevista para a arquitetura renovada.
 
-> Referencias
+> Referências
 >
 > https://blog.logrocket.com/exploring-react-natives-new-architecture/
 >
@@ -346,41 +335,33 @@ interoperabilidade entre Java e Kotlin ou Objective-C e Swift.
 
 #### O desafio do Dart no Flutter
 
-O Dart, como toda nova linguagem, há um desafio natural de aprendizado e aplicação.
+Como toda linguagem, Dart impõe um desafio natural de aprendizado e aplicação.
 
-Embora o Dart seja uma linguagem moderna e dinâmica, é compreensível que devs com experiência em plataformas nativas
-possam inicialmente encontrar uma barreira ao adentrar neste novo ecossistema.
+Embora o Dart seja uma linguagem moderna e dinâmica, é comum que devs de outras plataformas nativas possam encontrar uma barreira ao
+adentrar neste novo ecossistema, como funcionalidades específicas de linguagens como Kotlin ou Swift.
 
-Dart está constantemente se aprimorando e, embora possa não ter a mesma percepção de maturidade que linguagens estabelecidas como Kotlin,
-JavaScript/TypeScript e Swift, ela oferece uma série de recursos interessantes que estão ganhando reconhecimento na comunidade de
+Dart está constantemente se aprimorando e, embora possa não ter a mesma percepção de maturidade que linguagens estabelecidas, ela oferece
+uma série de recursos interessantes que estão ganhando reconhecimento na comunidade de
 desenvolvimento.
 
 ---
 
 ## E o Multiplataforma?
 
-As soluções cross-platform se esforçam para abstrair as complexidades das plataformas específicas, nos permitindo escrever
-um código único que funciona em diversos dispositivos.
+As soluções cross-plataforma abstraem as complexidades nativas, permitindo escrever um único código para diversos dispositivos.
 
-No entanto, essa abstração muitas vezes resulta em limitações quando se trata de funcionalidades nativas, desempenho e experiência do
-usuário final que está acostumado com a fluidez e recursos específicos de cada plataforma.
+Porém, é comum encontrar limitações ao se integrar com a plataforma nativa, impactando o desempenho e a experiência da aplicação.
 
-Além disso, a adaptação a atualizações das plataformas pode ser lenta, pois o framework cross-platform precisa ser atualizado para suportar
-novas funcionalidades nativas.
+Além disso, a adaptação a atualizações das plataformas pode ser lenta, pois o framework cross-plataforma precisa ser atualizado para
+suportar novas funcionalidades nativas.
 
-Compreender a filosofia por trás de um framework é crucial por algumas razões:
-
-- Você se torna mais consciente dos limites do framework e pode identificar quando uma funcionalidade pode estar comprometida.
-- Você pode antecipar a direção futura do framework e como isso afetará o desenvolvimento do seu projeto.
-
-### Introduzindo Kotlin Multiplataforma
+## Introduzindo o Kotlin Multiplataforma (KMP)
 
 Para superar esses desafios, o Kotlin Multiplatform (KMP) apresenta uma nova abordagem, centrada na coexistência harmoniosa com o
 desenvolvimento nativo.
 
-Em vez de tentar abstrair completamente a plataforma nativa, o KMP foca em compartilhar a lógica de negócios não
-específica da plataforma, enquanto ainda permite que a parte do código que interage com o sistema do dispositivo seja escrita de forma
-nativa.
+Em vez de tentar abstrair completamente a plataforma nativa, o KMP empodera devs nativos com um maquinário open-source que trata de
+compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre outros.
 
 ![Kotlin Multiplatform](https://kotlinlang.org/docs/images/kotlin-multiplatform.svg)
 
