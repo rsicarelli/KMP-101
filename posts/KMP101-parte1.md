@@ -394,79 +394,70 @@ O KMP visa:
 
 ```mermaid
 graph TD
+    subgraph UI["Opção 1: 100% nativa"]
+        subgraph Android_UI["&nbsp&nbspJetpack Compose&nbsp&nbsp"]
+            AndroidButton[Botão <br> Gestos]
+        end
 
-subgraph UI["Opção 1: UI Nativa"]
-subgraph Android_UI["Jetpack Compose"]
-AndroidButton[📲 Botão <br> ↕️ Scroll]
-end
+        subgraph iOS_UI["Swift UI"]
+            iOSButton[Botão <br> Gestos]
+        end
 
-subgraph iOS_UI["Swift UI"]
-iOSButton[📲 Botão <br> ↕️ Scroll]
-end
+        subgraph Web_UI["React"]
+            WebButton[Botão <br> ️Gestos]
+        end
 
-subgraph Web_UI["React"]
-WebButton[📲 Botão <br> ↕️ Scroll]
-end
+        subgraph Desktop_UI["&nbsp&nbspDesktop&nbsp&nbsp"]
+            DesktopButton[Botão <br> ️Gestos]
+        end
+    end
 
-subgraph Desktop_UI["Desktop"]
-DesktopButton[📲 Botão <br> ↕️ Scroll]
-end
-end
+    subgraph UI2["Opção 2: Compose Multiplataforma"]
+        subgraph ComposeUI[" "]
+            BotaoKMP["Botão, Gestos"]
+        end
+    end
 
-subgraph ComposeUI["Opção 2: Compose Multiplatform"]
-ComposeAndroid_UI["Android"]
-ComposeiOS_UI["iOS"]
-ComposeWeb_UI["Web"]
-ComposeDesktop_UI["Desktop"]
-end
+    subgraph KotlinMP["Código comum em KMP"]
+        KMPDomain[Domínio]
+        KMPData[Dados]
+    end
 
-subgraph KotlinMP["Código comum em KMP"]
-KMPDomain[Domínio]
-KMPData[Dados]
-end
+    subgraph Infra["Infra nativo"]
+        subgraph Android_Infra["Android"]
+            AndroidGPS[️GPS <br> Internet]
+        end
 
-subgraph Infra["Infra nativo"]
-subgraph Android_Infra["Android"]
-AndroidGPS[🛰️ GPS <br> 🌐 Internet]
-end
+        subgraph iOS_Infra["iOS"]
+            iOSGPS[GPS <br> Internet]
+        end
 
-subgraph iOS_Infra["iOS"]
-iOSGPS[🛰️ GPS <br> 🌐 Internet]
-end
+        subgraph Desktop_Infra["Desktop"]
+            DesktopGPS[️GPS <br> Internet]
+        end
 
-subgraph Desktop_Infra["Desktop"]
-DesktopGPS[🛰️ GPS <br> 🌐 Internet]
-end
+        subgraph Web_Infra["Web"]
+            WebGPS[️GPS <br> Internet]
+        end
+    end
 
-subgraph Web_Infra["Web"]
-WebGPS[🛰️ GPS <br> 🌐 Internet]
-end
-end
-
-
-Android_UI -->|Evento|KotlinMP
-iOS_UI -->|Evento|KotlinMP
-Web_UI -->|Evento|KotlinMP
-Desktop_UI -->|Evento|KotlinMP
-ComposeUI -->|Evento|KotlinMP
-
-KotlinMP -->|Estado|Android_UI
-KotlinMP -->|Estado|iOS_UI
-KotlinMP -->|Estado|Web_UI
-KotlinMP -->|Estado|Desktop_UI
-KotlinMP -->|Estado|ComposeUI
-
-Android_Infra <--> KotlinMP
-iOS_Infra <--> KotlinMP
-Desktop_Infra <--> KotlinMP
-Web_Infra <--> KotlinMP
-
-classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
-classDef infra fill: #4c4c4c, color: #fff, stroke: #333, stroke-width: 1px
-classDef ui fill: #9b5de5, color: #000, stroke: #333, stroke-width: 1px
-class Android_UI,iOS_UI,Web_UI,Desktop_UI ui;
-class Android_Infra,iOS_Infra,Desktop_Infra,Web_Infra infra;
-class KMPDomain,KMPData area;
+    Android_UI -->|Evento| KotlinMP
+    iOS_UI -->|Evento| KotlinMP
+    Web_UI -->|Evento| KotlinMP
+    Desktop_UI -->|Evento| KotlinMP
+    ComposeUI -->|Evento| KotlinMP
+    KotlinMP -->|Estado| Android_UI
+    KotlinMP -->|Estado| iOS_UI
+    KotlinMP -->|Estado| Web_UI
+    KotlinMP -->|Estado| Desktop_UI
+    KotlinMP -->|Estado| ComposeUI
+    Android_Infra <--> KotlinMP
+    iOS_Infra <--> KotlinMP
+    Desktop_Infra <--> KotlinMP
+    Web_Infra <--> KotlinMP
+    classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
+    class Android_UI,iOS_UI,Web_UI,Desktop_UI,ComposeUI,KotlinMP area;
+    class Android_Infra,iOS_Infra,Desktop_Infra,Web_Infra area;
 ```
 ### 
 
