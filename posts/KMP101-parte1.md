@@ -52,7 +52,7 @@ graph TD
         F -->|apk, xap, <br> app, etc| G[Lojas de Aplicativos]
         F -->|zip, wasm, etc| GG[Web]
         C -->|png, jpg, xml, <br> json, etc| D[Empacotador]
-        classDef area fill: #9b5de5, stroke: #333, stroke-width: px;
+        classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
         class area1,area2 area
     end
 ```
@@ -163,7 +163,7 @@ graph TB
         Bridge -.-> Yoga
     end
 
-    classDef area fill: #9b5de5
+    classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
     classDef defaultStyle stroke: #333, stroke-width: 1px;
     class area1,area2,area3 area
     class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
@@ -227,7 +227,7 @@ graph TD
         Mounting --> EventHandler
     end
 
-    classDef area fill: #9b5de5
+    classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
     classDef defaultStyle stroke: #333, stroke-width: 1px;
     class area1,area2,area3 area
     class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
@@ -302,7 +302,7 @@ graph TD
         end
     end
 
-    classDef area fill: #9b5de5
+    classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
     classDef defaultStyle stroke: #333, stroke-width: 1px;
     class area1,area2,area3 area
     class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
@@ -404,9 +404,9 @@ compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre out
 ```mermaid
 graph TD
     subgraph " "
-        classDef area fill: #9b5de5
+        classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
         classDef defaultStyle stroke: #333, stroke-width: 1px;
-        CommonCode[Kotlin common code] --> KotlinJVM[Kotlin/JVM]
+        CommonCode[Código Kotlin compartilhado] --> KotlinJVM[Kotlin/JVM]
         CommonCode --> KotlinJS[Kotlin/JS]
         CommonCode --> KotlinNative[Kotlin/Native]
         CommonCode --> KotlinWasm["Kotlin/Wasm"]
@@ -414,7 +414,7 @@ graph TD
         KotlinJS --> JSCode[.js]
         KotlinWasm --> WasmCode[.wasm]
         KotlinNative --> NativeCode[.framework <br> .xcframework <br> .bin]
-        class CommonCode,KotlinJVM,KotlinJS,KotlinNative,KotlinWasm area;
+        class KotlinJVM,KotlinJS,KotlinNative,KotlinWasm area;
         class JVMCode,JSCode,NativeCode,WasmCode defaultStyle;
     end
 
