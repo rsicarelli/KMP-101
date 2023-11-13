@@ -52,7 +52,7 @@ graph TD
         F -->|apk, xap, <br> app, etc| G[Lojas de Aplicativos]
         F -->|zip, wasm, etc| GG[Web]
         C -->|png, jpg, xml, <br> json, etc| D[Empacotador]
-        classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
+        classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
         class area1,area2 area
     end
 ```
@@ -163,7 +163,7 @@ graph TB
         Bridge -.-> Yoga
     end
 
-    classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
+    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
     classDef defaultStyle stroke: #333, stroke-width: 1px;
     class area1,area2,area3 area
     class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
@@ -227,7 +227,7 @@ graph TD
         Mounting --> EventHandler
     end
 
-    classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
+    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
     classDef defaultStyle stroke: #333, stroke-width: 1px;
     class area1,area2,area3 area
     class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
@@ -297,7 +297,7 @@ graph TD
         end
     end
 
-    classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
+    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
     classDef defaultStyle stroke: #333, stroke-width: 1px;
     class area1,area2,area3 area
     class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
@@ -396,7 +396,7 @@ compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre out
 ```mermaid
 graph TD
     subgraph " "
-        classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
+        classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
         classDef defaultStyle stroke: #333, stroke-width: 1px;
         CommonCode[Código Kotlin compartilhado] --> KotlinJVM[Kotlin/JVM]
         CommonCode --> KotlinJS[Kotlin/JS]
@@ -421,17 +421,34 @@ O KMP visa:
 
 ### Compartilhando código Kotlin com as plataformas
 
-Um dos princípios adotados no KMP é: compartilhar o que você quiser, quando você quiser e onde você quiser.
+Dado o espírito flexível do KMP, atualmente existem uma série de estratégias que devs podem adotar para usar o KMP.
 
-Isso nos permite adotar uma estratégia de refatoração incremental, selecionando um pequeno pedaço do app para compartilhar (como eventos de
-analytics), e ir expandindo conforme a experiência do time expande.
+Algumas abordagens comuns:
 
-#### UI e Infra nativa
+- **Compartilhando modelos do domínio**: Utilização de classes comuns como entidades, DTOs (Data Transfer Objects), respostas do servidor,
+  etc., consistentes em todas as plataformas.
 
-Essa é abordagem mais comum no KMP, onde compartilhamos apenas o "cérebro" ou "core" da nossa aplicação.
+- **Componentes de infraestrutura**: Compartilhamento de lógica relacionada ao uso da internet, persistência de dados, e manipulação de
+  cache. Isso pode incluir:
 
-Aqui, focamos apenas em compartilhar as regras de negócio ou e todas as suas implicações, como acesso ao hardware (localização, internet,
-Bluetooth), serialização, deserialização, etc.
+- **Experimentação e analytics**: Códigos que permite experimentação no app, como a definição de feature flags, eventos de analytics, etc.
+
+- **Lógica de negócios**: Códigos que definem regras de negócios, validações, e algoritmos essenciais para o
+  funcionamento da aplicação.
+
+- **Utilitários**: Funções e classes auxiliares que podem ser usadas em diferentes partes da aplicação, como manipulação de
+  strings, formatação de datas, constantes, etc.
+
+- **Testes**: Escrever testes unitários e de integração que podem ser executados em todas as plataformas, garantindo a
+  consistência e a confiabilidade do código compartilhado.
+
+- **Abstrações de Hardware e SO**: Códigos que abstraem funcionalidades específicas do sistema operacional ou do hardware, como acesso a
+  sensores, armazenamento de arquivos, etc., permitindo que sejam usados de maneira uniforme em diferentes plataformas.
+
+Lembrando que a escolha de quais partes compartilhar depende das necessidades específicas do projeto e da equipe. O KMP oferece a
+flexibilidade para adaptar a estratégia de compartilhamento de código conforme o projeto evolui.
+
+
 
 ```mermaid
 
@@ -462,7 +479,7 @@ graph TD
     iOS_Infra <--> KotlinMP
     Desktop_Infra <--> KotlinMP
     Web_Infra <--> KotlinMP
-    classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
+    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
     class UI,Infra area;
 ```
 
@@ -527,10 +544,10 @@ graph LR
     end
 
     UI --> Clientes
-    classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
+    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
     class Mobile,Wearables,Desktop,Web,Server,UI,Domain,Data,TV area;
 ```
 
-###                                                                                  
+###                                                                                      
 
 Ao explorar o KMP, podemos nos beneficiar da eficiência do código compartilhado sem sacrificar a qualidade da experiência nativa. 
