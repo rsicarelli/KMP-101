@@ -71,10 +71,6 @@ nativo.
   foram desenvolvidos com Flutter, representando cerca de 3.2% do
   total [[1](https://developers.googleblog.com/2021/03/announcing-flutter-2.html), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/)].
 
-<style>
-svg[id^="mermaid-"] { min-width: 200px; max-width: 500px; }
-</style>
-
 ```mermaid
 pie
     title Aplicativos na Play Store (2021)
@@ -86,10 +82,6 @@ pie
   cresceu para 500.000, representando cerca de
   14.1% [[1](https://techcrunch.com/2023/05/10/with-over-1m-published-apps-googles-flutter-expands-its-support-for-web-apps-and-webassembly/?guccounter=1#:~:text=Google%20also%20noted%20that%20there,adopt%20Flutter%20in%20existing%20projects.), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/#:~:text=Google%20Play%3A%20number%20of%20available%20apps%20as%20of%20Q3%202022)].
 
-<style>
-svg[id^="mermaid-"] { min-width: 200px; max-width: 500px; }
-</style>
-
 ```mermaid
 pie
     title Aplicativos na Play Store (2022)
@@ -100,10 +92,6 @@ pie
 - **2023**: A mais recente contagem disponível indica que há 2,87 milhões de aplicativos na Google Play Store, com mais de 1 milhão baseado
   em Flutter, sugerindo que quase 35% dos aplicativos na loja são desenvolvidos usando essa
   tecnologia [[1](https://bloggersideas.com/pt/apps-statistics/#:~:text=,de%20aplicativos%20dispon%C3%ADveis%20para%20download), [2](https://www.nomtek.com/blog/flutter-app-examples)].
-
-<style>
-svg[id^="mermaid-"] { min-width: 200px; max-width: 500px; }
-</style>
 
 ```mermaid
 pie
@@ -463,6 +451,6 @@ graph TD
     class Android_Infra,iOS_Infra,Desktop_Infra,Web_Infra area;
 ```
 
-###                    
+###                     
 
 Ao explorar o KMP, podemos nos beneficiar da eficiência do código compartilhado sem sacrificar a qualidade da experiência nativa. 
