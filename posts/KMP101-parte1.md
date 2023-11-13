@@ -52,7 +52,7 @@ graph TD
         F -->|apk, xap, <br> app, etc| G[Lojas de Aplicativos]
         F -->|zip, wasm, etc| GG[Web]
         C -->|png, jpg, xml, <br> json, etc| D[Empacotador]
-        classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
+        classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
         class area1,area2 area
     end
 ```
@@ -163,7 +163,7 @@ graph TB
         Bridge -.-> Yoga
     end
 
-    classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
+    classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
     classDef defaultStyle stroke: #333, stroke-width: 1px;
     class area1,area2,area3 area
     class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
@@ -227,7 +227,7 @@ graph TD
         Mounting --> EventHandler
     end
 
-    classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
+    classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
     classDef defaultStyle stroke: #333, stroke-width: 1px;
     class area1,area2,area3 area
     class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
@@ -302,7 +302,7 @@ graph TD
         end
     end
 
-    classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
+    classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
     classDef defaultStyle stroke: #333, stroke-width: 1px;
     class area1,area2,area3 area
     class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
@@ -343,7 +343,7 @@ gantt
     title Tamanhos de um app Flutter no Android
     dateFormat X
     axisFormat %s
-    section Nativo
+    section Jetpack Compose
         1.463 MB: 0, 1463
     section KMP Compose
         1.463 MB: 0, 1463
@@ -356,20 +356,17 @@ gantt
     title Tamanhos de um app Flutter no iOS
     dateFormat X
     axisFormat %s
-    section Nativo
+    section Swift UI
         1,7 MB: 0, 1700
-    section Flutter para iOS 12.2+
-        17,9 MB: 0, 17900
+    section Flutter
+        17,9 MB (iOS > 12.1): 0, 17900
+        25,4MB (iOS < 12.1): 0, 25400
     section KMP Compose
         24,8 MB: 0, 24800
-    section Flutter iOS nas versões antigas
-        
-        25,4MB: 0, 25400
+
 ```
 
-> [Android & iOS native vs. Flutter vs. Compose Multiplatform](https://www.jacobras.nl/2023/09/android-ios-native-flutter-compose-kmp/)
->
-> *Compose Multiplataforma em iOS está em versão alpha
+> [🔗 Android & iOS native vs. Flutter vs. Compose Multiplatform](https://www.jacobras.nl/2023/09/android-ios-native-flutter-compose-kmp/)
 
 #### O desafio do Dart no Flutter
 
@@ -404,7 +401,7 @@ compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre out
 ```mermaid
 graph TD
     subgraph " "
-        classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
+        classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
         classDef defaultStyle stroke: #333, stroke-width: 1px;
         CommonCode[Código Kotlin compartilhado] --> KotlinJVM[Kotlin/JVM]
         CommonCode --> KotlinJS[Kotlin/JS]
@@ -429,6 +426,18 @@ O KMP visa:
 
 ### Compartilhando código Kotlin com as plataformas
 
+Um dos princípios adotados no KMP é: compartilhar o que você quiser, quando você quiser e onde você quiser.
+
+Isso nos permite adotar uma estratégia de refatoração incremental, selecionando um pequeno pedaço do app para compartilhar (como eventos de
+analytics), e ir expandindo conforme a experiência do time expande.
+
+#### UI e Infra nativa
+
+Essa é abordagem mais comum no KMP, onde compartilhamos apenas o "cérebro" ou "core" da nossa aplicação.
+
+Aqui, focamos apenas em compartilhar as regras de negócio ou e todas as suas implicações, como acesso ao hardware (localização, internet,
+Bluetooth), serialização, deserialização, etc.
+
 ```mermaid
 
 graph TD
@@ -436,14 +445,11 @@ graph TD
         subgraph UI["UI nativa"]
             Android_UI["&nbsp&nbspJetpack Compose&nbsp&nbsp"]
             iOS_UI["Swift UI"]
-            Web_UI["React"]
-            Desktop_UI["&nbsp&nbspDesktop&nbsp&nbsp"]
+            Web_UI["Kotlin React"]
+            Desktop_UI["&nbsp&nbsp KMP Compose (Desktop)&nbsp&nbsp"]
         end
 
-        subgraph KotlinMP["Código comum em KMP"]
-            KMPDomain[Domínio]
-            KMPData[Dados]
-        end
+        KotlinMP["Código comum em KMP"]
 
         subgraph Infra["Infra nativo"]
             Android_Infra["Android"]
@@ -461,11 +467,75 @@ graph TD
     iOS_Infra <--> KotlinMP
     Desktop_Infra <--> KotlinMP
     Web_Infra <--> KotlinMP
-    classDef area fill: #9b5de5, color: #fff, stroke: #333, stroke-width: 1px
-    class Android_UI,iOS_UI,Web_UI,Desktop_UI,KotlinMP area;
-    class Android_Infra,iOS_Infra,Desktop_Infra,Web_Infra area;
+    classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
+    class UI,Infra area;
 ```
 
-###                                                                      
+```mermaid
+graph LR
+    subgraph Clientes
+        subgraph Mobile
+            Android["Android <br> (Compose KMP)"]
+            iOS["iOS <br> (SwiftUI)"]
+            iOSCompose["iOS <br> (Compose KMP - Experimental)"]
+            AndroidWidget["Android App Widget <br> (Glance API)"]
+            iOSWidget["iOS App Widget <br> (SwiftUI)"]
+        end
+        subgraph Wearables
+            watchOS["iOS watchOS <br> (SwiftUI)"]
+            WearOS["Android Wear OS <br> (Compose KMP)"]
+        end
+        subgraph Desktop
+            macOS["Apple macOS <br> (SwiftUI)"]
+            macOSCompose["Apple macOS <br> (Compose KMP)"]
+            Windows["Windows <br> (Compose KMP)"]
+            Linux["Linux <br> (Compose KMP)"]
+        end
+        subgraph TV
+            TvOS["Apple tvOS <br> (SwiftUI)"]
+            AndroidTV["Android TV <br> (Compose KMP)"]
+        end
+        subgraph Web
+            WebWasm["Wasm <br> (Compose KMP - Experimental)"]
+            WebReact["Web Kotlin/JS <br> (Kotlin React Wrapper)"]
+        end
+    end
+
+    subgraph Server["Servidor"]
+        JVM["JVM REST API <br> (Ktor)"]
+        JVM2["JVM REST API <br> (Spring)"]
+        JVM3["JVM REST API <br> (http4k)"]
+        JVM4["JVM GraphQL <br> (KGraphQL)"]
+        JVM5["JVM GraphQL <br> (Apollo)"]
+        JVM6["JVM GRPC <br> (grpc-kotlin)"]
+    end
+
+    subgraph Arquitetura["App em Kotlin Multiplataforma"]
+        Data
+        Domain
+        UI
+    end
+
+    subgraph Data["Data - Kotlin"]
+        RESTAPI["Chamadas REST API <br> (ktor KMP)"]
+        Serialization["Serialização e Deserialização <br> (kotlinx-serialization KMP)"]
+        SQDelight["Banco de dados/Cache <br> (SQDelight KMP)"]
+    end
+
+    subgraph UI["Apresentação/UI"]
+        Nativo["Nativo"]
+    end
+
+    subgraph Domain
+        BusinessLogic[Regras de negócios]
+        DataModels[Modelos]
+    end
+
+    UI --> Clientes
+    classDef area fill: #B125EA, color: #fff, stroke: #333, stroke-width: 1px
+    class Mobile,Wearables,Desktop,Web,Server,UI,Domain,Data,TV area;
+```
+
+###                                                                                  
 
 Ao explorar o KMP, podemos nos beneficiar da eficiência do código compartilhado sem sacrificar a qualidade da experiência nativa. 
