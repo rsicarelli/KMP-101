@@ -274,12 +274,7 @@ nativas: Android, iOS ou web. A plataforma nativa apresenta o canvas e envia os 
 
 ```mermaid
 graph TD
-    DIR("<img src='https://iconscout.com/ms-icon-310x310.png'; width='30' />")
-```
-
-```mermaid
-graph TD
-    subgraph " "
+    subgraph " Flutter SDK"
         subgraph area1[Framework]
             Material[Material]
             Cupertino[Cupertino]
