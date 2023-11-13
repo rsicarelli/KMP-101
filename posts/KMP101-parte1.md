@@ -31,7 +31,7 @@ O desenvolvimento nativo enfrenta desafios como:
 - Gerenciar múltiplas base de código
 - Lidar com a fragmentação de dispositivos, como tamanhos de tela e versões de sistema variados
 - Requer atenção constante a novas atualizações dos sistemas operacionais
-- Retrocompatibilidade para garantir o funcionamento em versões antigas;
+- Retrocompatibilidade para garantir o funcionamento em versões antigas
 
 A complexidade aumenta com a necessidade de dominar ferramentas e APIs específicas, resultando em uma manutenção mais trabalhosa.
 
@@ -70,12 +70,47 @@ nativo.
 - **2021**: A Play Store alcançou um pico de 4,67 milhões de aplicativos na loja, dos quais mais de 150.000
   foram desenvolvidos com Flutter, representando cerca de 3.2% do
   total [[1](https://developers.googleblog.com/2021/03/announcing-flutter-2.html), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/)].
+
+<style>
+svg[id^="mermaid-"] { min-width: 200px; max-width: 500px; }
+</style>
+
+```mermaid
+pie
+    title Aplicativos na Play Store (2021)
+    "Flutter (150.000)": 150000
+    "Outros (4.52M)": 4520000
+```
+
 - **2022**: No terceiro trimestre de 2022, o número de aplicativos disponíveis caiu para 3,55 milhões, mas o número de aplicativos Flutter
   cresceu para 500.000, representando cerca de
   14.1% [[1](https://techcrunch.com/2023/05/10/with-over-1m-published-apps-googles-flutter-expands-its-support-for-web-apps-and-webassembly/?guccounter=1#:~:text=Google%20also%20noted%20that%20there,adopt%20Flutter%20in%20existing%20projects.), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/#:~:text=Google%20Play%3A%20number%20of%20available%20apps%20as%20of%20Q3%202022)].
+
+<style>
+svg[id^="mermaid-"] { min-width: 200px; max-width: 500px; }
+</style>
+
+```mermaid
+pie
+    title Aplicativos na Play Store (2022)
+    "Flutter (500.000)": 500000
+    "Outros (3.05M)": 3050000
+```
+
 - **2023**: A mais recente contagem disponível indica que há 2,87 milhões de aplicativos na Google Play Store, com mais de 1 milhão baseado
   em Flutter, sugerindo que quase 35% dos aplicativos na loja são desenvolvidos usando essa
   tecnologia [[1](https://bloggersideas.com/pt/apps-statistics/#:~:text=,de%20aplicativos%20dispon%C3%ADveis%20para%20download), [2](https://www.nomtek.com/blog/flutter-app-examples)].
+
+<style>
+svg[id^="mermaid-"] { min-width: 200px; max-width: 500px; }
+</style>
+
+```mermaid
+pie
+    title Aplicativos na Play Store (2023)
+    "Flutter (1M)": 1000000
+    "Outros (1.87M)": 1870000
+```
 
 ### O que impulsiona a busca por soluções cross-plataforma?
 
@@ -344,7 +379,6 @@ Dart está constantemente se aprimorando e, embora possa não ter a mesma percep
 uma série de recursos interessantes que estão ganhando reconhecimento na comunidade de
 desenvolvimento.
 
-
 ### Considerações finais sobre cross-plataforma
 
 As soluções cross-plataforma abstraem as complexidades nativas, permitindo escrever um único código para diversos dispositivos.
@@ -393,56 +427,33 @@ O KMP visa:
 ### Compartilhando código Kotlin com as plataformas
 
 ```mermaid
+
 graph TD
-    subgraph UI["UI nativa"]
-        subgraph Android_UI["&nbsp&nbspJetpack Compose&nbsp&nbsp"]
-            AndroidButton[Botão <br> Gestos]
+    subgraph KMP["Arquitetura do KMP"]
+        subgraph UI["UI nativa"]
+            Android_UI["&nbsp&nbspJetpack Compose&nbsp&nbsp"]
+            iOS_UI["Swift UI"]
+            Web_UI["React"]
+            Desktop_UI["&nbsp&nbspDesktop&nbsp&nbsp"]
         end
 
-        subgraph iOS_UI["Swift UI"]
-            iOSButton[Botão <br> Gestos]
+        subgraph KotlinMP["Código comum em KMP"]
+            KMPDomain[Domínio]
+            KMPData[Dados]
         end
 
-        subgraph Web_UI["React"]
-            WebButton[Botão <br> ️Gestos]
-        end
-
-        subgraph Desktop_UI["&nbsp&nbspDesktop&nbsp&nbsp"]
-            DesktopButton[Botão <br> ️Gestos]
-        end
-    end
-
-    subgraph KotlinMP["Código comum em KMP"]
-        KMPDomain[Domínio]
-        KMPData[Dados]
-    end
-
-    subgraph Infra["Infra nativo"]
-        subgraph Android_Infra["Android"]
-            AndroidGPS[️GPS <br> Internet]
-        end
-
-        subgraph iOS_Infra["iOS"]
-            iOSGPS[GPS <br> Internet]
-        end
-
-        subgraph Desktop_Infra["Desktop"]
-            DesktopGPS[️GPS <br> Internet]
-        end
-
-        subgraph Web_Infra["Web"]
-            WebGPS[️GPS <br> Internet]
+        subgraph Infra["Infra nativo"]
+            Android_Infra["Android"]
+            iOS_Infra["iOS"]
+            Desktop_Infra["Desktop"]
+            Web_Infra["Web"]
         end
     end
 
-    Android_UI -->|Evento| KotlinMP
-    iOS_UI -->|Evento| KotlinMP
-    Web_UI -->|Evento| KotlinMP
-    Desktop_UI -->|Evento| KotlinMP
-    KotlinMP -->|Estado| Android_UI
-    KotlinMP -->|Estado| iOS_UI
-    KotlinMP -->|Estado| Web_UI
-    KotlinMP -->|Estado| Desktop_UI
+    KotlinMP <--> Android_UI
+    KotlinMP <--> iOS_UI
+    KotlinMP <--> Web_UI
+    KotlinMP <--> Desktop_UI
     Android_Infra <--> KotlinMP
     iOS_Infra <--> KotlinMP
     Desktop_Infra <--> KotlinMP
@@ -451,6 +462,7 @@ graph TD
     class Android_UI,iOS_UI,Web_UI,Desktop_UI,KotlinMP area;
     class Android_Infra,iOS_Infra,Desktop_Infra,Web_Infra area;
 ```
-### 
+
+###                    
 
 Ao explorar o KMP, podemos nos beneficiar da eficiência do código compartilhado sem sacrificar a qualidade da experiência nativa. 
