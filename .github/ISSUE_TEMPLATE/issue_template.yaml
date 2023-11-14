@@ -1,0 +1,50 @@
+name: Dúvida, Crítica ou Sugestão
+description: Envie uma dúvida, crítica ou sugestão sobre Kotlin Multiplataforma
+title: "[Feedback]: "
+labels: ["feedback", "triage"]
+assignees: []
+
+body: 
+    - type: markdown
+      attributes: 
+          value: |
+              Obrigado por dedicar seu tempo para enviar um feedback!
+
+    - type: dropdown
+      id: tipo-feedback
+      attributes: 
+          label: Tipo de Feedback
+          description: Selecione o tipo de feedback que você está enviando.
+          options: 
+              - Dúvida
+              - Crítica
+              - Sugestão
+      validations: 
+          required: true
+
+    - type: input
+      id: contato
+      attributes: 
+          label: Detalhes de Contato
+          description: Como podemos entrar em contato com você se precisarmos de mais informações?
+          placeholder: ex. slack, email, twitter, etc. 
+      validations: 
+          required: false
+
+    - type: textarea
+      id: mensagem
+      attributes: 
+          label: Mensagem
+          description: Descreva aqui sua dúvida, crítica ou sugestão.
+          placeholder: Descreva seu feedback aqui!
+      validations: 
+          required: true
+
+    - type: textarea
+      id: info-adicional
+      attributes: 
+          label: Informações Adicionais
+          description: Inclua aqui qualquer informação adicional relevante (opcional).
+          placeholder: Informações adicionais aqui
+      validations: 
+          required: false
