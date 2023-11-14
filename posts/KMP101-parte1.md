@@ -1,5 +1,3 @@
-> Conteúdo
-> 
 > * [O que é desenvolver "nativo"?](#o-que-é-desenvolver-nativo)
 > * [Introduzindo frameworks cross-plataforma](#introduzindo-frameworks-cross-plataforma)
 > * [O que impulsiona a busca por soluções cross-plataforma?](#o-que-impulsiona-a-busca-por-soluções-cross-plataforma)
@@ -13,9 +11,7 @@ Usamos diariamente uma variedade de aplicativos em dispositivos como celulares, 
 
 Essa diversidade de plataformas exige estratégias de desenvolvimento que proporcionem atualizações simultâneas e experiências de usuário uniformes.
 
-O [Kotlin Multiplataforma (KMP)](https://kotlinlang.org/docs/multiplatform.html) surge como uma resposta a esse desafio, facilitando a manutenção e a sincronização de aplicações como a Netflix, que devem funcionar de forma integrada em várias interfaces.
-
-Antes de discutir a abordagem multiplataforma, é importante entender as diferenças entre desenvolvimento "nativo", "cross-platform" e "multiplataforma", cada um com suas vantagens e desafios no cenário tecnológico atual.
+Neste artigo, exploraremos o [Kotlin Multiplataforma (KMP)](https://kotlinlang.org/docs/multiplatform.html) e como ele se compara com outras tecnologias cross-plataforma, como React Native e Flutter. Discutiremos as vantagens e desafios dessas abordagens, oferecendo insights úteis para devs que buscam soluções eficientes para desenvolvimento multiplataforma.
 
 ---
 
@@ -160,13 +156,15 @@ A engine, então, renderiza isso em uma tela usando o [Skia](https://github.com/
 
 ### Flutter vs React Native
 
+A transição do React Native para o Flutter revela uma evolução no desenvolvimento cross-plataforma. Enquanto o React Native oferece um caminho eficiente com JavaScript, o Flutter se destaca com a flexibilidade do Dart, uma linguagem otimizada para UIs interativas.
+
 Embora a arquitetura do Flutter seja semelhante à do React Native, há uma diferença significativa em termos de desempenho.
 
 Um dos componentes-chave que permite ao Flutter alcançar um desempenho superior ao do React Native é a integração mais profunda com o lado nativo, o que significa que ele não usa os SDKs tradicionais.
 
 Em vez disso, o Flutter utiliza o Android NDK e o LLVM do iOS para compilar o código C/C++ que vem do engine.
 
-Não encontrei material comparando a nova arquitetura do React Native com o Flutter. Fica para um artigo do futuro!
+Com a nova arquitetura do React Native, essa diferença de desempenho poderá ficar menos expressiva.
 
 ### Desvantagens do Flutter
 
@@ -198,7 +196,7 @@ Além disso, a adaptação a atualizações das plataformas pode ser lenta, pois
 
 ## Introduzindo o Kotlin Multiplataforma (KMP)
 
-Para superar esses desafios, o Kotlin Multiplatform (KMP) apresenta uma nova abordagem, centrada na coexistência harmoniosa com o desenvolvimento nativo.
+Kotlin Multiplatform se destaca na integração com plataformas nativas. Esta abordagem permite devs compartilhar lógica de negócios enquanto mantêm interfaces de usuário nativas, oferecendo um equilíbrio ideal entre eficiência e personalização.
 
 Em vez de tentar abstrair completamente a plataforma nativa, o KMP empodera devs nativos com um maquinário open-source que trata de compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre outros.
 
@@ -239,6 +237,10 @@ Lembrando que a escolha de quais partes compartilhar depende das necessidades es
 ## Considerações finais
 
 Nesse artigo, conseguimos sair do zero no mundo KMP e compreendemos tecnicamente a diferença entre desenvolvimento nativo, cross-plataforma e multiplataforma.
+
+Em resumo, cada tecnologia - React Native, Flutter e Kotlin Multiplatform - tem seus pontos fortes e fracos. 
+
+Ao escolher a ferramenta certa para o seu projeto, considere fatores como desempenho, facilidade de uso e suporte da comunidade. Kotlin Multiplatform emerge como uma opção promissora, especialmente para quem valoriza a eficiência do código compartilhado sem comprometer a experiência do usuário nativo.
 
 Com esse conhecimento, podemos avançar para os conceitos mais específicos do funcionamento do Kotlin Multiplataforma, como o compilador, síntaxe, configuração, etc.
 
