@@ -123,14 +123,16 @@ Essa nova arquitetura ainda é experimental e está sujeita a mudanças à medid
 
 #### Turbo Modules
 
-Os [`TurboModules`](https://reactnative.dev/docs/next/the-new-architecture/pillars-turbomodules) representam uma evolução significativa dos `NativeModule` no React Native, abordando desafios como a inicialização prematura e a serialização de dados.
+Anteriormente, a comunicação no React Native entre as camadas Nativa e JavaScript era realizada através da ponte JavaScript, ou os "Native Modules". 
 
-Os Turbo Modules oferecem os seguintes benefícios adicionais:
+Os Turbo Modules representam uma evolução significativa dos `NativeModule` no React Native, abordando desafios como a inicialização prematura e a serialização de dados.
 
-- **Interfaces fortemente tipadas**: As interfaces são consistentes em todas as plataformas, aumentando a confiabilidade e a clareza do código.
-- **Flexibilidade de linguagem**: Há a opção de escrever seu código em C++, seja exclusivamente ou integrado a outras linguagens de plataformas nativas. Isso reduz a necessidade de duplicar implementações em diferentes plataformas.
-- **Carregamento preguiçoso (lazy loading)**: Os módulos são carregados conforme a necessidade, contribuindo para um início mais rápido do aplicativo.
-- **Uso do JSI**: Permite uma comunicação mais eficiente entre o código nativo e o JavaScript, superando as limitações da ponte tradicional.
+- **Carregamento preguiçoso:** permitem o carregamento preguiçoso de módulos, acelerando a inicialização do aplicativo.
+- **Comunicação direta:** Ao evitar a JavaScript Bridge e comunicar-se diretamente com o código nativo, reduzem a sobrecarga de comunicação entre o JavaScript e o código nativo.
+- **Codegen para tipagem segura:** O Codegen gera uma interface JavaScript no momento da construção, garantindo que o código nativo permaneça sincronizado com os dados provenientes da camada JavaScript.
+- **Uso de JSI:** As ligações JSI (JavaScript Interface) possibilitam uma interação eficiente e direta entre JavaScript e código nativo sem a necessidade da ponte, proporcionando uma comunicação mais rápida e otimizada.
+
+O Fabric aproveita das capacidades dos Turbo Modules e do Codegen. Juntos, esses componentes formam os pilares da nova arquitetura no React Native, oferecendo desempenho aprimorado e interoperabilidade mais eficiente entre código nativo e JavaScript.
 
 > [🔗 Exploring React Native's new architecture](https://blog.logrocket.com/exploring-react-natives-new-architecture/)
 >
