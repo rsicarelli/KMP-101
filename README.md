@@ -8,7 +8,7 @@ O principal objetivo deste projeto é fornecer uma base de conhecimento para dev
 
 ### Publicações
 
-- [Introdução ao Kotlin Multiplatform](https://dev.to/rsicarelli/kotlin-multiplataforma-101-introducao-ao-paradigma-da-multiplataforma-eo3)
+- [Introdução ao paradigma da Multiplataforma](https://dev.to/rsicarelli/kotlin-multiplataforma-101-introducao-ao-paradigma-da-multiplataforma-eo3)
 
 ## Como Contribuir
 
