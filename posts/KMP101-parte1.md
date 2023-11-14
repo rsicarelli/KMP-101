@@ -198,7 +198,7 @@ Além disso, a adaptação a atualizações das plataformas pode ser lenta, pois
 
 ## Introduzindo o Kotlin Multiplataforma (KMP)
 
-Kotlin Multiplatform se destaca na integração com plataformas nativas. Esta abordagem permite devs compartilhar lógica de negócios enquanto mantêm interfaces de usuário nativas, oferecendo um equilíbrio ideal entre eficiência e personalização.
+Kotlin Multiplatform se destaca na integração com plataformas nativas. Esta abordagem permite devs compartilhar lógica de negócios mantendo as interfaces nativas, oferecendo um equilíbrio ideal entre eficiência e personalização.
 
 Em vez de tentar abstrair completamente a plataforma nativa, o KMP empodera devs nativos com um maquinário open-source que trata de compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre outros.
 
@@ -211,6 +211,12 @@ O KMP visa:
 - Manter o desenvolvimento de recursos específicos da plataforma tão natural e próximo quanto possível do desenvolvimento nativo.
 - Assegurar que os desenvolvedores nativos não enfrentem dificuldades ao trabalhar com o código compartilhado.
 - Facilitar a interoperabilidade entre o código nativo e compartilhado, tornando a interação com o código compartilhado intuitiva e familiar.
+
+### Flexibilidade e UI Nativa
+
+Com KMP, as versões do seu aplicativo podem ter muito em comum, mas também diferir significativamente, especialmente em termos de UIs. 
+
+KMP não impõe limitações em como você desenvolve a UI do seu aplicativo. Você pode usar qualquer estilo e frameworks que quiser, incluindo os mais modernos, como Jetpack Compose para Android e SwiftUI para iOS. Isso permite o uso de elementos específicos de cada plataforma, proporcionando uma experiência de UI nativa para seus usuários.
 
 ### Compartilhando código Kotlin com as plataformas
 
