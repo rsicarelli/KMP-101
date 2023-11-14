@@ -34,6 +34,8 @@ Contudo, o desenvolvimento nativo implica desafios, como:
 
 A complexidade aumenta com a necessidade de dominar ferramentas e APIs específicas, resultando em uma manutenção mais trabalhosa.
 
+![Desenvolvimento nativo](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091436.png?raw=true)
+
 ```mermaid
 graph TD
     subgraph " "
