@@ -55,8 +55,6 @@ Frameworks cross-plataforma como React Native e Flutter apresentam um SDK própr
 
 - Em novembro de **2023**, Flutter conta com cerca de 35% contando com **1 milhão dos 2,87 milhões** de aplicativos disponíveis na Play Store [[1](https://bloggersideas.com/pt/apps-statistics/#:~:text=,de%20aplicativos%20dispon%C3%ADveis%20para%20download), [2](https://www.nomtek.com/blog/flutter-app-examples)].
 
-[🔗 Versão interativa](https://mermaid.live/edit#pako:eNo1kEFrhDAQhf9KmJMLVqIxbsytUHpbWthbyWXQaRuqRrKx1Ir_vVG7b04z8_EevAUa1xJoGC2ZgUUFGzpij2NnGwz2293YgOy1w5ldg_PEkoIX4nSwBp67KQTyLMkvJwOa5XzX_f0yBR8dkjxT539AnTcAUujJ92jbmL1suIHwST1tjIEW_ZcBM6yRwym46zw0oIOfKIVpbDHQk8UPjz3od-xu8Tri8OZcf4fiCnqBH9Ayq1Qpylypiqs4BT3kZQoz6KKWGVdSSVlWlRDnQq4p_O4mPKsPlVzUUkgpUqDWxgIuR117a-sfih1b_w)
-
 ![Flutter Play Store 2023](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091710.png?raw=true)
 
 ## O que impulsiona a busca por soluções cross-plataforma?
