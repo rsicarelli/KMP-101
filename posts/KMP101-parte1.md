@@ -1,26 +1,29 @@
-# Kotlin Multiplataforma 101: Introdução ao paradigma da Multiplataforma
+> Conteúdo
+> 
+> * [O que é desenvolver "nativo"?](#o-que-é-desenvolver-nativo)
+> * [Introduzindo frameworks cross-plataforma](#introduzindo-frameworks-cross-plataforma)
+> * [O que impulsiona a busca por soluções cross-plataforma?](#o-que-impulsiona-a-busca-por-soluções-cross-plataforma)
+> * [Introduzindo o React Native](#introduzindo-o-react-native)
+> * [Introduzindo o Flutter](#introduzindo-o-flutter)
+> * [Introduzindo o Kotlin Multiplataforma (KMP)](#introduzindo-o-kotlin-multiplataforma-kmp)
+> * [Considerações finais](#considerações-finais)
+> * [Feedbacks](#feedbacks)
 
-Usamos diariamente uma variedade de aplicativos em dispositivos como celulares, relógios, TVs e computadores, inseridos em um amplo
-ecossistema digital.
+Usamos diariamente uma variedade de aplicativos em dispositivos como celulares, relógios, TVs e computadores, inseridos em um amplo ecossistema digital.
 
-Essa diversidade de plataformas exige estratégias de desenvolvimento que proporcionem atualizações simultâneas e
-experiências de usuário uniformes.
+Essa diversidade de plataformas exige estratégias de desenvolvimento que proporcionem atualizações simultâneas e experiências de usuário uniformes.
 
-O [Kotlin Multiplataforma (KMP)](https://kotlinlang.org/docs/multiplatform.html) surge como uma resposta a esse desafio, facilitando a
-manutenção e a sincronização de aplicações como a Netflix, que devem funcionar de forma integrada em várias interfaces.
+O [Kotlin Multiplataforma (KMP)](https://kotlinlang.org/docs/multiplatform.html) surge como uma resposta a esse desafio, facilitando a manutenção e a sincronização de aplicações como a Netflix, que devem funcionar de forma integrada em várias interfaces.
 
-Antes de discutir a abordagem multiplataforma, é importante entender as diferenças entre desenvolvimento "nativo", "cross-platform" e "
-multiplataforma", cada um com suas vantagens e desafios no cenário tecnológico atual.
+Antes de discutir a abordagem multiplataforma, é importante entender as diferenças entre desenvolvimento "nativo", "cross-platform" e "multiplataforma", cada um com suas vantagens e desafios no cenário tecnológico atual.
 
 ---
 
 ## O que é desenvolver "nativo"?
 
-Desenvolvimento nativo é a criação de aplicativos feitos para operar especificamente em uma plataforma, como Android, iOS, Desktop, Web,
-tirando proveito de todas as suas capacidades.
+Desenvolvimento nativo é a criação de aplicativos feitos para operar especificamente em uma plataforma, como Android, iOS, desktop, web, tirando proveito de todas as suas capacidades.
 
-Aplicativos nativos se integram perfeitamente com o hardware e seguem as diretrizes de design da plataforma, resultando em interfaces
-responsivas e acesso imediato às últimas atualizações do sistema.
+Aplicativos nativos se integram perfeitamente com o hardware e seguem as diretrizes de design da plataforma, resultando em interfaces responsivas e acesso imediato às últimas atualizações do sistema.
 
 Para cada plataforma, os fabricantes fornecem um SDK (Kit de Desenvolvimento de Software) que facilita a criação de aplicações dedicadas.
 
@@ -34,102 +37,50 @@ Contudo, o desenvolvimento nativo implica desafios, como:
 
 A complexidade aumenta com a necessidade de dominar ferramentas e APIs específicas, resultando em uma manutenção mais trabalhosa.
 
+[🔗 Versão interativa](https://mermaid.live/edit#pako:eNp1U9Fu2jAU_ZUr79UgEiCk0VSJEtKHddK0VtrUpA8mdsCQxJbjFFrKx1R72NOe9gn5sToJDMpUK7Jyr8-5Pj6-3qJYUIY8NFdELuDOj3IwoyhnbSJC5mtz7_JEMWJBGKFJ9ZfyuYBE5JoBJUBkymNS_a5-iQg9HKn1GIcHeNDCBdyKRK9NtTPkJPzO4lIVojhZYDn9QIpdSwmYUiRjuSZFU9n_8p-Aq3AiMslTQoXCcMPzFVNnED-cZpLEQteYczp0Opcv45wqwWm9Af48U5fws_YQA9PxC0zD6cYo19XrI0thxvPqVXHxUBPBPzvKMRyH_3xokFfHJb9JBOG3WhMDnxda8VlZ_TH1T-QFjTQiVxg2RGJohBEp97KuwxuxrH1hMG4uSPPHd962_GduCGtSZAfadfiDzU5gkwYm8zmGpTTTJkv3ey0Lke9ZH1kYp6QofJY0VwYJT1MPPo2CoR0EGGKRCmXiJEkwmDOKFTNRv98_RJ01p3rhgSU3ZyXbbsRtI9Rzu248RhhlTGWEU9Pi2zodIb1gGYuQZ34pUau6vXcGR0otbp_yGHlalQyjUlKimc-J6bLskJQkvxfiNETeFm2QZ18Mu8Oea_fcgeNYjm1koyfkuU53MHBc1-n1rIvRyN1h9Nzwe13Xsob2sO8YuD1yLAsjRrkW6mv7HptnuXsDt5gXKQ)
+
 ![Desenvolvimento nativo](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091436.png?raw=true)
-
-```mermaid
-graph TD
-    subgraph " "
-        subgraph area1 ["Código fonte da aplicação"]
-            A[Código Fonte do Software]
-            C[Recursos]
-        end
-        subgraph area2 ["Ferramentas do SDK"]
-            B[Compilador, Linker]
-            D[Empacotador]
-            B -->|Android SDK,<br> Xcode, etc| E[Executável binário] --> D
-        end
-
-        A[Software] --> B
-        D --> F[Pacote Distribuível]
-        F -->|apk, xap, <br> app, etc| G[Lojas de Aplicativos]
-        F -->|zip, wasm, etc| GG[Web]
-        C -->|png, jpg, xml, <br> json, etc| D[Empacotador]
-        classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
-        class area1,area2 area
-    end
-```
 
 > [🔗 Decision framework for mobile development](https://www.researchgate.net/publication/314165913_Decision_Framework_for_Mobile_Development_Methods)
 
 ## Introduzindo frameworks cross-plataforma
 
-Frameworks cross-plataforma como React Native e Flutter apresentam um SDK próprio, que pode atuar como uma camada adicional sobre o SDK
-nativo.
+Frameworks cross-plataforma como React Native e Flutter apresentam um SDK próprio, que pode atuar como uma camada adicional sobre o SDK nativo.
 
 É inegável a ascensão dessa solução no ecossistema de aplicativos. Usando dados do Flutter:
 
-- **2021**: A Play Store alcançou um pico de 4,67 milhões de aplicativos na loja, dos quais mais de 150.000
-  foram desenvolvidos com Flutter, representando cerca de 3.2% do
-  total [[1](https://developers.googleblog.com/2021/03/announcing-flutter-2.html), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/)].
+- Em **2021**, Flutter representava 3.2% do total, contando com mais de **150.000 dos 4,67 milhões** de aplicativos na Play Store [[1](https://developers.googleblog.com/2021/03/announcing-flutter-2.html), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/)].
 
 ![Flutter Play Store 2021](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091647.png?raw=true)
 
-```mermaid
-pie
-    title Aplicativos na Play Store (2021)
-    "Flutter (150.000)": 150000
-    "Outros (4.52M)": 4520000
-```
-
-- **2022**: No terceiro trimestre de 2022, o número de aplicativos disponíveis caiu para 3,55 milhões, mas o número de aplicativos Flutter
-  cresceu para 500.000, representando cerca de
-  14.1% [[1](https://techcrunch.com/2023/05/10/with-over-1m-published-apps-googles-flutter-expands-its-support-for-web-apps-and-webassembly/?guccounter=1#:~:text=Google%20also%20noted%20that%20there,adopt%20Flutter%20in%20existing%20projects.), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/#:~:text=Google%20Play%3A%20number%20of%20available%20apps%20as%20of%20Q3%202022)].
+- No terceiro trimestre de **2022**, Flutter representava cerca de 14.1% contando com mais de **500.000 dos 3,55 milhões** aplicativos publicados na Play Store [[1](https://techcrunch.com/2023/05/10/with-over-1m-published-apps-googles-flutter-expands-its-support-for-web-apps-and-webassembly/?guccounter=1#:~:text=Google%20also%20noted%20that%20there,adopt%20Flutter%20in%20existing%20projects.), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/#:~:text=Google%20Play%3A%20number%20of%20available%20apps%20as%20of%20Q3%202022)].
 
 ![Flutter Play Store 2022](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091703.png?raw=true)
 
-```mermaid
-pie
-    title Aplicativos na Play Store (2022)
-    "Flutter (500.000)": 500000
-    "Outros (3.05M)": 3050000
-```
+- Em novembro de **2023**, Flutter conta com cerca de 35% contando com **1 milhão dos 2,87 milhões** de aplicativos disponíveis na Play Store [[1](https://bloggersideas.com/pt/apps-statistics/#:~:text=,de%20aplicativos%20dispon%C3%ADveis%20para%20download), [2](https://www.nomtek.com/blog/flutter-app-examples)].
 
-- **2023**: A mais recente contagem disponível indica que há 2,87 milhões de aplicativos na Google Play Store, com mais de 1 milhão baseado
-  em Flutter, sugerindo que quase 35% dos aplicativos na loja são desenvolvidos usando essa
-  tecnologia [[1](https://bloggersideas.com/pt/apps-statistics/#:~:text=,de%20aplicativos%20dispon%C3%ADveis%20para%20download), [2](https://www.nomtek.com/blog/flutter-app-examples)].
+[🔗 Versão interativa](https://mermaid.live/edit#pako:eNo1kEFrhDAQhf9KmJMLVqIxbsytUHpbWthbyWXQaRuqRrKx1Ir_vVG7b04z8_EevAUa1xJoGC2ZgUUFGzpij2NnGwz2293YgOy1w5ldg_PEkoIX4nSwBp67KQTyLMkvJwOa5XzX_f0yBR8dkjxT539AnTcAUujJ92jbmL1suIHwST1tjIEW_ZcBM6yRwym46zw0oIOfKIVpbDHQk8UPjz3od-xu8Tri8OZcf4fiCnqBH9Ayq1Qpylypiqs4BT3kZQoz6KKWGVdSSVlWlRDnQq4p_O4mPKsPlVzUUkgpUqDWxgIuR117a-sfih1b_w)
 
 ![Flutter Play Store 2023](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091710.png?raw=true)
 
-```mermaid
-pie
-    title Aplicativos na Play Store (2023)
-    "Flutter (1M)": 1000000
-    "Outros (1.87M)": 1870000
-```
-
 ## O que impulsiona a busca por soluções cross-plataforma?
 
-A demanda por soluções cross-plataforma vem do desejo de simplificar o complexo processo de desenvolvimento de aplicativos para múltiplas
-plataformas.
+A demanda por soluções cross-plataforma vem do desejo de simplificar o complexo processo de desenvolvimento de aplicativos para múltiplas plataformas.
 
-A necessidade de dominar linguagens e SDKs diferentes para cada plataforma, como Kotlin para Android e Swift para iOS, além das
-constantes atualizações tecnológicas, impõe um grande desafio ao longo prazo.
+A necessidade de dominar linguagens e SDKs diferentes para cada plataforma, como Kotlin para Android e Swift para iOS, além das constantes atualizações tecnológicas, impõe um grande desafio ao longo prazo.
 
-Frameworks cross-plataforma, como Flutter e React Native, oferecem um caminho mais eficiente, permitindo o uso de um único código-base para
-várias plataformas, economizando tempo e esforço significativos.
+Frameworks cross-plataforma, como Flutter e React Native, oferecem um caminho mais eficiente, permitindo o uso de um único código-base para várias plataformas, economizando tempo e esforço significativos.
 
 ## Introduzindo o React Native
 
-[React Native](https://github.com/facebook/react-native) é um framework de código aberto que conecta o JavaScript e React com componentes
-nativos para Android e iOS.
+[React Native](https://github.com/facebook/react-native) é um framework de código aberto que conecta o JavaScript e React com componentes nativos para Android e iOS.
 
 Essa metodologia é especialmente conveniente para devs com experiência no universo Web/React.
 
 - Um componente `Text` no React Native é convertido em um `UITextView` no iOS.
 - No Android, o mesmo componente `Text` se torna um `TextView`.
 
-Atualmente, o React Native possuí 2 tipos de arquiteturas: uma atual e
-a [nova](https://reactnative.dev/docs/next/the-new-architecture/landing-page).
+Atualmente, o React Native possuí 2 tipos de arquiteturas: uma atual e a [nova](https://reactnative.dev/docs/next/the-new-architecture/landing-page).
 
 ### Arquitetura Atual (Estável) do React Native
 
@@ -139,128 +90,52 @@ A arquitetura estável do React Native é baseada em três threads principais:
 2. **Main Thread Nativa**: Ou "thread principal", gerencia a UI e as interações do usuário.
 3. **Thread de Background (Shadow Node)**: Administra a criação e manipulação dos nodes.
 
-A comunicação entre o JavaScript e o código nativo é realizada via uma "ponte", que funciona como um terminal de transmissão
-de dados, permitindo a desserialização e execução das operações necessárias.
+A comunicação entre o JavaScript e o código nativo é realizada via uma "ponte", que funciona como um terminal de transmissão de dados, permitindo a desserialização e execução das operações necessárias.
+
+[🔗 Versão interativa](https://mermaid.live/edit#pako:eNqNVO9u2jAQfxXLU9VNMowQAiOdJq3tKrUaVTW6D1uyD0fsgEViZ45DyxAPs2foI_BiuyRQGFBtJ8XK_b_73dkLGmkuqE_HBrIJuT8PFUHKi1EtCOlH87OQVtjCADkFW0DyVuR29XsmklPCNfkiILLkFqyciZDW7iWdG8nHIgjpnVYWNT9CtVU-xwcjwEGj-wn-cHIDMxhGRma2ciA7VOX5LEcBfuRm-FfeY6YXOs2C8tBKYAG1cMdQKP5iRe1tRapMAOR1ZqSKZIbdpyDVm4PysJCB5tdplgSD1RMvEp3Xvjrfs_x6jYYbI8IFCg5j3SVgg_KAWJsU1rEg_88G3G0DIiUjiKZjowt02C_7mx5DMJwA1w_kFjehEpBPaiyVOJ7r5IRcIKSRBYXTL7tcPeUk0ikBUo9aHcyBNBof1guxpy2H-f6YtkLpuGoL9Yv6ErnjyponjSbqyl5rzU5_UQJ5finiCkcSyyTxyavelde-umLYZqIN8nEcM5Jbo6cCOdd1N1zjQXI78YmTPe6F4yKGIrFDO0_Ev1zPdnzrK8KqtaxOt5LsWtQ9sWe42QZatoWKVYCyNTasGvNuSWeU0VTgqkmOr8GiDB9SOxEpXl0ffzmYaXm9l2gHhdXDuYqob00hGC0yDlZcSsAFTKkfQ5KjNAP1Xet0Y4Qs9Rf0kfpOq9lp913H8xykntduMzqnfqfXbHU6_ZbnvOt2va7ndpeM_qoiOM1WTV6_2-p03V6PUcGl1WZQv17VI7b8A-WLexI)
 
 ![Arquitetura estável do React Native](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091730.png?raw=true)
-
-```mermaid
-graph TB
-    subgraph "Arquitetura 'atual/estável' do React Native"
-        Bridge["Ponte"]
-
-        subgraph area1["Thread JavaScript"]
-            ReactLib[Lib JS React Native]
-            ReactComp[Componente React]
-        end
-
-        subgraph area2["Thread nativa (principal/main)"]
-            NatModImpl[Módulos nativos]
-            UIMod[Módulo de UI]
-            NatPlat[Plataformas nativas]
-        end
-
-        subgraph area3["Thread em background"]
-            Yoga[Shadow Node Yoga Engine]
-        end
-
-    %% Conectando os nós com a Ponte
-        ReactComp --> Bridge
-        ReactLib <--> Bridge
-        UIMod <--> Bridge
-        NatModImpl <--> Bridge
-        NatPlat <--> Bridge
-        Bridge -.-> Yoga
-    end
-
-    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
-    classDef defaultStyle stroke: #333, stroke-width: 1px;
-    class area1,area2,area3 area
-    class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
-```
 
 > [🔗 Understanding React Native Architecture](https://dev.to/goodpic/understanding-react-native-architecture-22hh)
 
 #### Desafios da Arquitetura Antiga
 
-1. **Assincronicidade**: a ponte opera de forma assíncrona, causando possíveis atrasos na atualização da UI quando a espera não é
-   necessária.
-2. **Execução Single-threaded do JavaScript**: restringe todas as computações a uma única thread, podendo causar bloqueios e atrasos em
-   operações intensivas.
-3. **Overheads de Serialização**: a transferência de dados entre as camadas requer serialização (geralmente em JSON) e desserialização,
-   adicionando sobrecarga computacional e afeta o desempenho.
+1. **Assincronicidade**: a ponte opera de forma assíncrona, causando possíveis atrasos na atualização da UI quando a espera não é necessária.
+2. **Execução Single-threaded do JavaScript**: restringe todas as computações a uma única thread, podendo causar bloqueios e atrasos em operações intensivas.
+3. **Overheads de serialização**: a transferência de dados entre as camadas requer serialização (geralmente em JSON) e desserialização, adicionando sobrecarga computacional e afeta o desempenho.
 
 ### A Nova arquitetura do React Native
 
-A nova arquitetura do React Native foca em melhorar a comunicação entre as threads, eliminando a necessidade de serialização/desserialização
-e utilizando múltiplas threads para aprimorar o desempenho.
+A nova arquitetura do React Native foca em melhorar a comunicação entre as threads, eliminando a necessidade de serialização/desserialização e utilizando múltiplas threads para aprimorar o desempenho.
 
 #### ⚠️ Fase experimental
 
 Essa nova arquitetura ainda é experimental e está sujeita a mudanças à medida que o projeto evolui.
 
-É importante estar ciente de que a implementação atual inclui várias etapas manuais e não reflete a experiência final de desenvolvimento
-prevista para a arquitetura renovada.
+É importante estar ciente de que a implementação atual inclui várias etapas manuais e não reflete a experiência final de desenvolvimento prevista para a arquitetura renovada.
 
 #### Principais componentes da nova arquitetura
 
-- **[Fabric](https://reactnative.dev/architecture/fabric-renderer)**: Uma reescrita total da camada de renderização, otimizando a interação
-  entre JavaScript e código nativo. O Fabric elimina a necessidade de serialização e desserialização, permitindo atualizações de UI
-  imediatas
-  e animações mais fluidas, reduzindo simultaneamente a carga computacional geral.
-- **JSI (JavaScript Interface, uma interface em JavaScript para código nativo)**: Substitui a ponte tradicional, oferecendo uma camada de
-  abstração mais leve que permite chamadas sincronizadas entre JavaScript e código nativo.
+- **[Fabric](https://reactnative.dev/architecture/fabric-renderer)**: Uma reescrita total da camada de renderização, otimizando a interação entre JavaScript e código nativo. O Fabric elimina a necessidade de serialização e desserialização, permitindo atualizações de UI imediatas e animações mais fluidas, reduzindo simultaneamente a carga computacional geral.
+- **JSI (JavaScript Interface, uma interface em JavaScript para código nativo)**: Substitui a ponte tradicional, oferecendo uma camada de abstração mais leve que permite chamadas sincronizadas entre JavaScript e código nativo.
 - **TurboModules**: Módulos otimizados que usam o JSI para um acesso mais direto e eficiente.
 - **React Renderer**: Um novo renderizador que colabora com o JSI para melhorar o desempenho da UI.
 
+[🔗 Versão interativa](https://mermaid.live/edit#pako:eNqFVFFv0zAQ_iuWeeiLOy1NupVMQoKWikkrQmw8QIO0a3xprTl2cJxupeqPQTzwQ_rHcBxK044KP0T-7r67--zceU1TzZHGdG6gWJC7UaKIW2U1awwJfW2-VcKirQyQjtJL6BCuyUeE1JL3YMUSE9oEHQSCQQimCfXEhH7dU-r1donKvgPFJZrpBJQoKglcG8KRYO3TZSsCFT9RoecqjGFmRPqsxJ1BHDqKFVpNh0bA9tf2pyYcyPaHWWqDR_wbWOnKTsdQYq2iIz3uHLGGOs9Fi5V63DkWe0Ju6OR-kGAh0yaHZ5InulJWqPnf9Pf5H8v96QLtqyTd7quDg-9pbaunNefdExrsXc0h964Ge9dO4j-dbSl7wi7kBKV1nFRCWY4w83dFMiFlTF5cjvu98ZiRVEttHM6yjJHSGv2ADoVhuEPdR8HtIiZB8XSUjmMGlbS3diXxf6FXrdimiZlvNP8NvaXNeGMEnyPzXe5uomh2N2LG3GxMNL_OC8k-Xbtdbaj_Pfus53Ag6YoymqNrCMHdIK7r9Am1C8zdZMVuy8E81DO2cTyorL5dqZTG1lTIaFVwsDgS4Josp3EGsnTWAtQXrfMdyUEar-kTjYNBdBZcvIzOw36vH0XB-QWjK2cOzoJ-NLh0uNe_CAa9aMPod58hYBS5sNpMmnfCPxeb34ZgUH0)
+
 ![React Native nova arquitetura](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091745.png?raw=true)
-
-```mermaid
-graph TD
-    subgraph "Arquitetura 'nova' do React Native"
-        subgraph area1["React"]
-            EventHandler[Manipulador de eventos]
-        end
-        subgraph area2["Fabric"]
-            TreeCreation[Criação da árvore]
-            Layout[Fase de 'layout']
-            Commit[Fase de 'commit']
-        end
-
-        subgraph area3["Plataforma"]
-            Mounting[Fase de `mounting`]
-        end
-
-        EventHandler --> TreeCreation
-        TreeCreation --> Layout
-        Layout --> Commit
-        Commit --> Mounting
-        Commit --> EventHandler
-        Mounting --> EventHandler
-    end
-
-    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
-    classDef defaultStyle stroke: #333, stroke-width: 1px;
-    class area1,area2,area3 area
-    class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
-```
 
 #### Turbo Modules
 
-Os [`TurboModules`](https://reactnative.dev/docs/next/the-new-architecture/pillars-turbomodules) representam uma evolução significativa
-dos `NativeModule` no React Native, abordando desafios como a inicialização prematura e a serialização de dados.
+Os [`TurboModules`](https://reactnative.dev/docs/next/the-new-architecture/pillars-turbomodules) representam uma evolução significativa dos `NativeModule` no React Native, abordando desafios como a inicialização prematura e a serialização de dados.
 
 Os Turbo Modules oferecem os seguintes benefícios adicionais:
 
-- **Interfaces fortemente tipadas**: As interfaces são consistentes em todas as plataformas, aumentando a confiabilidade e a clareza do
-  código.
-- **Flexibilidade de linguagem**: Há a opção de escrever seu código em C++, seja exclusivamente ou integrado a outras linguagens de
-  plataformas nativas. Isso reduz a necessidade de duplicar implementações em diferentes plataformas.
-- **Carregamento preguiçoso (lazy loading)**: Os módulos são carregados conforme a necessidade, contribuindo para um início mais rápido do
-  aplicativo.
+- **Interfaces fortemente tipadas**: As interfaces são consistentes em todas as plataformas, aumentando a confiabilidade e a clareza do código.
+- **Flexibilidade de linguagem**: Há a opção de escrever seu código em C++, seja exclusivamente ou integrado a outras linguagens de plataformas nativas. Isso reduz a necessidade de duplicar implementações em diferentes plataformas.
+- **Carregamento preguiçoso (lazy loading)**: Os módulos são carregados conforme a necessidade, contribuindo para um início mais rápido do aplicativo.
 - **Uso do JSI**: Permite uma comunicação mais eficiente entre o código nativo e o JavaScript, superando as limitações da ponte tradicional.
 
->
 > [🔗 Exploring React Native's new architecture](https://blog.logrocket.com/exploring-react-natives-new-architecture/)
 >
 > [🔗 A guide to Turbo Modules in React Native](https://dev.to/amazonappdev/a-guide-to-turbo-modules-in-react-native-5aa3)
@@ -271,111 +146,35 @@ Os Turbo Modules oferecem os seguintes benefícios adicionais:
 
 ## Introduzindo o Flutter
 
-[Flutter](https://github.com/flutter/flutter) é um kit de desenvolvimento de interface de usuário (UI toolkit e framework), de código
-aberto, criado pela empresa Google em 2015, baseado na linguagem de programação Dart, que possibilita a criação de aplicativos compilados
-nativamente, para os sistemas operacionais Android, iOS, Windows, Mac, Linux, Fuchsia e Web.
+[Flutter](https://github.com/flutter/flutter) é um kit de desenvolvimento de interface de usuário (UI toolkit e framework), de código aberto, criado pela empresa Google em 2015, baseado na linguagem de programação Dart, que possibilita a criação de aplicativos compilados nativamente, para os sistemas operacionais Android, iOS, Windows, Mac, Linux, Fuchsia e Web.
 
-Do ponto de vista arquitetural, o Flutter possui três camadas – o framework, a engine e a plataforma – e se baseia em especificidades da
-linguagem Dart, como a compilação ahead-of-time (AOT).
+Do ponto de vista arquitetural, o Flutter possui três camadas – o framework, a engine e a plataforma – e se baseia em especificidades da linguagem Dart, como a compilação ahead-of-time (AOT).
 
-Como dev, você interage principalmente com o framework, escrevendo o aplicativo e os widgets (componentes da UI no Flutter) de
-maneira declarativa usando Dart.
+Como dev, você interage principalmente com o framework, escrevendo o aplicativo e os widgets (componentes da UI no Flutter) de maneira declarativa usando Dart.
 
-A engine, então, renderiza isso em uma tela usando o [Skia](https://github.com/google/skia), que é posteriormente enviada às plataformas
-nativas: Android, iOS ou web. A plataforma nativa apresenta o canvas e envia os eventos que ocorrem de volta:
+A engine, então, renderiza isso em uma tela usando o [Skia](https://github.com/google/skia), que é posteriormente enviada às plataformas nativas: Android, iOS ou web. A plataforma nativa apresenta o canvas e envia os eventos que ocorrem de volta:
+
+[🔗 Versão interativa](https://mermaid.live/edit#pako:eNqVVMlu2zAQ_RWCvSpGvMhulSKAI8eA0aQwohZFK_cwkUYyYYokKMrZv6aHnPoV_rGSkp06SoKiPEizvHkYzsI7msgUaUBzDWpJvkwWgthTVpeNYUHJlFfGoCbR5NOCNu5nENAI3XiqocArqVc__0LcOQcby4DHO6HlDyuF2jAh4yephfjG0hxNGW__Le8FitTyijzudDp7PmteiDey7cWnImcCW1QR6jVLcK6lkYnk8U6QJMXGuXlsJxfKQsmSGSZFvJU3j5tfbdicg8mkLsIlCIG8jEMQwEpH7FzgfNCKmYA2s1JaN0ZoKvUfF-zHb7I29YoqnUGy5Q2lyFheaagzJymQyLUi2_xOGJKPl_rY5bkt9C28dr_PYNga57yyZS3j7b-xynbHxkrNIVlB7pp2WihIpLGzI0xd57HiLKnjWmGnaws5k1LNhB0k-Wo5WnVJOJTlBLO6JiRjnAfk3Wjq96ZTj7jGaqtnWeaR0mi5Qqv1-_2ddnDFUrMMSFddt-hSzKDiJjI3HP8VerQX26yKV49g_e3Xln3EiXZT7l0gJMbNUyOdsUvPFvNcprNCce_rzErO4LrsfZc5PEvp6OUO7y_ueG9XycHB8f12se7Jycu9OKkRdlrXUJJoxeCehK8PV1gj6y5Jx9XmePKMn_pEPVqgZWGpfYDunHlBzRILXNDAiinolUv8weKgMjK6EQkNjK7Qo5VK7V5MGNgrFjTIgJfWqkD8kLLYgaxKgzt6TQO_Mxwc-j3_0B--748GI9-jNzTo-cPOaNQd-h8Go6E_6A6GDx69rQm6HsWUGanPm-exfiUf_gA_RqLp)
+
 ![Flutter SDK](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091807.png?raw=true)
-
-```mermaid
-graph TD
-    subgraph " Flutter SDK"
-        subgraph area1[Framework]
-            Material[Material]
-            Cupertino[Cupertino]
-            Widgets[Widgets]
-            Rendering[...]
-        end
-
-        subgraph area2[Engine]
-            ServiceProtocol[Protocolo de Serviço]
-            Composition[Composição]
-            PlatformChannels[Canais de Plataforma]
-            DartIsolateSetup[...]
-        end
-
-        subgraph area3[Plataforma]
-            RenderSurfaceSetup[Configuração da Superfície <br> de Renderização]
-            NativePlugins[Plugins Nativos]
-            AppPackaging[Empacotamento de Aplicativo]
-            EventLoopInterop[...]
-        end
-    end
-
-    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
-    classDef defaultStyle stroke: #333, stroke-width: 1px;
-    class area1,area2,area3 area
-    class Bridge,ReactComp,ReactLib,NatModImpl,UIMod,NatPlat,Yoga defaultStyle;
-    subgraph " "
-        A[Framework] -->|Widgets| B[Engine]
-        B -->|Canvas Skia| C[Plataforma]
-        C -->|Eventos| B
-        B -->|Eventos| A
-    end
-```
 
 ### Flutter vs React Native
 
 Embora a arquitetura do Flutter seja semelhante à do React Native, há uma diferença significativa em termos de desempenho.
 
-Um dos componentes-chave que permite ao Flutter alcançar um desempenho superior ao do React Native é a integração mais profunda com o lado
-nativo, o que significa que ele não usa os SDKs tradicionais.
+Um dos componentes-chave que permite ao Flutter alcançar um desempenho superior ao do React Native é a integração mais profunda com o lado nativo, o que significa que ele não usa os SDKs tradicionais.
 
 Em vez disso, o Flutter utiliza o Android NDK e o LLVM do iOS para compilar o código C/C++ que vem do engine.
 
-#### Flutter vs a nova arquitetura do React Native
-
-É importante ressaltar que não encontrei material comparando a nova arquitetura do React Native com o Flutter. Fica para um artigo do
-futuro!
+Não encontrei material comparando a nova arquitetura do React Native com o Flutter. Fica para um artigo do futuro!
 
 ### Desvantagens do Flutter
 
-Embora o Flutter tenha um desempenho satisfatório, superando o React Native em termos de compilação de Dart para código nativo, ele enfrenta
-desafios como o tamanho aumentado dos aplicativos, devido à inclusão de seu motor de execução e widgets.
+Embora o Flutter tenha um desempenho satisfatório, superando o React Native em termos de compilação de Dart para código nativo, ele enfrenta desafios como o tamanho aumentado dos aplicativos, devido à inclusão de seu motor de execução e widgets.
 
-Além disso, a extensão de funcionalidades não suportadas nativamente pelo Flutter exige a comunicação entre Dart e as linguagens nativas por
-meio de canais e estruturas de dados específicas, o que pode ser uma solução menos eficiente e mais complexa em comparação com a
-interoperabilidade entre Java e Kotlin ou Objective-C e Swift.
+Além disso, a extensão de funcionalidades não suportadas nativamente pelo Flutter exige a comunicação entre Dart e as linguagens nativas por meio de canais e estruturas de dados específicas, o que pode ser uma solução menos eficiente e mais complexa em comparação com a interoperabilidade entre Java e Kotlin ou Objective-C e Swift.
 
-![Tamanho do app no Flutter Android](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091853.png?raw=true)
-
-```mermaid
-gantt
-    title Tamanhos de um app Flutter no Android
-    dateFormat X
-    axisFormat %s
-    section Jetpack Compose
-        1.463 MB: 0, 1463
-    section KMP Compose
-        1.463 MB: 0, 1463
-    section Flutter
-        5.5MB: 0, 5463
-```
-
-![Tamanho do app no Flutter iOS](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091906.png?raw=true)
-
-```mermaid
-gantt
-    title Tamanhos de um app Flutter no iOS
-    dateFormat X
-    axisFormat %s
-    section Swift UI
-        1,7 MB: 0, 1700
-    section Flutter
-        17,9 MB (iOS > 12.1): 0, 17900
-        25,4MB (iOS < 12.1): 0, 25400
-    section KMP Compose
-        24,8 MB: 0, 24800
-
-```
+![Nativo vs Flutter vs Compose](https://www.jacobras.nl/wp-content/uploads/2023/09/chart_app_size-5-1024x633.png)
 
 > [🔗 Android & iOS native vs. Flutter vs. Compose Multiplatform](https://www.jacobras.nl/2023/09/android-ios-native-flutter-compose-kmp/)
 
@@ -383,12 +182,9 @@ gantt
 
 Como toda linguagem, Dart impõe um desafio natural de aprendizado e aplicação.
 
-Embora o Dart seja uma linguagem moderna e dinâmica, é comum que devs de outras plataformas nativas possam encontrar uma barreira ao
-adentrar neste novo ecossistema, como funcionalidades específicas de linguagens como Kotlin ou Swift.
+Embora o Dart seja uma linguagem moderna e dinâmica, é comum que devs de outras plataformas nativas possam encontrar uma barreira ao adentrar neste novo ecossistema, como funcionalidades específicas de linguagens como Kotlin ou Swift.
 
-Dart está constantemente se aprimorando e, embora possa não ter a mesma percepção de maturidade que linguagens estabelecidas, ela oferece
-uma série de recursos interessantes que estão ganhando reconhecimento na comunidade de
-desenvolvimento.
+Dart está constantemente se aprimorando e, embora possa não ter a mesma percepção de maturidade que linguagens estabelecidas, ela oferece uma série de recursos interessantes que estão ganhando reconhecimento na comunidade de desenvolvimento.
 
 ### Considerações finais sobre cross-plataforma
 
@@ -396,45 +192,25 @@ As soluções cross-plataforma abstraem as complexidades nativas, permitindo esc
 
 Porém, é comum encontrar limitações ao se integrar com a plataforma nativa, impactando o desempenho e a experiência da aplicação.
 
-Além disso, a adaptação a atualizações das plataformas pode ser lenta, pois o framework cross-plataforma precisa ser atualizado para
-suportar novas funcionalidades nativas.
+Além disso, a adaptação a atualizações das plataformas pode ser lenta, pois o framework cross-plataforma precisa ser atualizado para suportar novas funcionalidades nativas.
 
 ---
 
 ## Introduzindo o Kotlin Multiplataforma (KMP)
 
-Para superar esses desafios, o Kotlin Multiplatform (KMP) apresenta uma nova abordagem, centrada na coexistência harmoniosa com o
-desenvolvimento nativo.
+Para superar esses desafios, o Kotlin Multiplatform (KMP) apresenta uma nova abordagem, centrada na coexistência harmoniosa com o desenvolvimento nativo.
 
-Em vez de tentar abstrair completamente a plataforma nativa, o KMP empodera devs nativos com um maquinário open-source que trata de
-compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre outros.
+Em vez de tentar abstrair completamente a plataforma nativa, o KMP empodera devs nativos com um maquinário open-source que trata de compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre outros.
+
+[🔗 Versão interativa](https://mermaid.live/edit#pako:eNqFk8GO2jAQhl_Fml4NbcLShOxqLyAOrbaXVK1UwmGIncVLHEeOU6CIp9pH6IvViZOFwkpYkTIz-X57fmV8gFQxDhE8ayzX5PssKYhdVb1yhQTs42rNSnOsqhnPCGqOJBN5HpEPwXzsz-eUpCpX2uZZllFSGa023Gaj0ajPBlvBzDoiXrl7Z0vGM6xzE5t9zm_J70_6qZJSFVPrYjH9-8rEsyJflclFYfuRJWoj8jUytSSDwWP35cuPp4WLPtpw-d5e53T8Bse32G9oxG_e8y67pfmJlVwk0GmaLIEzzVvLrcS-W6vDF9TkYaUfyRBRX-Oxo-MOrq6I5pyWaQJHbW10xTkPLelCx2YaJd8qvema2KWXlZUolhd_-eSF9m3S81PoWWvNgN1f6jv31Pmip4Zo7-K_Ker0vGBAQXItUTA76oemnIBZc8kTiGzIUG-aMT9aDmuj4n2RQmR0zSnUJUPDZwLthZAQZZhXtlpi8Usp2UM2hegAO4g8b-jf-f5dEIS-54chhb0thpNhGAbBp_F4NPk8CT3_SOFPq_cocCaM0k_uHrbX8fgPbMAiag)
 
 ![KMP compartilhando código](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091929.png?raw=true)
-
-```mermaid
-graph TD
-    subgraph " "
-        classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
-        classDef defaultStyle stroke: #333, stroke-width: 1px;
-        CommonCode[Código Kotlin compartilhado] --> KotlinJVM[Kotlin/JVM]
-        CommonCode --> KotlinJS[Kotlin/JS]
-        CommonCode --> KotlinNative[Kotlin/Native]
-        CommonCode --> KotlinWasm["Kotlin/Wasm"]
-        KotlinJVM --> JVMCode[.jar <br> .aar]
-        KotlinJS --> JSCode[.js]
-        KotlinWasm --> WasmCode[.wasm]
-        KotlinNative --> NativeCode[.framework <br> .xcframework <br> .bin]
-        class KotlinJVM,KotlinJS,KotlinNative,KotlinWasm area;
-        class JVMCode,JSCode,NativeCode,WasmCode defaultStyle;
-    end
-```
 
 O KMP visa:
 
 - Manter o desenvolvimento de recursos específicos da plataforma tão natural e próximo quanto possível do desenvolvimento nativo.
 - Assegurar que os desenvolvedores nativos não enfrentem dificuldades ao trabalhar com o código compartilhado.
-- Facilitar a interoperabilidade entre o código nativo e compartilhado, tornando a interação com o código compartilhado intuitiva e
-  familiar.
+- Facilitar a interoperabilidade entre o código nativo e compartilhado, tornando a interação com o código compartilhado intuitiva e familiar.
 
 ### Compartilhando código Kotlin com as plataformas
 
@@ -442,146 +218,41 @@ Dado o espírito flexível do KMP, atualmente existem uma série de estratégias
 
 Algumas abordagens comuns:
 
-- **Compartilhando modelos do domínio**: Utilização de classes comuns como entidades, DTOs (Data Transfer Objects), respostas do servidor,
-  etc., consistentes em todas as plataformas.
-
-- **Componentes de infraestrutura**: Compartilhamento de lógica relacionada ao uso da internet, persistência de dados, e manipulação de
-  cache. Isso pode incluir:
-
+- **Compartilhando modelos do domínio**: Utilização de classes comuns como entidades, DTOs (Data Transfer Objects), respostas do servidor, etc., consistentes em todas as plataformas.
+- **Componentes de infraestrutura**: Compartilhamento de lógica relacionada ao uso da internet, persistência de dados, e manipulação de cache. Isso pode incluir:
 - **Experimentação e analytics**: Códigos que permite experimentação no app, como a definição de feature flags, eventos de analytics, etc.
+- **Lógica de negócios**: Códigos que definem regras de negócios, validações, e algoritmos essenciais para o funcionamento da aplicação.
+- **Utilitários**: Funções e classes auxiliares que podem ser usadas em diferentes partes da aplicação, como manipulação de strings, formatação de datas, constantes, etc.
+- **Testes**: Escrever testes unitários e de integração que podem ser executados em todas as plataformas, garantindo a consistência e a confiabilidade do código compartilhado.
+- **Abstrações de Hardware e SO**: Códigos que abstraem funcionalidades específicas do sistema operacional ou do hardware, como acesso a sensores, armazenamento de arquivos, etc., permitindo que sejam usados de maneira uniforme em diferentes plataformas.
 
-- **Lógica de negócios**: Códigos que definem regras de negócios, validações, e algoritmos essenciais para o
-  funcionamento da aplicação.
+Lembrando que a escolha de quais partes compartilhar depende das necessidades específicas do projeto e da equipe. O KMP oferece a flexibilidade para adaptar a estratégia de compartilhamento de código conforme o projeto evolui.
 
-- **Utilitários**: Funções e classes auxiliares que podem ser usadas em diferentes partes da aplicação, como manipulação de
-  strings, formatação de datas, constantes, etc.
-
-- **Testes**: Escrever testes unitários e de integração que podem ser executados em todas as plataformas, garantindo a
-  consistência e a confiabilidade do código compartilhado.
-
-- **Abstrações de Hardware e SO**: Códigos que abstraem funcionalidades específicas do sistema operacional ou do hardware, como acesso a
-  sensores, armazenamento de arquivos, etc., permitindo que sejam usados de maneira uniforme em diferentes plataformas.
-
-Lembrando que a escolha de quais partes compartilhar depende das necessidades específicas do projeto e da equipe. O KMP oferece a
-flexibilidade para adaptar a estratégia de compartilhamento de código conforme o projeto evolui.
+[🔗 Versão interativa](https://mermaid.live/edit#pako:eNp1lOFq2zAQx19F3KBs4JQkcpKijkFpCGSlrCwrg9VlKJbciNiSJ8tru5Cn6iP0xSZbUdI0ij7YOt3vJN3_JK0gVYwDgQdNywX6MU4ksq2q527g6vrmLoEL_acWhptaU8RUM5jAvSP36NuphW-nSFIj_tI9pmkXkmkl2O8WO5Hzqmw_X7kpabpEl6ooVcV3joMJxLeZC549iszY5Q6In3zuiCtlciHRd05Tc0CNebU0qny_kSYxvwv0cQN9OrIfLlkid6Zbr1Xr8vWFiQeFUlXUBeLFVq-AYlOZaWpj2r_TTR3VzcMbOyiPZ2z_aNqe2dhBET1j-4dpv8vf544-dzpf3lQ55HUlDHlc6UKeXbmcd08Ph_gAB2yFCDn3VAgB2_RDzjSnVTXmGaKaU5SJPCfow2gy6E8mka14rrS1syyLUGW0WnJrYYy91XkUzCwI6pVPb6azBzlyCzaTnkMEBdcFFczey1XDJWAWvOAJENtlVC8TSOTacrQ2avYsUyBG1zyCumTU8LGg9nQVQDKaV3a0pPKXUoWHrAlkBU9Azk6HuNvH3eGgPxoO4xhH8Ayk34tPz_AgHnW7OMa4F68j-NfG9yLgTBilr92j0b4d6_9D5EqA)
 
 ![Arquitetura simplificada KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-092444.png?raw=true)
 
-```mermaid
-graph TD
-    subgraph KMP["Arquitetura do KMP"]
-        subgraph UI["UI nativa"]
-            Android_UI["&nbsp&nbspJetpack Compose&nbsp&nbsp"]
-            iOS_UI["Swift UI"]
-            Web_UI["Kotlin React"]
-            Desktop_UI["&nbsp&nbsp KMP Compose (Desktop)&nbsp&nbsp"]
-        end
-
-        KotlinMP["Código comum em KMP"]
-
-        subgraph Infra["Infra nativo"]
-            Android_Infra["Android"]
-            iOS_Infra["iOS"]
-            Desktop_Infra["Desktop"]
-            Web_Infra["Web"]
-        end
-    end
-
-    KotlinMP <--> Android_UI
-    KotlinMP <--> iOS_UI
-    KotlinMP <--> Web_UI
-    KotlinMP <--> Desktop_UI
-    Android_Infra <--> KotlinMP
-    iOS_Infra <--> KotlinMP
-    Desktop_Infra <--> KotlinMP
-    Web_Infra <--> KotlinMP
-    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
-    class UI,Infra area;
-```
+[🔗 Versão interativa](https://mermaid.live/edit#pako:eNqdVtty0zAQ_RWNeIEZh-bS0NYwnQkJZQINtLk0MzQ8KPYm0US2jCS3gU6_hgc-gE_oj7HypbUTQ5n6wdZKZ88erVaSb6gnfaAuXSoWrcjpcBYSfHQ8Tzu6gkNoQKfdpaGBnHMBDwP26YS-kty_nNGsRd7M1TF53pVBJDWQj4OzFzP6tezEP4_QAd8ZeHTNF2bSrwRmRCV8gZzUyLtNBIoHqJqJXYpM1pT7SzAFmZ0oImlnRvpesNAD0jmr1nFPYGXsOFfOAEK_IotTYIrNRTHD9rlmxlvd5yWzHsuP5Up88lnZDlKVp_9R1gO9NjIqhwiYl0aIIgGp9ZiqBPSwbrue_yyOKQ99ea3RMWv9j9MpD-MNuiTfp81-fFGmHF8V5m2uHp92tgbji8J6jC-eJmYK8-2Vnk-ZDmxW8POEfYAEQ2CerWBsko_SCB7ufchnldokgZApakCuvwhNGlunxgjUFSjktg3uS1Vy_XAxwCF8k-G70dhusTyqkVtRENSsxo4ixcPlDrpVjV4ZE-2vd9D7Gfq9VX1-msvIzB14uxLeiaQQcgf8KgcPz7oZcqkir7ZOUvsAr8pfR32LuQETK5bWHIEgWyMyiIXhkWCGLaQKWClsD3sLlgwYDx_sSf_vEa0nhrIfrJ00VInaJhTziZjuigXMZ3o7x3hYqN2CxgrgTPAfzHAZphWR2ne_7n5KAvaYKXdlbImETU0X_Svoz3sg-HJlC_ktntiS-EB85ku912XeCvJqyWFlhqpMTPpJyhXKwq2TSNrDzBWDfkIxVxJhaeOfdNuL8DbWPAStT-WSe5dDQJS2mkNY3v32uNRbyznA61noy-RzP1gINOmTWu146572BNO6BwvCFDCy4EK45NnBSbt5cuIQTwqp0F4sFg7RRsk1oNVqtXKrds19s3JJI9oU6LL73rm_sJzsgsCeuZPueGfSd9IJO1a7g-edVfCaOjQALFbu45_GjSWdUbOCAGbUxabP1HpGZ-Et4lhs5Oh76FHXqBgcGkc-M9DjDBMVUHfBhMbeiIVfpAxyEJrUvaEb6rZe1tvt-qt247Bd399vtA8c-p26zaP6y8N6o9lsHLUOD1pHB7cO_ZH4NxwKPsfKHaS_Qcnf0O0fAFi6oA)
 
 ![Arquitetura completa KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-092516.png?raw=true)
 
-```mermaid
-graph LR
-    subgraph Clientes
-        subgraph Mobile
-            Android["Android <br> (Compose KMP)"]
-            iOS["iOS <br> (SwiftUI)"]
-            iOSCompose["iOS <br> (Compose KMP - Experimental)"]
-            AndroidWidget["Android App Widget <br> (Glance API)"]
-            iOSWidget["iOS App Widget <br> (SwiftUI)"]
-        end
-        subgraph Wearables
-            watchOS["iOS watchOS <br> (SwiftUI)"]
-            WearOS["Android Wear OS <br> (Compose KMP)"]
-        end
-        subgraph Desktop
-            macOS["Apple macOS <br> (SwiftUI)"]
-            macOSCompose["Apple macOS <br> (Compose KMP)"]
-            Windows["Windows <br> (Compose KMP)"]
-            Linux["Linux <br> (Compose KMP)"]
-        end
-        subgraph TV
-            TvOS["Apple tvOS <br> (SwiftUI)"]
-            AndroidTV["Android TV <br> (Compose KMP)"]
-        end
-        subgraph Web
-            WebWasm["Wasm <br> (Compose KMP - Experimental)"]
-            WebReact["Web Kotlin/JS <br> (Kotlin React Wrapper)"]
-        end
-    end
+## Considerações finais
 
-    subgraph Server["Servidor"]
-        JVM["JVM REST API <br> (Ktor)"]
-        JVM2["JVM REST API <br> (Spring)"]
-        JVM3["JVM REST API <br> (http4k)"]
-        JVM4["JVM GraphQL <br> (KGraphQL)"]
-        JVM5["JVM GraphQL <br> (Apollo)"]
-        JVM6["JVM GRPC <br> (grpc-kotlin)"]
-    end
+Nesse artigo, conseguimos sair do zero no mundo KMP e compreendemos tecnicamente a diferença entre desenvolvimento nativo, cross-plataforma e multiplataforma.
 
-    subgraph Arquitetura["App em Kotlin Multiplataforma"]
-        Data
-        Domain
-        UI
-    end
+Com esse conhecimento, podemos avançar para os conceitos mais específicos do funcionamento do Kotlin Multiplataforma, como o compilador, síntaxe, configuração, etc.
 
-    subgraph Data["Data - Kotlin"]
-        RESTAPI["Chamadas REST API <br> (ktor KMP)"]
-        Serialization["Serialização e Deserialização <br> (kotlinx-serialization KMP)"]
-        SQDelight["Banco de dados/Cache <br> (SQDelight KMP)"]
-    end
+### Próximos passos
 
-    subgraph UI["Apresentação/UI"]
-        Nativo["Nativo"]
-    end
+Iremos aprender como o compilador do Kotlin funciona, e como sua estrutura de frontend + backend + IR possibilitam as múltiplas compilações.
 
-    subgraph Domain
-        BusinessLogic[Regras de negócios]
-        DataModels[Modelos]
-    end
+---
 
-    UI --> Clientes
-    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
-    class Mobile,Wearables,Desktop,Web,Server,UI,Domain,Data,TV area;
-```
+## Feedbacks
 
-## Conclusões finais
-
-Nesse artigo, conseguimos sair do zero no mundo KMP e compreendemos tecnicamente a diferença entre desenvolvimento nativo,
-cross-plataforma e multiplataforma.
-
-Com esse conhecimento, podemos avançar para os conceitos mais específicos do funcionamento do Kotlin Multiplataforma, como o compilador,
-síntaxe, configuração, etc.
-
-### Feedbacks
-
-🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues)
+🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
 
 Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
 
-Qualquer dúvida, crítica ou sugestão podem ser feitas através
+Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
 
-E aí, gostou da leitura? Aprendeu algo?
-
-Ao explorar o KMP, podemos nos beneficiar da eficiência do código compartilhado sem sacrificar a qualidade da experiência nativa. 
