@@ -307,7 +307,6 @@ graph TD
         C -->|Eventos| B
         B -->|Eventos| A
     end
-%% Conexões entre os subgráficos aqui, se necessário
 ```
 
 ### Flutter vs React Native
@@ -409,7 +408,6 @@ graph TD
         class KotlinJVM,KotlinJS,KotlinNative,KotlinWasm area;
         class JVMCode,JSCode,NativeCode,WasmCode defaultStyle;
     end
-
 ```
 
 O KMP visa:
@@ -451,7 +449,6 @@ flexibilidade para adaptar a estratégia de compartilhamento de código conforme
 
 
 ```mermaid
-
 graph TD
     subgraph KMP["Arquitetura do KMP"]
         subgraph UI["UI nativa"]
