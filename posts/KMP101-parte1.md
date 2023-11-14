@@ -72,6 +72,8 @@ nativo.
   foram desenvolvidos com Flutter, representando cerca de 3.2% do
   total [[1](https://developers.googleblog.com/2021/03/announcing-flutter-2.html), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/)].
 
+![Flutter Play Store 2021](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091647.png?raw=true)
+
 ```mermaid
 pie
     title Aplicativos na Play Store (2021)
@@ -83,6 +85,8 @@ pie
   cresceu para 500.000, representando cerca de
   14.1% [[1](https://techcrunch.com/2023/05/10/with-over-1m-published-apps-googles-flutter-expands-its-support-for-web-apps-and-webassembly/?guccounter=1#:~:text=Google%20also%20noted%20that%20there,adopt%20Flutter%20in%20existing%20projects.), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/#:~:text=Google%20Play%3A%20number%20of%20available%20apps%20as%20of%20Q3%202022)].
 
+![Flutter Play Store 2022](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091703.png?raw=true)
+
 ```mermaid
 pie
     title Aplicativos na Play Store (2022)
@@ -93,6 +97,8 @@ pie
 - **2023**: A mais recente contagem disponível indica que há 2,87 milhões de aplicativos na Google Play Store, com mais de 1 milhão baseado
   em Flutter, sugerindo que quase 35% dos aplicativos na loja são desenvolvidos usando essa
   tecnologia [[1](https://bloggersideas.com/pt/apps-statistics/#:~:text=,de%20aplicativos%20dispon%C3%ADveis%20para%20download), [2](https://www.nomtek.com/blog/flutter-app-examples)].
+
+![Flutter Play Store 2023](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091710.png?raw=true)
 
 ```mermaid
 pie
@@ -135,6 +141,8 @@ A arquitetura estável do React Native é baseada em três threads principais:
 
 A comunicação entre o JavaScript e o código nativo é realizada via uma "ponte", que funciona como um terminal de transmissão
 de dados, permitindo a desserialização e execução das operações necessárias.
+
+![Arquitetura estável do React Native](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091730.png?raw=true)
 
 ```mermaid
 graph TB
@@ -205,6 +213,8 @@ prevista para a arquitetura renovada.
 - **TurboModules**: Módulos otimizados que usam o JSI para um acesso mais direto e eficiente.
 - **React Renderer**: Um novo renderizador que colabora com o JSI para melhorar o desempenho da UI.
 
+![React Native nova arquitetura](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091745.png?raw=true)
+
 ```mermaid
 graph TD
     subgraph "Arquitetura 'nova' do React Native"
@@ -273,6 +283,7 @@ maneira declarativa usando Dart.
 
 A engine, então, renderiza isso em uma tela usando o [Skia](https://github.com/google/skia), que é posteriormente enviada às plataformas
 nativas: Android, iOS ou web. A plataforma nativa apresenta o canvas e envia os eventos que ocorrem de volta:
+![Flutter SDK](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091807.png?raw=true)
 
 ```mermaid
 graph TD
@@ -334,6 +345,8 @@ Além disso, a extensão de funcionalidades não suportadas nativamente pelo Flu
 meio de canais e estruturas de dados específicas, o que pode ser uma solução menos eficiente e mais complexa em comparação com a
 interoperabilidade entre Java e Kotlin ou Objective-C e Swift.
 
+![Tamanho do app no Flutter Android](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091853.png?raw=true)
+
 ```mermaid
 gantt
     title Tamanhos de um app Flutter no Android
@@ -346,6 +359,8 @@ gantt
     section Flutter
         5.5MB: 0, 5463
 ```
+
+![Tamanho do app no Flutter iOS](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091906.png?raw=true)
 
 ```mermaid
 gantt
@@ -393,6 +408,8 @@ desenvolvimento nativo.
 
 Em vez de tentar abstrair completamente a plataforma nativa, o KMP empodera devs nativos com um maquinário open-source que trata de
 compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre outros.
+
+![KMP compartilhando código](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091929.png?raw=true)
 
 ```mermaid
 graph TD
@@ -448,7 +465,7 @@ Algumas abordagens comuns:
 Lembrando que a escolha de quais partes compartilhar depende das necessidades específicas do projeto e da equipe. O KMP oferece a
 flexibilidade para adaptar a estratégia de compartilhamento de código conforme o projeto evolui.
 
-
+![Arquitetura simplificada KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-092444.png?raw=true)
 
 ```mermaid
 graph TD
@@ -481,6 +498,8 @@ graph TD
     classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
     class UI,Infra area;
 ```
+
+![Arquitetura completa KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-092516.png?raw=true)
 
 ```mermaid
 graph LR
@@ -547,6 +566,22 @@ graph LR
     class Mobile,Wearables,Desktop,Web,Server,UI,Domain,Data,TV area;
 ```
 
-###                                                                                      
+## Conclusões finais
+
+Nesse artigo, conseguimos sair do zero no mundo KMP e compreendemos tecnicamente a diferença entre desenvolvimento nativo,
+cross-plataforma e multiplataforma.
+
+Com esse conhecimento, podemos avançar para os conceitos mais específicos do funcionamento do Kotlin Multiplataforma, como o compilador,
+síntaxe, configuração, etc.
+
+### Feedbacks
+
+🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues)
+
+Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
+
+Qualquer dúvida, crítica ou sugestão podem ser feitas através
+
+E aí, gostou da leitura? Aprendeu algo?
 
 Ao explorar o KMP, podemos nos beneficiar da eficiência do código compartilhado sem sacrificar a qualidade da experiência nativa. 
