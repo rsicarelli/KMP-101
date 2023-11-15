@@ -34,7 +34,7 @@ A complexidade aumenta com a necessidade de dominar ferramentas e APIs específi
 
 [🔗 Versão interativa](https://mermaid.live/edit#pako:eNp1U9Fu2jAU_ZUr79UgEiCk0VSJEtKHddK0VtrUpA8mdsCQxJbjFFrKx1R72NOe9gn5sToJDMpUK7Jyr8-5Pj6-3qJYUIY8NFdELuDOj3IwoyhnbSJC5mtz7_JEMWJBGKFJ9ZfyuYBE5JoBJUBkymNS_a5-iQg9HKn1GIcHeNDCBdyKRK9NtTPkJPzO4lIVojhZYDn9QIpdSwmYUiRjuSZFU9n_8p-Aq3AiMslTQoXCcMPzFVNnED-cZpLEQteYczp0Opcv45wqwWm9Af48U5fws_YQA9PxC0zD6cYo19XrI0thxvPqVXHxUBPBPzvKMRyH_3xokFfHJb9JBOG3WhMDnxda8VlZ_TH1T-QFjTQiVxg2RGJohBEp97KuwxuxrH1hMG4uSPPHd962_GduCGtSZAfadfiDzU5gkwYm8zmGpTTTJkv3ey0Lke9ZH1kYp6QofJY0VwYJT1MPPo2CoR0EGGKRCmXiJEkwmDOKFTNRv98_RJ01p3rhgSU3ZyXbbsRtI9Rzu248RhhlTGWEU9Pi2zodIb1gGYuQZ34pUau6vXcGR0otbp_yGHlalQyjUlKimc-J6bLskJQkvxfiNETeFm2QZ18Mu8Oea_fcgeNYjm1koyfkuU53MHBc1-n1rIvRyN1h9Nzwe13Xsob2sO8YuD1yLAsjRrkW6mv7HptnuXsDt5gXKQ)
 
-![Desenvolvimento nativo](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091436.png?raw=true)
+![Desenvolvimento nativo](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091436.png?raw=true)
 
 > [🔗 Decision framework for mobile development](https://www.researchgate.net/publication/314165913_Decision_Framework_for_Mobile_Development_Methods)
 
@@ -46,15 +46,15 @@ Frameworks cross-plataforma como React Native e Flutter apresentam um SDK própr
 
 - Em **2021**, Flutter representava 3.2% do total, contando com mais de **150.000 dos 4,67 milhões** de aplicativos na Play Store [[1](https://developers.googleblog.com/2021/03/announcing-flutter-2.html), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/)].
 
-![Flutter Play Store 2021](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091647.png?raw=true)
+![Flutter Play Store 2021](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091647.png?raw=true)
 
 - No terceiro trimestre de **2022**, Flutter representava cerca de 14.1% contando com mais de **500.000 dos 3,55 milhões** aplicativos publicados na Play Store [[1](https://techcrunch.com/2023/05/10/with-over-1m-published-apps-googles-flutter-expands-its-support-for-web-apps-and-webassembly/?guccounter=1#:~:text=Google%20also%20noted%20that%20there,adopt%20Flutter%20in%20existing%20projects.), [2](https://www.statista.com/statistics/289418/number-of-available-apps-in-the-google-play-store-quarter/#:~:text=Google%20Play%3A%20number%20of%20available%20apps%20as%20of%20Q3%202022)].
 
-![Flutter Play Store 2022](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091703.png?raw=true)
+![Flutter Play Store 2022](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091703.png?raw=true)
 
 - Em novembro de **2023**, Flutter conta com cerca de 35% contando com **1 milhão dos 2,87 milhões** de aplicativos disponíveis na Play Store [[1](https://bloggersideas.com/pt/apps-statistics/#:~:text=,de%20aplicativos%20dispon%C3%ADveis%20para%20download), [2](https://www.nomtek.com/blog/flutter-app-examples)].
 
-![Flutter Play Store 2023](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091710.png?raw=true)
+![Flutter Play Store 2023](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091710.png?raw=true)
 
 A demanda por soluções cross-plataforma vem do desejo de simplificar o complexo processo de desenvolvimento de aplicativos para múltiplas plataformas.
 
@@ -85,7 +85,7 @@ A comunicação entre o JavaScript e o código nativo é realizada via uma "pont
 
 [🔗 Versão interativa](https://mermaid.live/edit#pako:eNqNVO9u2jAQfxXLU9VNMowQAiOdJq3tKrUaVTW6D1uyD0fsgEViZ45DyxAPs2foI_BiuyRQGFBtJ8XK_b_73dkLGmkuqE_HBrIJuT8PFUHKi1EtCOlH87OQVtjCADkFW0DyVuR29XsmklPCNfkiILLkFqyciZDW7iWdG8nHIgjpnVYWNT9CtVU-xwcjwEGj-wn-cHIDMxhGRma2ciA7VOX5LEcBfuRm-FfeY6YXOs2C8tBKYAG1cMdQKP5iRe1tRapMAOR1ZqSKZIbdpyDVm4PysJCB5tdplgSD1RMvEp3Xvjrfs_x6jYYbI8IFCg5j3SVgg_KAWJsU1rEg_88G3G0DIiUjiKZjowt02C_7mx5DMJwA1w_kFjehEpBPaiyVOJ7r5IRcIKSRBYXTL7tcPeUk0ikBUo9aHcyBNBof1guxpy2H-f6YtkLpuGoL9Yv6ErnjyponjSbqyl5rzU5_UQJ5finiCkcSyyTxyavelde-umLYZqIN8nEcM5Jbo6cCOdd1N1zjQXI78YmTPe6F4yKGIrFDO0_Ev1zPdnzrK8KqtaxOt5LsWtQ9sWe42QZatoWKVYCyNTasGvNuSWeU0VTgqkmOr8GiDB9SOxEpXl0ffzmYaXm9l2gHhdXDuYqob00hGC0yDlZcSsAFTKkfQ5KjNAP1Xet0Y4Qs9Rf0kfpOq9lp913H8xykntduMzqnfqfXbHU6_ZbnvOt2va7ndpeM_qoiOM1WTV6_2-p03V6PUcGl1WZQv17VI7b8A-WLexI)
 
-![Arquitetura estável do React Native](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091730.png?raw=true)
+![Arquitetura estável do React Native](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091730.png?raw=true)
 
 > [🔗 Understanding React Native Architecture](https://dev.to/goodpic/understanding-react-native-architecture-22hh)
 
@@ -114,7 +114,7 @@ Essa nova arquitetura ainda é experimental e está sujeita a mudanças à medid
 
 [🔗 Versão interativa](https://mermaid.live/edit#pako:eNqFVFFv0zAQ_iuWeeiLOy1NupVMQoKWikkrQmw8QIO0a3xprTl2cJxupeqPQTzwQ_rHcBxK044KP0T-7r67--zceU1TzZHGdG6gWJC7UaKIW2U1awwJfW2-VcKirQyQjtJL6BCuyUeE1JL3YMUSE9oEHQSCQQimCfXEhH7dU-r1donKvgPFJZrpBJQoKglcG8KRYO3TZSsCFT9RoecqjGFmRPqsxJ1BHDqKFVpNh0bA9tf2pyYcyPaHWWqDR_wbWOnKTsdQYq2iIz3uHLGGOs9Fi5V63DkWe0Ju6OR-kGAh0yaHZ5InulJWqPnf9Pf5H8v96QLtqyTd7quDg-9pbaunNefdExrsXc0h964Ge9dO4j-dbSl7wi7kBKV1nFRCWY4w83dFMiFlTF5cjvu98ZiRVEttHM6yjJHSGv2ADoVhuEPdR8HtIiZB8XSUjmMGlbS3diXxf6FXrdimiZlvNP8NvaXNeGMEnyPzXe5uomh2N2LG3GxMNL_OC8k-Xbtdbaj_Pfus53Ag6YoymqNrCMHdIK7r9Am1C8zdZMVuy8E81DO2cTyorL5dqZTG1lTIaFVwsDgS4Josp3EGsnTWAtQXrfMdyUEar-kTjYNBdBZcvIzOw36vH0XB-QWjK2cOzoJ-NLh0uNe_CAa9aMPod58hYBS5sNpMmnfCPxeb34ZgUH0)
 
-![React Native nova arquitetura](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091745.png?raw=true)
+![React Native nova arquitetura](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091745.png?raw=true)
 
 #### Turbo Modules
 
@@ -149,7 +149,7 @@ A engine, então, renderiza isso em uma tela usando o [Skia](https://github.com/
 
 [🔗 Versão interativa](https://mermaid.live/edit#pako:eNqVVMlu2zAQ_RWCvSpGvMhulSKAI8eA0aQwohZFK_cwkUYyYYokKMrZv6aHnPoV_rGSkp06SoKiPEizvHkYzsI7msgUaUBzDWpJvkwWgthTVpeNYUHJlFfGoCbR5NOCNu5nENAI3XiqocArqVc__0LcOQcby4DHO6HlDyuF2jAh4yephfjG0hxNGW__Le8FitTyijzudDp7PmteiDey7cWnImcCW1QR6jVLcK6lkYnk8U6QJMXGuXlsJxfKQsmSGSZFvJU3j5tfbdicg8mkLsIlCIG8jEMQwEpH7FzgfNCKmYA2s1JaN0ZoKvUfF-zHb7I29YoqnUGy5Q2lyFheaagzJymQyLUi2_xOGJKPl_rY5bkt9C28dr_PYNga57yyZS3j7b-xynbHxkrNIVlB7pp2WihIpLGzI0xd57HiLKnjWmGnaws5k1LNhB0k-Wo5WnVJOJTlBLO6JiRjnAfk3Wjq96ZTj7jGaqtnWeaR0mi5Qqv1-_2ddnDFUrMMSFddt-hSzKDiJjI3HP8VerQX26yKV49g_e3Xln3EiXZT7l0gJMbNUyOdsUvPFvNcprNCce_rzErO4LrsfZc5PEvp6OUO7y_ueG9XycHB8f12se7Jycu9OKkRdlrXUJJoxeCehK8PV1gj6y5Jx9XmePKMn_pEPVqgZWGpfYDunHlBzRILXNDAiinolUv8weKgMjK6EQkNjK7Qo5VK7V5MGNgrFjTIgJfWqkD8kLLYgaxKgzt6TQO_Mxwc-j3_0B--748GI9-jNzTo-cPOaNQd-h8Go6E_6A6GDx69rQm6HsWUGanPm-exfiUf_gA_RqLp)
 
-![Flutter SDK](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091807.png?raw=true)
+![Flutter SDK](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091807.png?raw=true)
 
 ### Flutter vs React Native
 
@@ -199,7 +199,7 @@ Em vez de tentar abstrair completamente a plataforma nativa, o KMP empodera devs
 
 [🔗 Versão interativa](https://mermaid.live/edit#pako:eNqFk8GO2jAQhl_Fml4NbcLShOxqLyAOrbaXVK1UwmGIncVLHEeOU6CIp9pH6IvViZOFwkpYkTIz-X57fmV8gFQxDhE8ayzX5PssKYhdVb1yhQTs42rNSnOsqhnPCGqOJBN5HpEPwXzsz-eUpCpX2uZZllFSGa023Gaj0ajPBlvBzDoiXrl7Z0vGM6xzE5t9zm_J70_6qZJSFVPrYjH9-8rEsyJflclFYfuRJWoj8jUytSSDwWP35cuPp4WLPtpw-d5e53T8Bse32G9oxG_e8y67pfmJlVwk0GmaLIEzzVvLrcS-W6vDF9TkYaUfyRBRX-Oxo-MOrq6I5pyWaQJHbW10xTkPLelCx2YaJd8qvema2KWXlZUolhd_-eSF9m3S81PoWWvNgN1f6jv31Pmip4Zo7-K_Ker0vGBAQXItUTA76oemnIBZc8kTiGzIUG-aMT9aDmuj4n2RQmR0zSnUJUPDZwLthZAQZZhXtlpi8Usp2UM2hegAO4g8b-jf-f5dEIS-54chhb0thpNhGAbBp_F4NPk8CT3_SOFPq_cocCaM0k_uHrbX8fgPbMAiag)
 
-![KMP compartilhando código](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091929.png?raw=true)
+![KMP compartilhando código](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091929.png?raw=true)
 
 O KMP visa:
 
@@ -215,7 +215,7 @@ KMP não impõe limitações em como você desenvolve a UI do seu aplicativo. Vo
 
 [🔗 Gráfico em tela cheia](https://mermaid.live/view#pako:eNp9VNtu2kAQ_ZXV9iWRHBowhEurSCkoapqQoqCoUkNVDd5x2GLvWrvrkAv5mfahUl-rvvSVH-vYBgohxELYs3P2zGXP7AMPtEDe4tcGkhE7uxgoRo9Nh8XCabd3NeBswL8UjjXniQoNkPs9GDEBgwzZUe-EKXDyBuzanuw5UsJoKb4utp3pACJ5D7Ofsx96Ay0_9pfICxS4AeigHTudLEEdaYNNmk84XCLas-8xGljDoBID9d881S6SKi-6Pfst5LVmgY7TmGGc9WJta07L3u7tHU7bhFEyKEphQhp05BmaQwaa9Tun7DzriZ4u-Z9GJG7iSGQEQlPs0jcwHisB_ecseItB6mAYYWHbEbVbvLaOaAMWyaFXRKOEYpxoM85hE7Dx-tEtwrMs6Z7RIr1n8exv5GQSgc1KzVKgKv6gnVMKTKhH9KO6CEI4B6E2MX3P_aFUklzTZ0p5qcw8Bzq0RCs5lJkQGKxkQH1MgPpr0RSBAq1sGlOkDKTnec1-qUDClL1LZbR2kEuR5p5MHiv4DZXkUrzayV-7T3wXGGunr3aK9-527SxDXp5QvMvFIGydgxz2AV0CwZhlbdEWnx2DHNifyNAR9bMKzxFFiylfCNwWVCUfJvIXgsQtMJ9gx1HqHJqtY5eHnGfNumkhIZcp46X5oq4U86KsjpEl2rAu3KDy2HmvO1dcUWmPugLXmQzbOtCQaGHns-CC5Xk_iRCQiG0HQ0bTASyUUdRir-rHtcrxsUeqibQhOwxDj1ln9BjJ8n1_Ye1NpHCjFisntyt0lLJXTHpG-oZ7nO6QGKSgS_Mhww24G2FMrWzRpwAzHvCBeiQcpE7371TAW86k6PE0EeCwI4FUEi8WE1CftV41eeuB3_JWeb9SKtdqB5VyuVr1a37D9_gdLTdLDb98UKnU6vvVRs2vVh89fp8z7JeajXL9oOZXmg2_Xm82yx5HIZ023eKOz6_6x3-RzN2q)
 
-![Arquitetura simplificada KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-15-155557.png?raw=true)
+![Arquitetura simplificada KMP](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-15-155557.png?raw=true)
 
 ### Compartilhando código Kotlin com as plataformas
 
@@ -233,7 +233,7 @@ Algumas abordagens comuns:
 
 [🔗 Gráfico em tela cheia](https://mermaid.live/view#pako:eNqNVc1y2zYQfhUMekmntBxZsewymczIUjxVY-XHkpyZWD2A4FLCGARYAPRPHD9NDjnl1Efwi2UBUrIoKx3zQGJ3P3z77XIJ3lKuU6AxnRtWLGaK4GXLJFikLwUoB7ZyN0IjnQgJDwF_9VRqtEjPZ7Rezeg_TYR4P8Yo3hsRUOmWDJ-AGZbI9ez-umKOL5Y0S-tRIr85gGolwUGelHcA9sLposmXM17RFYWEynqcU6hUX1lE1atHiBOhymuMh-cTpEzOmvsnl2si3OUWDXW5k7O10pHlKd1ONjuYfGI299VA0rMW8kTekF3inVvanZwC4w7Rf01GJ-QP0h__otdhsTFnPfNvKRy40jBkeHMNeSE1sQIfIhOcpZqkQMqckVeJeb0O937OcpYyS14dYUxp8lY7KRQZldKJQjLHMm1y1lAzQO-apXMm1IM9Hf5aqt-JGgeoye4OVWaaxKdvxpPehyEi-otaFpoNyBiMYFJ8YU5ohcCVff_9_puuKsQZbHibBB8HIMV84bt9xBQPzUmDoD7jC1iBt-mfem3T4W6vMJhDuS3871DZpfZFgoS5b36BXyLRttL20FJLlIeyOvCM18fF7_-roOq2p9f5_Q8lmsmPSisUWHui54KfnwLusb4-BfP7_7jQduMtjvD0kvY8PFbBtbTTIdnZef2VfEAAsThETviuGuJfjQOutMRMyxLqeiJutLU7vlJfKNFlFc6bI1U5wy30jMVkfCUyNx1G5G9wBeMXpK_zQmPegOqvaCuCmBzL0jkwEQmfT0VTgzfmN15RrQJBW8CC461Wi3zdOLG5ZNYOICPMACOZkDImvx0c7-8dH0eEY-UG7SzLImKd0ReAVqfTWVo7VyJ1i5i0i-s1uvrkj1bHc1QfmOhJIhzmSywHO1C95si_o2hyFhS8pBHNAWsRKf5wbj3pjLoF5DiyMS5TZi5mdKbuEMdKp8c3itPYmRIiWhYpczAQDAciXzoLpj5rvW7S-JZe07jd3mt1ut3DFweHe93nh90_X0T0hsYHrZVjv7vf7nTuIvolELQjCqlw2oyqv2H4Kd79BJYTO0I)
 
-![Arquitetura KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-15-155422.png?raw=true)
+![Arquitetura KMP](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-15-155422.png?raw=true)
 
 Lembrando que a escolha de quais partes compartilhar depende das necessidades específicas do projeto e da equipe. O KMP oferece a flexibilidade para adaptar a estratégia de compartilhamento de código conforme o projeto evolui.
 
@@ -257,10 +257,10 @@ Iremos aprender como o compilador do Kotlin funciona, e como sua estrutura de fr
 
 ## Feedbacks
 
-🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
+🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP-101/issues/new/choose)
 
 Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
 
-Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
+Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP-101)
 
 Também, pode dar um alô no Xwitter, ou no Slack do Kotlin, ou AndroidDevBR!

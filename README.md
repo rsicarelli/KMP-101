@@ -12,7 +12,7 @@ O principal objetivo deste projeto é fornecer uma base de conhecimento para dev
 
 ## Como Contribuir
 
-🔗 [Nova issue: dúvida, crítica ou sugestão](https://github.com/rsicarelli/KMP101/issues/new/choose)
+🔗 [Nova issue: dúvida, crítica ou sugestão](https://github.com/rsicarelli/KMP-101/issues/new/choose)
 
 Seu feedback é essencial para o crescimento deste projeto! Se você tem sugestões, críticas ou quer contribuir com conteúdo, sinta-se à vontade para abrir uma issue ou enviar um pull request.
 
