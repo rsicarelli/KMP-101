@@ -1,6 +1,5 @@
 > * [O que é desenvolver "nativo"?](#o-que-é-desenvolver-nativo)
 > * [Introduzindo frameworks cross-plataforma](#introduzindo-frameworks-cross-plataforma)
-> * [O que impulsiona a busca por soluções cross-plataforma?](#o-que-impulsiona-a-busca-por-soluções-cross-plataforma)
 > * [Introduzindo o React Native](#introduzindo-o-react-native)
 > * [Introduzindo o Flutter](#introduzindo-o-flutter)
 > * [Introduzindo o Kotlin Multiplataforma (KMP)](#introduzindo-o-kotlin-multiplataforma-kmp)
@@ -234,11 +233,9 @@ Algumas abordagens comuns:
 
 Lembrando que a escolha de quais partes compartilhar depende das necessidades específicas do projeto e da equipe. O KMP oferece a flexibilidade para adaptar a estratégia de compartilhamento de código conforme o projeto evolui.
 
-[🔗 Versão interativa](https://mermaid.live/edit#pako:eNp1lOFq2zAQx19F3KBs4JQkcpKijkFpCGSlrCwrg9VlKJbciNiSJ8tru5Cn6iP0xSZbUdI0ij7YOt3vJN3_JK0gVYwDgQdNywX6MU4ksq2q527g6vrmLoEL_acWhptaU8RUM5jAvSP36NuphW-nSFIj_tI9pmkXkmkl2O8WO5Hzqmw_X7kpabpEl6ooVcV3joMJxLeZC549iszY5Q6In3zuiCtlciHRd05Tc0CNebU0qny_kSYxvwv0cQN9OrIfLlkid6Zbr1Xr8vWFiQeFUlXUBeLFVq-AYlOZaWpj2r_TTR3VzcMbOyiPZ2z_aNqe2dhBET1j-4dpv8vf544-dzpf3lQ55HUlDHlc6UKeXbmcd08Ph_gAB2yFCDn3VAgB2_RDzjSnVTXmGaKaU5SJPCfow2gy6E8mka14rrS1syyLUGW0WnJrYYy91XkUzCwI6pVPb6azBzlyCzaTnkMEBdcFFczey1XDJWAWvOAJENtlVC8TSOTacrQ2avYsUyBG1zyCumTU8LGg9nQVQDKaV3a0pPKXUoWHrAlkBU9Azk6HuNvH3eGgPxoO4xhH8Ayk34tPz_AgHnW7OMa4F68j-NfG9yLgTBilr92j0b4d6_9D5EqA)
+[🔗 Gráfico em tela cheia](https://mermaid.live/view#pako:eNp9VNtu2kAQ_ZXV9iWRHBowhEurSCkoapqQoqCoUkNVDd5x2GLvurvrkAv5mfahUl-rvvSVH-vYBgoh1ELYu3N8Zub4zD7wQAvkLX5tIBmxs4uBYnTZdFhsnHZ7VwN-ZL6m0qFLDTChs80B_1Qg19AnKjRA-LdgxAQMMmRHvROmwMkbsGvvZNeREkZL8Xnx2pkOIJL3MPsx-6430PJ9f4m8QIEbgA7asdPJEtSRNtik-YDDJaI9-xajgTUMKjFQ_5an2kVS5Sq0Z7-EvNYs0HEaM4w3dMhp2eu9vcNpmzBKBkUrTEiDjiJDc8hAs37nlJ1nmujpkv9pRuImjkRGIDTlLn0B47ES0H_OgrcYpA6GERZrOyK5xUvriDZgkRx6RTYqKMaJNuMcNgEbs7WSF-lZVnTPaJHes3j2J3IyicBmrWYlUBe_0c4pBSakEf2oL4IQzkGoTUzP83golaTQ9JlW_tdmXgN9tEQrOZSZERisVEA6JkD6WjRFokArm8aUKQPpeV2znyqQMGVvUhmtfcilSfNIZo8V_IZLcite7eS33SexC4y101c7xX13u3eWKS9PKN_lYhC2zkEOe4cugWDMMlm0xWfHIAf2JzJ0RP2sw3NEITHVC4Hbgqrkw0TxwpC4BeYT7DhKnUOzdezylPOqWTctLOQyZ_xvvkiVYl6U1TGyRBvWhRtUHjvvdeeOKzrtkSpwndmwrQMNiRZ2PgsuWH7vJxkCMrHtYMhoOoCFMopa7EX9uFY5PvbINZE2tA7D0GPWGT1GWvm-v1jtTaRwoxYrJ7crdFSyV0x6RvqKe5zOkBikoFP0IcMNuBthTFK26FGAGQ_4QD0SDlKn-3cq4C1nUvR4mghw2JFALokXmwmoj1qvLnnrgd_yVnm_UirXageVcrla9Wt-w_f4HW03Sw2_fFCp1Or71UbNr1YfPX6fM-yXmo1y_aDmV5oNv15vNsseRyGdNt3i0M_P_se_AG7kHA)
 
-![Arquitetura simplificada KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-092444.png?raw=true)
-
-
+![Arquitetura simplificada KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-15-153615.png?raw=true)
 
 ## Considerações finais
 
@@ -263,3 +260,40 @@ Iremos aprender como o compilador do Kotlin funciona, e como sua estrutura de fr
 Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
 
 Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
+
+```mermaid
+graph LR
+    subgraph KMP["Arquitetura do KMP"]
+        subgraph Infra["Hardware e API nativas"]
+            Android_Infra["Localização"]
+            iOS_Infra["Rede"]
+            Desktop_Infra["Disco"]
+            Web_Infra["Câmera"]
+        end
+
+        KotlinMP["Código comum em KMP"]
+        Infra <-->|Comunicação direta <br> ao SDK Nativo| KotlinMP
+        KotlinKMPCompilado[".jar, .aar,<br> executable,<br> shared/static lib, <br> framework,<br>wasm "]
+        KotlinMP -->|Produz múltiplas compilações, <br> dependendo das plataformas <br> definidas| KotlinKMPCompilado
+        KotlinKMPCompilado -->|Disponibiliza a compilação para ser <br> consumida como dependência| Build
+
+        subgraph Build["Dependência"]
+            Local[(Local)]
+            Remoto[(Remoto)]
+        end
+
+        subgraph UI["UI nativa"]
+            Android_UI["Jetpack Compose"]
+            iOS_UI["Swift UI"]
+            Web_UI["Kotlin React"]
+            Web_UI2["React Native"]
+            Web_UI3["Flutter"]
+            Desktop_UI["Compose Multiplatform"]
+        end
+
+        UI -->|Consome por Maven, NPM, <br> Swift Packages, Cocoapods,<br> etc| Build
+    end
+
+    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
+    class UI,Infra area;
+```
