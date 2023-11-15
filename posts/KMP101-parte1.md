@@ -10,7 +10,7 @@ Usamos diariamente uma variedade de aplicativos em dispositivos como celulares, 
 
 Essa diversidade de plataformas exige estratégias de desenvolvimento que proporcionem atualizações simultâneas e experiências de usuário uniformes.
 
-Neste artigo, exploraremos o [Kotlin Multiplataforma (KMP)](https://kotlinlang.org/docs/multiplatform.html) e como ele se compara com outras tecnologias cross-plataforma, como React Native e Flutter. Discutiremos as vantagens e desafios dessas abordagens, oferecendo insights úteis para devs que buscam soluções eficientes para desenvolvimento multiplataforma.
+Neste artigo, exploraremos o [Kotlin Multiplataforma (KMP)](https://kotlinlang.org/docs/multiplatform.html) e como ele se compara com outras tecnologias cross-plataforma, como React Native e Flutter. Discutiremos as vantagens e desafios dessas abordagens, oferecendo visões úteis para devs que buscam soluções eficientes para desenvolvimento multiplataforma.
 
 ---
 
@@ -213,9 +213,9 @@ Com KMP, as versões do seu aplicativo podem ter muito em comum, mas também dif
 
 KMP não impõe limitações em como você desenvolve a UI do seu aplicativo. Você pode usar qualquer estilo e frameworks que quiser, incluindo os mais modernos, como Jetpack Compose para Android e SwiftUI para iOS. Isso permite o uso de elementos específicos de cada plataforma, proporcionando uma experiência de UI nativa para seus usuários.
 
-[🔗 Versão interativa](https://mermaid.live/view#pako:eNqNVEtu2zAQvQrBblpUSWwr8kctAjh2gxqN-4ntBGjcBSWNbSIUqZKU80NO00VXXfUIvlhJSXYkxynChcQ3M3zzZiTOPQ5FBNjHc0mSxZQjs1QaZAj1GAWuQeXmimsoAsrg0WFXl0dS0OhyiovdFP-oRtAvI-M1z4oHeLQjwwUQSQJWzm7XNdHhYk2zRk8S2cNZUKEkM6AX5e2DutIiqfLFJMzpkoRBjp7mpDwS18pEFbsnEaeUpzfGn71fIGV8Xj0_XpZE6OUODUW54_NS6YblJd0OtjsYXBAV22og6CoFccBu0QGyxh3tDs6AhNpEfxwPT9Fb1Bs90-tss_WfdeXPlGrQqSR5eQhi9EloRjkapkzThBFNZkLGpELaN9YSEjGh_BFPBs9ntCdNqoygzHj2YTTufh0YV29BYhIRhQyshIxAUsLoHdFUcBO4wavfq18CvQ_kkf2HKtYqwbc-MDpf2G4dEx4KFAGKSCTUQY-EC9gE7xI-sdomVUWfjZSlsOUAg7khQom5OkioXMxj8xTiNpQUjtdhcb_f_Ddl3ldLL-LVH06r1RyninJQ6lTMaXh5BuaMsgVxmK_-hlSore81NOOGqcvstXGW0k4GaG_vaGv0hIwo1YcZIhIImlHGfPSqdeI1Tk4cFAompMGz2cxBSktxBQa5rrtGe9c00gsf1ZObEl0xwpzNnHGKm28sgWO-6hKkMxk4efmO1e6MzzMF77CDYzANpZGZnPeWdIr1AmLz7XyzjYi8muIpfzBxJNVidMtD7GuZgoPTJCIa-pSYRsVrY0L4dyHKEPv3-Ab7Xmu_1XYbNa_ZabU77XrbwbfYP_T2D1uder3h1Wu1w0az0Xxw8F1GUNvvuK2m2_Bq1u26XsvBEFEt5DCf89m4f_gHd2rNtA)
+[🔗 Gráfico em tela cheia](https://mermaid.live/view#pako:eNp9VNtu2kAQ_ZXV9iWRHBowhEurSCkoapqQoqCoUkNVDd5x2GLvurvrkAv5mfahUl-rvvSVH-vYBgoh1ELYu3N8Zub4zD7wQAvkLX5tIBmxs4uBYnTZdFhsnHZ7VwN-ZL6m0qFLDTChs80B_1Qg19AnKjRA-LdgxAQMMmRHvROmwMkbsGvvZNeREkZL8Xnx2pkOIJL3MPsx-6430PJ9f4m8QIEbgA7asdPJEtSRNtik-YDDJaI9-xajgTUMKjFQ_5an2kVS5Sq0Z7-EvNYs0HEaM4w3dMhp2eu9vcNpmzBKBkUrTEiDjiJDc8hAs37nlJ1nmujpkv9pRuImjkRGIDTlLn0B47ES0H_OgrcYpA6GERZrOyK5xUvriDZgkRx6RTYqKMaJNuMcNgEbs7WSF-lZVnTPaJHes3j2J3IyicBmrWYlUBe_0c4pBSakEf2oL4IQzkGoTUzP83golaTQ9JlW_tdmXgN9tEQrOZSZERisVEA6JkD6WjRFokArm8aUKQPpeV2znyqQMGVvUhmtfcilSfNIZo8V_IZLcite7eS33SexC4y101c7xX13u3eWKS9PKN_lYhC2zkEOe4cugWDMMlm0xWfHIAf2JzJ0RP2sw3NEITHVC4Hbgqrkw0TxwpC4BeYT7DhKnUOzdezylPOqWTctLOQyZ_xvvkiVYl6U1TGyRBvWhRtUHjvvdeeOKzrtkSpwndmwrQMNiRZ2PgsuWH7vJxkCMrHtYMhoOoCFMopa7EX9uFY5PvbINZE2tA7D0GPWGT1GWvm-v1jtTaRwoxYrJ7crdFSyV0x6RvqKe5zOkBikoFP0IcMNuBthTFK26FGAGQ_4QD0SDlKn-3cq4C1nUvR4mghw2JFALokXmwmoj1qvLnnrgd_yVnm_UirXageVcrla9Wt-w_f4HW03Sw2_fFCp1Or71UbNr1YfPX6fM-yXmo1y_aDmV5oNv15vNsseRyGdNt3i0M_P_se_AG7kHA)
 
-![Arquitetura KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-15-150050.png?raw=true)
+![Arquitetura simplificada KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-15-153615.png?raw=true)
 
 ### Compartilhando código Kotlin com as plataformas
 
@@ -231,11 +231,11 @@ Algumas abordagens comuns:
 - **Testes**: Escrever testes unitários e de integração que podem ser executados em todas as plataformas, garantindo a consistência e a confiabilidade do código compartilhado.
 - **Abstrações de Hardware e SO**: Códigos que abstraem funcionalidades específicas do sistema operacional ou do hardware, como acesso a sensores, armazenamento de arquivos, etc., permitindo que sejam usados de maneira uniforme em diferentes plataformas.
 
+[🔗 Versão interativa](https://mermaid.live/view#pako:eNqNVEtu2zAQvQrBblpUSWwr8kctAjh2gxqN-4ntBGjcBSWNbSIUqZKU80NO00VXXfUIvlhJSXYkxynChcQ3M3zzZiTOPQ5FBNjHc0mSxZQjs1QaZAj1GAWuQeXmimsoAsrg0WFXl0dS0OhyiovdFP-oRtAvI-M1z4oHeLQjwwUQSQJWzm7XNdHhYk2zRk8S2cNZUKEkM6AX5e2DutIiqfLFJMzpkoRBjp7mpDwS18pEFbsnEaeUpzfGn71fIGV8Xj0_XpZE6OUODUW54_NS6YblJd0OtjsYXBAV22og6CoFccBu0QGyxh3tDs6AhNpEfxwPT9Fb1Bs90-tss_WfdeXPlGrQqSR5eQhi9EloRjkapkzThBFNZkLGpELaN9YSEjGh_BFPBs9ntCdNqoygzHj2YTTufh0YV29BYhIRhQyshIxAUsLoHdFUcBO4wavfq18CvQ_kkf2HKtYqwbc-MDpf2G4dEx4KFAGKSCTUQY-EC9gE7xI-sdomVUWfjZSlsOUAg7khQom5OkioXMxj8xTiNpQUjtdhcb_f_Ddl3ldLL-LVH06r1RyninJQ6lTMaXh5BuaMsgVxmK_-hlSore81NOOGqcvstXGW0k4GaG_vaGv0hIwo1YcZIhIImlHGfPSqdeI1Tk4cFAompMGz2cxBSktxBQa5rrtGe9c00gsf1ZObEl0xwpzNnHGKm28sgWO-6hKkMxk4efmO1e6MzzMF77CDYzANpZGZnPeWdIr1AmLz7XyzjYi8muIpfzBxJNVidMtD7GuZgoPTJCIa-pSYRsVrY0L4dyHKEPv3-Ab7Xmu_1XYbNa_ZabU77XrbwbfYP_T2D1uder3h1Wu1w0az0Xxw8F1GUNvvuK2m2_Bq1u26XsvBEFEt5DCf89m4f_gHd2rNtA)
+
+![Arquitetura KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-15-150050.png?raw=true)
+
 Lembrando que a escolha de quais partes compartilhar depende das necessidades específicas do projeto e da equipe. O KMP oferece a flexibilidade para adaptar a estratégia de compartilhamento de código conforme o projeto evolui.
-
-[🔗 Gráfico em tela cheia](https://mermaid.live/view#pako:eNp9VNtu2kAQ_ZXV9iWRHBowhEurSCkoapqQoqCoUkNVDd5x2GLvurvrkAv5mfahUl-rvvSVH-vYBgoh1ELYu3N8Zub4zD7wQAvkLX5tIBmxs4uBYnTZdFhsnHZ7VwN-ZL6m0qFLDTChs80B_1Qg19AnKjRA-LdgxAQMMmRHvROmwMkbsGvvZNeREkZL8Xnx2pkOIJL3MPsx-6430PJ9f4m8QIEbgA7asdPJEtSRNtik-YDDJaI9-xajgTUMKjFQ_5an2kVS5Sq0Z7-EvNYs0HEaM4w3dMhp2eu9vcNpmzBKBkUrTEiDjiJDc8hAs37nlJ1nmujpkv9pRuImjkRGIDTlLn0B47ES0H_OgrcYpA6GERZrOyK5xUvriDZgkRx6RTYqKMaJNuMcNgEbs7WSF-lZVnTPaJHes3j2J3IyicBmrWYlUBe_0c4pBSakEf2oL4IQzkGoTUzP83golaTQ9JlW_tdmXgN9tEQrOZSZERisVEA6JkD6WjRFokArm8aUKQPpeV2znyqQMGVvUhmtfcilSfNIZo8V_IZLcite7eS33SexC4y101c7xX13u3eWKS9PKN_lYhC2zkEOe4cugWDMMlm0xWfHIAf2JzJ0RP2sw3NEITHVC4Hbgqrkw0TxwpC4BeYT7DhKnUOzdezylPOqWTctLOQyZ_xvvkiVYl6U1TGyRBvWhRtUHjvvdeeOKzrtkSpwndmwrQMNiRZ2PgsuWH7vJxkCMrHtYMhoOoCFMopa7EX9uFY5PvbINZE2tA7D0GPWGT1GWvm-v1jtTaRwoxYrJ7crdFSyV0x6RvqKe5zOkBikoFP0IcMNuBthTFK26FGAGQ_4QD0SDlKn-3cq4C1nUvR4mghw2JFALokXmwmoj1qvLnnrgd_yVnm_UirXageVcrla9Wt-w_f4HW03Sw2_fFCp1Or71UbNr1YfPX6fM-yXmo1y_aDmV5oNv15vNsseRyGdNt3i0M_P_se_AG7kHA)
-
-![Arquitetura simplificada KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-15-153615.png?raw=true)
 
 ## Considerações finais
 
@@ -260,40 +260,3 @@ Iremos aprender como o compilador do Kotlin funciona, e como sua estrutura de fr
 Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
 
 Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
-
-```mermaid
-graph LR
-    subgraph KMP["Arquitetura do KMP"]
-        subgraph Infra["Hardware e API nativas"]
-            Android_Infra["Localização"]
-            iOS_Infra["Rede"]
-            Desktop_Infra["Disco"]
-            Web_Infra["Câmera"]
-        end
-
-        KotlinMP["Código comum em KMP"]
-        Infra <-->|Comunicação direta <br> ao SDK Nativo| KotlinMP
-        KotlinKMPCompilado[".jar, .aar,<br> executable,<br> shared/static lib, <br> framework,<br>wasm "]
-        KotlinMP -->|Produz múltiplas compilações, <br> dependendo das plataformas <br> definidas| KotlinKMPCompilado
-        KotlinKMPCompilado -->|Disponibiliza a compilação para ser <br> consumida como dependência| Build
-
-        subgraph Build["Dependência"]
-            Local[(Local)]
-            Remoto[(Remoto)]
-        end
-
-        subgraph UI["UI nativa"]
-            Android_UI["Jetpack Compose"]
-            iOS_UI["Swift UI"]
-            Web_UI["Kotlin React"]
-            Web_UI2["React Native"]
-            Web_UI3["Flutter"]
-            Desktop_UI["Compose Multiplatform"]
-        end
-
-        UI -->|Consome por Maven, NPM, <br> Swift Packages, Cocoapods,<br> etc| Build
-    end
-
-    classDef area fill: #7F52FF, color: #fff, stroke: #333, stroke-width: 1px
-    class UI,Infra area;
-```
