@@ -214,6 +214,10 @@ Com KMP, as versões do seu aplicativo podem ter muito em comum, mas também dif
 
 KMP não impõe limitações em como você desenvolve a UI do seu aplicativo. Você pode usar qualquer estilo e frameworks que quiser, incluindo os mais modernos, como Jetpack Compose para Android e SwiftUI para iOS. Isso permite o uso de elementos específicos de cada plataforma, proporcionando uma experiência de UI nativa para seus usuários.
 
+[🔗 Versão interativa](https://mermaid.live/view#pako:eNqNVEtu2zAQvQrBblpUSWwr8kctAjh2gxqN-4ntBGjcBSWNbSIUqZKU80NO00VXXfUIvlhJSXYkxynChcQ3M3zzZiTOPQ5FBNjHc0mSxZQjs1QaZAj1GAWuQeXmimsoAsrg0WFXl0dS0OhyiovdFP-oRtAvI-M1z4oHeLQjwwUQSQJWzm7XNdHhYk2zRk8S2cNZUKEkM6AX5e2DutIiqfLFJMzpkoRBjp7mpDwS18pEFbsnEaeUpzfGn71fIGV8Xj0_XpZE6OUODUW54_NS6YblJd0OtjsYXBAV22og6CoFccBu0QGyxh3tDs6AhNpEfxwPT9Fb1Bs90-tss_WfdeXPlGrQqSR5eQhi9EloRjkapkzThBFNZkLGpELaN9YSEjGh_BFPBs9ntCdNqoygzHj2YTTufh0YV29BYhIRhQyshIxAUsLoHdFUcBO4wavfq18CvQ_kkf2HKtYqwbc-MDpf2G4dEx4KFAGKSCTUQY-EC9gE7xI-sdomVUWfjZSlsOUAg7khQom5OkioXMxj8xTiNpQUjtdhcb_f_Ddl3ldLL-LVH06r1RyninJQ6lTMaXh5BuaMsgVxmK_-hlSore81NOOGqcvstXGW0k4GaG_vaGv0hIwo1YcZIhIImlHGfPSqdeI1Tk4cFAompMGz2cxBSktxBQa5rrtGe9c00gsf1ZObEl0xwpzNnHGKm28sgWO-6hKkMxk4efmO1e6MzzMF77CDYzANpZGZnPeWdIr1AmLz7XyzjYi8muIpfzBxJNVidMtD7GuZgoPTJCIa-pSYRsVrY0L4dyHKEPv3-Ab7Xmu_1XYbNa_ZabU77XrbwbfYP_T2D1uder3h1Wu1w0az0Xxw8F1GUNvvuK2m2_Bq1u26XsvBEFEt5DCf89m4f_gHd2rNtA)
+
+![Arquitetura KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-15-150050.png?raw=true)
+
 ### Compartilhando código Kotlin com as plataformas
 
 Dado o espírito flexível do KMP, atualmente existem uma série de estratégias que devs podem adotar para usar o KMP.
@@ -234,9 +238,7 @@ Lembrando que a escolha de quais partes compartilhar depende das necessidades es
 
 ![Arquitetura simplificada KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-092444.png?raw=true)
 
-[🔗 Versão interativa](https://mermaid.live/view#pako:eNqNVMlu2zAQ_RWCvbSAkthWvKlFACduALdxl9hOgMY9jKSxTYQiVZJyNuRreuipp36Cf6zUYkdy3CI8SHwzwzdvRuI80ECGSD06VxAvpoLYpRM_Q-SEMxQGdW6uuIbSZxyfHOnqiVBJFl5NabGb0u_VCPZ5ZL32WfGgCHdkuERQ4PNy9nTdgAkWa5o1epYoPZwFFUoyA3lR3j7qayPjKl8EQU4Xxxxz9DwnE6G80Taq2D2LOGMiubX-7P0CKeOL6vnxsiTCLHdoKModX5RKtywv6ba_3UH_EnSUVoN-T2uMfH5HDkhq3NFu_xwhMDb6AyxhFCgWm91Zs83Wf9ZTPxJm0CQK8vIIRuSjNJwJMky4YTEHAzOpIqiQ9q21hGQETDzhyeDfGdOTNlVGUGY8fz8a974MrOtkARGEoImFlZARKgac3YNhUtjADV79Wv2U5J2vjtJ_qGKtEnztI2fzRdqtYxCBJCGSEEKpD04gWOAmeJfwSaptUlX0yUpZyrQc5Di3RCS2V4dInYt5ap4mIg2FwvE6KO73m_-mzPua0sto9VuwajXHiWYCtT6TcxZcnaM9o9OCBM5XfwIm9db3Gtpxw_VV9to4S2knA7K3d7Q1egIOWvdxRkAhkBnj3COv2qfNxumpQwLJpbJ4Nps5RBslr9Ei13XXaO-GhWbhkXp8W6IrRpizmTNOcfOtxXfsV12iciYDJy_fSbU744tMwVvq0AhtQ1loJ-dDSjqlZoGR_Xae3Yagrqd0Kh5tHCRGju5EQD2jEnRoEodgsM_ANipaG2MQ36QsQ-o90FvqNdv77Y7bqDVb3Xan26l3HHpHvcPm_mG7W683mvVa7bDRarQeHXqfEdT2u2675TaatdTtus22QzFkRqphPuezcf_4F6eAzyI)
 
-![Arquitetura KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-15-145553.png?raw=true)
 
 ## Considerações finais
 
