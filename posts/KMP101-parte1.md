@@ -1,3 +1,6 @@
+> 🔗 [dev.to/rsicarelli/kmp-101-introducao-ao-paradigma-da-multiplataforma](https://dev.to/rsicarelli/kotlin-multiplataforma-101-introducao-ao-paradigma-da-multiplataforma-eo3)
+
+
 > * [O que é desenvolver "nativo"?](#o-que-é-desenvolver-nativo)
 > * [Introduzindo frameworks cross-plataforma](#introduzindo-frameworks-cross-plataforma)
 > * [Introduzindo o React Native](#introduzindo-o-react-native)
