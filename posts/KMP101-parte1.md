@@ -243,11 +243,13 @@ Nesse artigo, conseguimos sair do zero no mundo KMP e compreendemos tecnicamente
 
 Em resumo, cada tecnologia - React Native, Flutter e Kotlin Multiplatform - tem seus pontos fortes e fracos.
 
-Ao escolher a ferramenta certa para o seu projeto, considere fatores como desempenho, facilidade de uso e suporte da comunidade. Kotlin Multiplatform emerge como uma opção promissora, especialmente para quem valoriza a eficiência do código compartilhado sem comprometer a experiência do usuário nativo.
+Kotlin Multiplatform emerge como uma opção promissora, especialmente para quem valoriza a eficiência do código compartilhado sem comprometer a experiência do usuário nativo.
 
-Com esse conhecimento, podemos avançar para os conceitos mais específicos do funcionamento do Kotlin Multiplataforma, como o compilador, síntaxe, configuração, etc.
+Com KMP, você consegue separar seu aplicativo em um "backend" (nativo ou como uma compilação multiplataforma) e "frontend" se utilizando tecnologias nativas, cross-plataforma ou multiplataforma.
 
 ### Próximos passos
+
+Com esse conhecimento, podemos avançar para os conceitos mais específicos do funcionamento do Kotlin Multiplataforma, como o compilador, síntaxe, configuração, etc.
 
 Iremos aprender como o compilador do Kotlin funciona, e como sua estrutura de frontend + backend + IR possibilitam as múltiplas compilações.
 
@@ -260,3 +262,5 @@ Iremos aprender como o compilador do Kotlin funciona, e como sua estrutura de fr
 Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
 
 Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
+
+Também, pode dar um alô no Xwitter, ou no Slack do Kotlin, ou AndroidDevBR!
