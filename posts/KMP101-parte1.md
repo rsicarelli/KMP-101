@@ -57,8 +57,6 @@ Frameworks cross-plataforma como React Native e Flutter apresentam um SDK própr
 
 ![Flutter Play Store 2023](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091710.png?raw=true)
 
-## O que impulsiona a busca por soluções cross-plataforma?
-
 A demanda por soluções cross-plataforma vem do desejo de simplificar o complexo processo de desenvolvimento de aplicativos para múltiplas plataformas.
 
 A necessidade de dominar linguagens e SDKs diferentes para cada plataforma, como Kotlin para Android e Swift para iOS, além das constantes atualizações tecnológicas, impõe um grande desafio ao longo prazo.
@@ -76,9 +74,9 @@ Essa metodologia é especialmente conveniente para devs com experiência no univ
 
 Atualmente, o React Native possuí 2 tipos de arquiteturas: uma atual e a [nova](https://reactnative.dev/docs/next/the-new-architecture/landing-page).
 
-### Arquitetura Atual (Estável) do React Native
+### Arquitetura atual do React Native
 
-A arquitetura estável do React Native é baseada em três threads principais:
+A arquitetura atual e estável do React Native é baseada em três threads principais:
 
 1. **Thread do JavaScript**: Responsável pela execução do código JavaScript.
 2. **Main Thread Nativa**: Ou "thread principal", gerencia a UI e as interações do usuário.
@@ -121,7 +119,7 @@ Essa nova arquitetura ainda é experimental e está sujeita a mudanças à medid
 
 #### Turbo Modules
 
-Anteriormente, a comunicação no React Native entre as camadas Nativa e JavaScript era realizada através da ponte JavaScript, ou os "Native Modules". 
+Anteriormente, a comunicação no React Native entre as camadas Nativa e JavaScript era realizada através da ponte JavaScript, ou os "Native Modules".
 
 Os Turbo Modules representam uma evolução significativa dos `NativeModule` no React Native, abordando desafios como a inicialização prematura e a serialização de dados.
 
@@ -196,7 +194,7 @@ Além disso, a adaptação a atualizações das plataformas pode ser lenta, pois
 
 ## Introduzindo o Kotlin Multiplataforma (KMP)
 
-Kotlin Multiplatform se destaca na integração com plataformas nativas. Esta abordagem permite devs compartilhar lógica de negócios mantendo as interfaces nativas, oferecendo um equilíbrio ideal entre eficiência e personalização.
+O KMP se destaca na integração com plataformas nativas. Esta abordagem permite devs compartilhem a lógica de negócios mantendo as interfaces nativas, oferecendo um equilíbrio ideal entre eficiência e personalização.
 
 Em vez de tentar abstrair completamente a plataforma nativa, o KMP empodera devs nativos com um maquinário open-source que trata de compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre outros.
 
@@ -212,7 +210,7 @@ O KMP visa:
 
 ### Flexibilidade e UI Nativa
 
-Com KMP, as versões do seu aplicativo podem ter muito em comum, mas também diferir significativamente, especialmente em termos de UIs. 
+Com KMP, as versões do seu aplicativo podem ter muito em comum, mas também diferir significativamente, especialmente em termos de UIs.
 
 KMP não impõe limitações em como você desenvolve a UI do seu aplicativo. Você pode usar qualquer estilo e frameworks que quiser, incluindo os mais modernos, como Jetpack Compose para Android e SwiftUI para iOS. Isso permite o uso de elementos específicos de cada plataforma, proporcionando uma experiência de UI nativa para seus usuários.
 
@@ -223,7 +221,7 @@ Dado o espírito flexível do KMP, atualmente existem uma série de estratégias
 Algumas abordagens comuns:
 
 - **Compartilhando modelos do domínio**: Utilização de classes comuns como entidades, DTOs (Data Transfer Objects), respostas do servidor, etc., consistentes em todas as plataformas.
-- **Componentes de infraestrutura**: Compartilhamento de lógica relacionada ao uso da internet, persistência de dados, e manipulação de cache. Isso pode incluir:
+- **Componentes de infraestrutura**: Compartilhamento de lógica relacionada ao uso da internet, persistência de dados, e manipulação de cache, etc.
 - **Experimentação e analytics**: Códigos que permite experimentação no app, como a definição de feature flags, eventos de analytics, etc.
 - **Lógica de negócios**: Códigos que definem regras de negócios, validações, e algoritmos essenciais para o funcionamento da aplicação.
 - **Utilitários**: Funções e classes auxiliares que podem ser usadas em diferentes partes da aplicação, como manipulação de strings, formatação de datas, constantes, etc.
@@ -236,15 +234,15 @@ Lembrando que a escolha de quais partes compartilhar depende das necessidades es
 
 ![Arquitetura simplificada KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-092444.png?raw=true)
 
-[🔗 Versão interativa](https://mermaid.live/edit#pako:eNqdVtty0zAQ_RWNeIEZh-bS0NYwnQkJZQINtLk0MzQ8KPYm0US2jCS3gU6_hgc-gE_oj7HypbUTQ5n6wdZKZ88erVaSb6gnfaAuXSoWrcjpcBYSfHQ8Tzu6gkNoQKfdpaGBnHMBDwP26YS-kty_nNGsRd7M1TF53pVBJDWQj4OzFzP6tezEP4_QAd8ZeHTNF2bSrwRmRCV8gZzUyLtNBIoHqJqJXYpM1pT7SzAFmZ0oImlnRvpesNAD0jmr1nFPYGXsOFfOAEK_IotTYIrNRTHD9rlmxlvd5yWzHsuP5Up88lnZDlKVp_9R1gO9NjIqhwiYl0aIIgGp9ZiqBPSwbrue_yyOKQ99ea3RMWv9j9MpD-MNuiTfp81-fFGmHF8V5m2uHp92tgbji8J6jC-eJmYK8-2Vnk-ZDmxW8POEfYAEQ2CerWBsko_SCB7ufchnldokgZApakCuvwhNGlunxgjUFSjktg3uS1Vy_XAxwCF8k-G70dhusTyqkVtRENSsxo4ixcPlDrpVjV4ZE-2vd9D7Gfq9VX1-msvIzB14uxLeiaQQcgf8KgcPz7oZcqkir7ZOUvsAr8pfR32LuQETK5bWHIEgWyMyiIXhkWCGLaQKWClsD3sLlgwYDx_sSf_vEa0nhrIfrJ00VInaJhTziZjuigXMZ3o7x3hYqN2CxgrgTPAfzHAZphWR2ne_7n5KAvaYKXdlbImETU0X_Svoz3sg-HJlC_ktntiS-EB85ku912XeCvJqyWFlhqpMTPpJyhXKwq2TSNrDzBWDfkIxVxJhaeOfdNuL8DbWPAStT-WSe5dDQJS2mkNY3v32uNRbyznA61noy-RzP1gINOmTWu146572BNO6BwvCFDCy4EK45NnBSbt5cuIQTwqp0F4sFg7RRsk1oNVqtXKrds19s3JJI9oU6LL73rm_sJzsgsCeuZPueGfSd9IJO1a7g-edVfCaOjQALFbu45_GjSWdUbOCAGbUxabP1HpGZ-Et4lhs5Oh76FHXqBgcGkc-M9DjDBMVUHfBhMbeiIVfpAxyEJrUvaEb6rZe1tvt-qt247Bd399vtA8c-p26zaP6y8N6o9lsHLUOD1pHB7cO_ZH4NxwKPsfKHaS_Qcnf0O0fAFi6oA)
+[🔗 Versão interativa](https://mermaid.live/view#pako:eNqNVMlu2zAQ_RWCvbSAkthWvKlFACduALdxl9hOgMY9jKSxTYQiVZJyNuRreuipp36Cf6zUYkdy3CI8SHwzwzdvRuI80ECGSD06VxAvpoLYpRM_Q-SEMxQGdW6uuIbSZxyfHOnqiVBJFl5NabGb0u_VCPZ5ZL32WfGgCHdkuERQ4PNy9nTdgAkWa5o1epYoPZwFFUoyA3lR3j7qayPjKl8EQU4Xxxxz9DwnE6G80Taq2D2LOGMiubX-7P0CKeOL6vnxsiTCLHdoKModX5RKtywv6ba_3UH_EnSUVoN-T2uMfH5HDkhq3NFu_xwhMDb6AyxhFCgWm91Zs83Wf9ZTPxJm0CQK8vIIRuSjNJwJMky4YTEHAzOpIqiQ9q21hGQETDzhyeDfGdOTNlVGUGY8fz8a974MrOtkARGEoImFlZARKgac3YNhUtjADV79Wv2U5J2vjtJ_qGKtEnztI2fzRdqtYxCBJCGSEEKpD04gWOAmeJfwSaptUlX0yUpZyrQc5Di3RCS2V4dInYt5ap4mIg2FwvE6KO73m_-mzPua0sto9VuwajXHiWYCtT6TcxZcnaM9o9OCBM5XfwIm9db3Gtpxw_VV9to4S2knA7K3d7Q1egIOWvdxRkAhkBnj3COv2qfNxumpQwLJpbJ4Nps5RBslr9Ei13XXaO-GhWbhkXp8W6IrRpizmTNOcfOtxXfsV12iciYDJy_fSbU744tMwVvq0AhtQ1loJ-dDSjqlZoGR_Xae3Yagrqd0Kh5tHCRGju5EQD2jEnRoEodgsM_ANipaG2MQ36QsQ-o90FvqNdv77Y7bqDVb3Xan26l3HHpHvcPm_mG7W683mvVa7bDRarQeHXqfEdT2u2675TaatdTtus22QzFkRqphPuezcf_4F6eAzyI)
 
-![Arquitetura completa KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-14-092516.png?raw=true)
+![Arquitetura KMP](https://github.com/rsicarelli/KMP101/blob/main/posts/assets/mermaid-diagram-2023-11-15-145553.png?raw=true)
 
 ## Considerações finais
 
 Nesse artigo, conseguimos sair do zero no mundo KMP e compreendemos tecnicamente a diferença entre desenvolvimento nativo, cross-plataforma e multiplataforma.
 
-Em resumo, cada tecnologia - React Native, Flutter e Kotlin Multiplatform - tem seus pontos fortes e fracos. 
+Em resumo, cada tecnologia - React Native, Flutter e Kotlin Multiplatform - tem seus pontos fortes e fracos.
 
 Ao escolher a ferramenta certa para o seu projeto, considere fatores como desempenho, facilidade de uso e suporte da comunidade. Kotlin Multiplatform emerge como uma opção promissora, especialmente para quem valoriza a eficiência do código compartilhado sem comprometer a experiência do usuário nativo.
 
@@ -263,4 +261,3 @@ Iremos aprender como o compilador do Kotlin funciona, e como sua estrutura de fr
 Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
 
 Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
-
