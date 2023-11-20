@@ -1,28 +1,26 @@
 # KMP 101: Kotlin e suas múltiplas compilações
 
-No último post, aprendemos um pouco sobre o paradigma de multiplataforma e como o KMP é uma das tecnologias mais promissoras para devs nativos na atualidade.
+No último post, exploramos o paradigma multiplataforma e como o KMP se destaca no ecossistema.
 
-Nesse post, aprenderemos alguns conceitos básicos do compilador do Kotlin, e como o compilador consegue realizar compilações para múltiplas plataformas.
+Neste post, vamos desvendar os conceitos básicos do compilador Kotlin e sua habilidade de compilar para múltiplas plataformas.
 
 ---
 
 ## Introdução ao compilador Kotlin
 
-Um compilador é um software que converte um código escrito em uma linguagem de programação para outra linguagem. Um dos usos mais comum dos compiladores é utilização para transformar programas escritos em linguagens de alto nível para uma linguagem de nível mais baixo, visando criar um programa executável.
+Um compilador é um software que traduz código de uma linguagem de programação para outra. Frequentemente, os compiladores são utilizados para transform programas de linguagens de alto nível em linguagens de baixo nível para gerar programas executáveis.
 
-O Kotlin, assim como outros compiladores como o [LLVM](https://llvm.org/) e o [GCC](https://gcc.gnu.org/), adota uma arquitetura de compilador que divide o processo de compilação em duas partes principais: o **frontend** e o **backend**. Essas duas partes se comunicam por uma linguagem intermediária, conhecida como **Intermediate Representation (IR)**.
+O Kotlin, a exemplo de compiladores como [LLVM](https://llvm.org/) e [GCC](https://gcc.gnu.org/), possui uma arquitetura dividida em **frontend** e **backend**, comunicando-se por uma **Intermediate Representation (IR)**.
 
-### Frontend do compilador do Kotlin
+### Frontend do compilador Kotlin
 
-O frontend do compilador é responsável por analisar o código-fonte e prepará-lo para compilação.
-
-Essa etapa utiliza o código-fonte `.kt` e transforma em uma representação intermediária pronta para ser processada pelo backend.
-
-Atualmente, o Kotlin possui dois frontends distintos: **K1** e **K2**.
+Responsável por analisar e preparar o código-fonte `.kt` para a compilação, o Kotlin apresenta dois frontends: **K1** e **K2**.
 
 #### Frontend K1 (FE10)
 
-É o frontend original do compilador Kotlin, também conhecido como **FE10**. Este frontend tem sido o padrão até agora, tratando da análise léxica, sintática e semântica do código Kotlin.
+O frontend K1, ou FE10, é o frontend original do compilador Kotlin que é o padrão utilizado na atualidade.
+
+Principais características:
 
 - **Análise Léxica (Lexer):** divide o código-fonte Kotlin em tokens, elementos fundamentais para a construção da linguagem.
 - **Análise Sintática (Parser):** organiza os tokens em uma estrutura sintática, geralmente uma árvore de análise sintática (AST), que representa a estrutura lógica do código.
@@ -31,56 +29,60 @@ Atualmente, o Kotlin possui dois frontends distintos: **K1** e **K2**.
 - **Algoritmo de Inferência de Tipo:** melhorado no Kotlin 1.4.0, contribuindo para uma análise de tipo mais eficiente durante a compilação.
 - **Backends de JVM e JS IR:** a introdução de novos backends de IR (Intermediate Representation) para JVM e JavaScript no Kotlin 1.5.0 e 1.6.*, respectivamente, proporcionando uma base para compilações mais eficientes e suporte a futuras extensões da linguagem.
 
-![K1 Frontend](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course/blob/master/res/k1_frontend.png?raw=true)
+![Frontend K1](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course/blob/master/res/k1_frontend.png?raw=true)
 
-> [ahinchman1/Kotlin-Compiler-Crash-Course](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course)
-> 
-> [The Road to the K2 Compiler | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/the-road-to-the-k2-compiler/)
-> 
-> [Seven Highlights from the Kotlin Roadmap Autumn 2021 | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/kotlin-roadmap-autumn-2021/)
+Referências:
+- [Curso Intensivo sobre o Compilador Kotlin](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course)
+- [Rumo ao Compilador K2 | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/the-road-to-the-k2-compiler/)
+- [Destaques do Roteiro Kotlin Outono 2021 | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/kotlin-roadmap-autumn-2021/)
 
 #### Frontend K2 (FIR)
 
-Representa a nova geração do frontend para o compilador Kotlin, que atualmente ainda está em processo de desenvolvimento. Conhecido como **FIR** (Frontend Intermediate Representation), visa substituir o frontend K1 FE10. 
+Com o codinome **FIR** (Frontend Intermediate Representation), o K2 representa a nova geração do frontend do compilador Kotlin. Ainda em desenvolvimento, ele substituirá o K1 (FE10).
 
-O primeiro suporte beta ao K2 veio no Kotlin `1.9.20` lançado em novembro de 2023, e o suporte oficial irá ser lançada junto ao Kotlin `2.0.0` em 2024
+A primeira versão beta do K2 foi introduzida no Kotlin `1.9.20`, lançado em novembro de 2023, e o lançamento oficial está previsto para o Kotlin `2.0.0` em 2024. Suas melhorias abrangem desempenho, arquitetura e uma representação semântica mais limpa do código. Alguns destaques são:
 
-Suas principais melhorias estão no desempenho e na arquitetura, com uma representação semântica mais limpa e eficiente do código. Muitos dos conceitos são reaproveitados do K1, porém com alguns pontos-chave:
+- **Reescrita total:** o FIR apresenta uma reescrita completa do frontend, visando rapidez e extensibilidade.
+- **Análise de fluxo de dados aprimorada:** um algoritmo mais preciso que resulta em melhores conversões inteligentes (smart casts).
+- **Suporte a plugins:** inclui suporte a uma variedade de plugins, como `kapt`, `serialization`, `all-open`, e outros.
+- **Compatibilidade entre plataformas:** suporta `JVM`, `Native`, `Wasm`, e `JS`, otimizado para projetos multiplataforma.
 
-- **Reescrita completa**: o FIR oferece uma reescrita completa do Frontend que visa ser mais rápida e extensível, tratando débitos técnicos do FE10 e preparando para extensões futuras da linguagem.
-- **Análise de fluxo de dados aprimorada:** introduz um algoritmo de análise de fluxo de dados mais preciso, resultando em melhores conversões inteligentes (smart casts).
-- **Suporte a Plugins:** Inclui suporte para uma variedade de plugins, como `kapt`, `serialization`, `all-open`, `no-arg`, `SAM with receiver`, `Lombok`, `AtomicFU`, `Jetpack Compose compiler plugin`, e `Kotlin Symbol Processing (KSP) plugin`.
-- **Compatibilidade entre plataformas:** O K2 oferece suporte unificado para todas as plataformas que o Kotlin suporta, incluindo `JVM`, `Native`, `Wasm` e `JS`, e é otimizado para projetos multiplataforma.
+![Frontend K2 FIR](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course/blob/master/res/k2_frontend.png?raw=true)
 
-![K2 FIR](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course/blob/master/res/k2_frontend.png?raw=true)
+Referências:
+- [Curso Intensivo sobre o Compilador Kotlin](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course)
+- [O Compilador K2 Estabilizando no Kotlin 2.0 | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/the-k2-compiler-is-going-stable-in-kotlin-2-0/)
+- [Documentação Básica FIR | GitHub](https://github.com/JetBrains/kotlin/blob/master/docs/fir/fir-basics.md)
+- [Novidades no Kotlin 2.0.0-Beta1 | Documentação Kotlin](https://kotlinlang.org/docs/whatsnew-eap.html)
 
-> [ahinchman1/Kotlin-Compiler-Crash-Course](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course)
-> 
-> [The Kotlin Blog: The K2 Compiler Is Going Stable in Kotlin 2.0](https://blog.jetbrains.com/kotlin/2021/11/the-k2-compiler-is-going-stable-in-kotlin-2-0/)
-> 
-> [GitHub: kotlin/docs/fir/fir-basics.md](https://github.com/JetBrains/kotlin/blob/master/docs/fir/fir-basics.md)
-> 
-> [Kotlin Documentation: What's new in Kotlin 2.0.0-Beta1](https://kotlinlang.org/docs/whatsnew-eap.html)
+### Backends do compilador Kotlin
 
-### Backend
+Após o frontend de um compilador processar e preparar o código-fonte, entra em cena o backend.
 
-O backend, por outro lado, lida com a conversão desta representação abstrata em código de máquina ou em outro formato de baixo nível, como bytecode para a JVM (Java Virtual Machine). É no backend que ocorrem as otimizações de código e a geração de saída específica para a plataforma alvo.
+O backend converte a representação intermediária (IR) em código de máquina, realizando otimizações e gerando a saída para a plataforma alvo (`*.class`, `*.js`, `*.so`, `*.wasm`)
+
+O Kotlin é projetado para ser multiplataforma, o que significa que ele pode ser compilado para rodar em diferentes tipos de dispositivos e sistemas operacionais. Cada backend do compilador Kotlin é otimizado para uma plataforma-alvo específica, permitindo devs escreverem um código que pode ser executado em qualquer lugar.
+
+- **Kotlin/JVM:**: compila o código Kotlin para Bytecode da JVM, que pode ser executado em qualquer máquina virtual Java. Este backend é utilizado para aplicações que rodam em aparelhos Android, servidores, desktops e qualquer sistema que suporte a JVM.
+- **Kotlin/Native:** compila o código Kotlin para código de máquina nativo, utilizando a toolchain **LLVM**. Suporta uma variedade de plataformas, incluindo iOS, macOS, Windows, Linux e até sistemas embarcados.
+- **Kotlin/JS:** converte o código Kotlin para JavaScript, permitindo o uso de Kotlin em desenvolvimento web. Pode ser executado em navegadores como código do lado do cliente ou em ambientes do lado do servidor como Node.js.
+- **Kotlin/Wasm:** permite a compilação de código Kotlin para WebAssembly, uma forma binária para a web. Permite que o código Kotlin seja executado em navegadores web com desempenho próximo ao nativo, adequado para aplicações web complexas e jogos.
 
 ## Intermediate Representation (IR)
 
-Para realizar a ponte entre o frontend e o backend, os compiladores utilizam uma estrutura de dados conhecida como Intermediate Representation (IR). A IR serve como uma linguagem comum, permitindo que diferentes frontends (suportando várias linguagens de programação) se comuniquem com diferentes backends (gerando código para várias plataformas e arquiteturas de hardware).
+A IR facilita a comunicação entre o frontend e o backend, sendo independente de linguagem e plataforma, o que possibilita otimizações mais eficientes.
 
 ### Características da IR
 
-- **Independência de Linguagem:** A IR é desenhada para ser neutra em relação à linguagem de programação, permitindo que um único backend suporte múltiplas linguagens.
-- **Independência de Plataforma:** Da mesma forma, ela é independente da plataforma alvo, o que facilita a geração de código para diferentes sistemas e arquiteturas.
-- **Facilita Otimizações:** A IR permite a implementação de otimizações de forma mais eficiente, uma vez que a representação do código é mais abstrata e padronizada.
+- **Independência de Linguagem:** Neutra quanto à linguagem de programação.
+- **Independência de Plataforma:** Facilita a geração de código para diferentes sistemas.
+- **Otimizações Eficientes:** A representação abstrata e padronizada permite otimizações mais eficazes.
 
 ## Exemplos Notáveis de Uso de IR
 
-1. **LLVM:** Um projeto de compilador que fornece uma infraestrutura para desenvolver compiladores (ou toolchains) que usam uma IR comum para otimizações e geração de código.
-2. **GCC (GNU Compiler Collection):** Um compilador que também implementa uma forma de IR, permitindo otimizações e suporte para múltiplas linguagens e plataformas.
+1. **LLVM:** Fornece infraestrutura para compiladores com IR comum.
+2. **GCC:** Suporta otimizações e múltiplas linguagens e plataformas.
 
 ## Conclusão
 
-A utilização de Intermediate Representation é um aspecto crucial na arquitetura de compiladores modernos, como o Kotlin. Ela não apenas facilita a comunicação entre diferentes partes do compilador, mas também aumenta a eficiência do processo de compilação, otimização e geração de código para diversas plataformas.
+A IR é essencial na arquitetura de compiladores modernos, aumentando a eficiência da compilação e geração de código.
