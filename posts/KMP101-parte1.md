@@ -256,6 +256,9 @@ Com esse conhecimento, podemos avançar para os conceitos mais específicos do f
 
 Iremos aprender como o compilador do Kotlin funciona, e como sua estrutura de frontend + backend + IR possibilitam as múltiplas compilações.
 
+**Confira o próximo artigo:**
+🔗 [KMP 101: Entendendo como o Kotlin compila para multiplas plataformas](https://dev.to/rsicarelli/kotlin-multiplataforma-101-entendendo-como-o-kotlin-compila-para-multiplas-plataformas-5hba)
+
 ---
 
 ## Feedbacks

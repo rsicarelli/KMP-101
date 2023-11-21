@@ -1,20 +1,19 @@
+> * [Introdução ao compilador do Kotlin](#introdução-ao-compilador-do-kotlin)
 > * [Entendendo o Frontend do compilador do Kotlin](#entendendo-o-frontend-do-compilador-do-kotlin)
- >   * [K1: codinome FE10 (Frontend 1.0)](#k1-codinome-fe10-frontend-10)
- >   * [K2: codinome FIR (Frontend Intermediate Representation)](#k2-codinome-fir-frontend-intermediate-representation)
- > * [Entendendo o Backend do compilador do Kotlin](#entendendo-o-backend-do-compilador-do-kotlin)
- > * [Representação Intermediária (IR) no Compilador Kotlin](#representação-intermediária-ir-no-compilador-kotlin)
- > * [Conclusões](#conclusões)
- > * [Feedbacks](#feedbacks)
+>   * [K1: codinome FE10 (Frontend 1.0)](#k1-codinome-fe10-frontend-10)
+>   * [K2: codinome FIR (Frontend Intermediate Representation)](#k2-codinome-fir-frontend-intermediate-representation)
+> * [Entendendo o Backend do compilador do Kotlin](#entendendo-o-backend-do-compilador-do-kotlin)
+> * [Representação Intermediária ou Intermediary Representation (IR)](#representação-intermediária-ou-intermediary-representation-ir)
 
-No último post, exploramos o paradigma multiplataforma e como o KMP se destaca no ecossistema.
+No último post ([🔗 KMP 101: Introdução ao paradigma da multiplataforma](https://dev.to/rsicarelli/kotlin-multiplataforma-101-introducao-ao-paradigma-da-multiplataforma-eo3)), exploramos o paradigma multiplataforma e como o KMP se destaca no ecossistema.
 
-Neste artígo, vamos desvendar os conceitos básicos do compilador Kotlin e sua habilidade de compilar para múltiplas plataformas.
+Neste artigo, vamos desvendar os conceitos básicos do compilador Kotlin e sua capacidade de compilar para múltiplas plataformas.
 
 ---
 
 ## Introdução ao compilador do Kotlin
 
-Um compilador é um software que traduz código de uma linguagem de programação para outra. Frequentemente, os compiladores são utilizados para transformar programas de linguagens de alto nível em linguagens de baixo nível.
+Um compilador é um software que converte código de uma linguagem de programação para outra. Frequentemente, os compiladores são utilizados para transformar programas de linguagens de alto nível em linguagens de baixo nível.
 
 O Kotlin, assim como alguns outros compiladores como [LLVM](https://llvm.org/) e [GCC](https://gcc.gnu.org/), possui uma arquitetura dividida em **frontend** e **backend**, comunicando-se por uma **Representação Intermediária (IR)**.
 
@@ -62,14 +61,14 @@ O backend é responsável por converter a representação intermediária (IR) em
 
 Projetado para ser multiplataforma, o Kotlin pode ser compilado para funcionar em diversos dispositivos e sistemas operacionais. Cada backend do compilador Kotlin é especialmente otimizado para uma plataforma-alvo, possibilitando que devs escrevam um código que pode ser executado em variados ambientes.
 
-- **Kotlin/JVM:** este backend é o mais tradicional e gera bytecode compatível com a Máquina Virtual Java (`JVM`). É ideal para aplicações que serão executadas em ambientes que suportam a JVM, incluindo Android e aplicações de servidor.
+- **Kotlin/JVM:** este backend é o mais tradicional e gera bytecode compatível com a Máquina Virtual Java (`JVM`). É ideal para aplicações que serão executadas em ambientes que suportam a JVM, incluindo Android, Desktop e aplicações de servidor.
 - **Kotlin/Native:** utilizando a toolchain do `LLVM`, este backend compila o código Kotlin diretamente para código de máquina nativo. Ele suporta uma ampla gama de plataformas, como iOS, macOS, Windows, Linux e sistemas embarcados, permitindo que aplicações sejam executadas diretamente no hardware.
 - **Kotlin/JS:** especializado para o desenvolvimento web, este backend converte o código Kotlin em JavaScript, tornando-o compatível com navegadores web e ambientes de servidor baseados em JavaScript, como Node.js.
 - **Kotlin/Wasm:** uma adição mais recente ainda em fase de desenvolvimento, este backend permite a compilação de Kotlin para WebAssembly (Wasm), facilitando a execução de aplicações Kotlin com alto desempenho em navegadores web.
 
-![Desenvolvimento nativo](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kotlin-compiler-backend.webp?raw=true)
+![Desenvolvimento nativo](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kotlin-compiler-backend.jpg?raw=true)
 
-## Representação Intermediária (IR) no Compilador Kotlin
+## Representação Intermediária ou Intermediary Representation (IR)
 
 O IR é uma forma de representar o código-fonte dentro do compilador que é independente tanto da linguagem de programação de origem quanto da arquitetura da máquina de destino. Ela serve como um meio-termo entre o código de alto nível e o código de máquina de baixo nível.
 
@@ -77,19 +76,9 @@ Essa estrutura de dados permite que o compilador Kotlin manipule o código de ma
 
 ## Conclusões
 
-Compreender como o Kotlin compila para diferentes plataformas não é uma necessidade diária, nem algo que você deve memorizar. No entanto, ter uma visão geral desse processo tem suas vantagens.
+Entender como o Kotlin compila para diferentes plataformas não é nada que você precise fazer diariamente ou memorizar. No entanto, ter uma visão geral desse processo tem suas vantagens.
 
 Esse entendimento fornece uma perspectiva sobre a versatilidade e a eficiência do Kotlin, oferecendo a você a confiança de que seu código pode operar em vários ecossistemas. Além disso, uma apreciação básica do que acontece "por debaixo dos panos" pode ser incrivelmente útil ao depurar o código e compreender mensagens de erro, economizando horas de frustração.
-
----
-> Referencias
-> - [Curso Intensivo sobre o Compilador Kotlin](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course)
-> - [Curso intensivo no compilador do Kotlin | K1 + K2 Frontends, Backends](https://medium.com/google-developer-experts/crash-course-on-the-kotlin-compiler-k1-k2-frontends-backends-fe2238790bd8)
-> - [Rumo ao Compilador K2 | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/the-road-to-the-k2-compiler/)
-> - [Destaques do Roteiro Kotlin Outono 2021 | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/kotlin-roadmap-autumn-2021/)
-> - [O Compilador K2 Estabilizando no Kotlin 2.0 | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/the-k2-compiler-is-going-stable-in-kotlin-2-0/)
-> - [Documentação Básica FIR | GitHub](https://github.com/JetBrains/kotlin/blob/master/docs/fir/fir-basics.md)
-> - [Novidades no Kotlin 2.0.0-Beta1 | Documentação Kotlin](https://kotlinlang.org/docs/whatsnew-eap.html)
 
 ---
 
@@ -100,3 +89,13 @@ Esse entendimento fornece uma perspectiva sobre a versatilidade e a eficiência 
 Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
 
 Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
+
+
+> Referencias
+> - [Crash Course on the Kotlin Compiler by Amanda Hinchman-Dominguez - KotlinConf'23](https://www.youtube.com/watch?v=wUGfuWHCqrc), [Github repo](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course)
+> - [Curso intensivo no compilador do Kotlin | K1 + K2 Frontends, Backends](https://medium.com/google-developer-experts/crash-course-on-the-kotlin-compiler-k1-k2-frontends-backends-fe2238790bd8)
+> - [Rumo ao Compilador K2 | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/the-road-to-the-k2-compiler/)
+> - [Destaques do Roteiro Kotlin Outono 2021 | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/kotlin-roadmap-autumn-2021/)
+> - [O Compilador K2 Estabilizando no Kotlin 2.0 | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/11/the-k2-compiler-is-going-stable-in-kotlin-2-0/)
+> - [Documentação Básica FIR | GitHub](https://github.com/JetBrains/kotlin/blob/master/docs/fir/fir-basics.md)
+> - [Novidades no Kotlin 2.0.0-Beta1 | Documentação Kotlin](https://kotlinlang.org/docs/whatsnew-eap.html)
