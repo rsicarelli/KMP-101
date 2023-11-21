@@ -200,9 +200,9 @@ O KMP se destaca na integração com plataformas nativas. Esta abordagem permite
 
 Em vez de tentar abstrair completamente a plataforma nativa, o KMP empodera devs nativos com um maquinário open-source que trata de compilar as aplicações para Android, iOS, Web, macOS, Windows, Linux entre outros.
 
-[🔗 Versão interativa](https://mermaid.live/edit#pako:eNqFk8GO2jAQhl_Fml4NbcLShOxqLyAOrbaXVK1UwmGIncVLHEeOU6CIp9pH6IvViZOFwkpYkTIz-X57fmV8gFQxDhE8ayzX5PssKYhdVb1yhQTs42rNSnOsqhnPCGqOJBN5HpEPwXzsz-eUpCpX2uZZllFSGa023Gaj0ajPBlvBzDoiXrl7Z0vGM6xzE5t9zm_J70_6qZJSFVPrYjH9-8rEsyJflclFYfuRJWoj8jUytSSDwWP35cuPp4WLPtpw-d5e53T8Bse32G9oxG_e8y67pfmJlVwk0GmaLIEzzVvLrcS-W6vDF9TkYaUfyRBRX-Oxo-MOrq6I5pyWaQJHbW10xTkPLelCx2YaJd8qvema2KWXlZUolhd_-eSF9m3S81PoWWvNgN1f6jv31Pmip4Zo7-K_Ker0vGBAQXItUTA76oemnIBZc8kTiGzIUG-aMT9aDmuj4n2RQmR0zSnUJUPDZwLthZAQZZhXtlpi8Usp2UM2hegAO4g8b-jf-f5dEIS-54chhb0thpNhGAbBp_F4NPk8CT3_SOFPq_cocCaM0k_uHrbX8fgPbMAiag)
+[🔗 Versão interativa](https://mermaid.live/view#pako:eNqFk81OwkAQx19lM14XtC0gVuMFwkGDlxpNpBwGdisrbbfZblUkPJWP4Iu57bZSxYRNk85Mf__5SGe3sJSMgw_PCrMVuR-HKTEnLxY2EIJ5bKw8yxjzfMwjgoojiUQc--TkfNJ3JxNKljKWyvhRFFGSayXX3Hie5zVe500wvfKJk73_k5LxCItYB3oT82Pyy71-JJNEpiMzxWz09cnEsyS3UsciNf0kGSot4hUyOSedznX95eZhOrPWqTHn_-Vq08EPHBxj71CLV97w1jumecQ8mYVQa0ovhJbmp-VKYt7VqN0XVORqoa5JF1Ed4oGlgxrOD4iyTsWUhqXejHXA2Rkq0pqWzeX8zy_cN0qbHmg7BW3VLbfn8q--Ho3apum-Gm1a_LUitZ6nDCgkXCUomNnjbRkOQa94wkPwjclQrcsd3hkOCy2DTboEX6uCUygyhpqPBZptT5pghumTlG0X_C28g--edXtDp-85nnvR6_XdAYUN-N6w6_SH7oXrng3PB2ZfdxQ-Kr1DgTOhpZraO1Zdtd037awVvw)
 
-![KMP compartilhando código](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-14-091929.png?raw=true)
+![KMP compartilhando código](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-21-164030.png?raw=true)
 
 O KMP visa:
 
