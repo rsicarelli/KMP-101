@@ -41,6 +41,10 @@ O K2, também conhecido como `FIR`, é a próxima grande atualização do compil
 
 A primeira versão beta do K2 chegou com o Kotlin `1.9.20`, lançada em novembro de 2023, e a versão final está planejada para o Kotlin 2.0.0, que esperamos para 2024. Esse novo sistema traz várias melhorias importantes, como mais velocidade, uma estrutura mais organizada e uma maneira mais clara de entender o código.
 
+![KotlinConf2023 K1 vs K2](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/k1-vs-k2-kotlinconf2023.png?raw=true)
+
+> Dados do [KotlinConf’23 - Keynote](https://www.youtube.com/live/c4f4SCEYA5Q?si=LyH_q_6R8hjd-dRo&t=495)
+
 Listando algumas dessas melhorias:
 
 - **Totalmente renovado:** o K2 foi feito do zero, pensando em ser rápido e fácil de atualizar no futuro.
@@ -56,14 +60,14 @@ Após o processamento e preparação do código-fonte pelo frontend de um compil
 
 O backend é responsável por converter a representação intermediária (IR) em código de máquina, realizando otimizações e gerando a saída específica para a plataforma alvo (como `*.class`, `*.js`, `*.so`, `*.wasm`).
 
-Projetado para ser multiplataforma, o Kotlin pode ser compilado para funcionar em diversos dispositivos e sistemas operacionais. Cada backend do compilador Kotlin é especialmente otimizado para uma plataforma-alvo, possibilitando devs escreverem código que pode ser executado em variados ambientes.
+Projetado para ser multiplataforma, o Kotlin pode ser compilado para funcionar em diversos dispositivos e sistemas operacionais. Cada backend do compilador Kotlin é especialmente otimizado para uma plataforma-alvo, possibilitando que devs escrevam um código que pode ser executado em variados ambientes.
 
 - **Kotlin/JVM:** este backend é o mais tradicional e gera bytecode compatível com a Máquina Virtual Java (`JVM`). É ideal para aplicações que serão executadas em ambientes que suportam a JVM, incluindo Android e aplicações de servidor.
 - **Kotlin/Native:** utilizando a toolchain do `LLVM`, este backend compila o código Kotlin diretamente para código de máquina nativo. Ele suporta uma ampla gama de plataformas, como iOS, macOS, Windows, Linux e sistemas embarcados, permitindo que aplicações sejam executadas diretamente no hardware.
 - **Kotlin/JS:** especializado para o desenvolvimento web, este backend converte o código Kotlin em JavaScript, tornando-o compatível com navegadores web e ambientes de servidor baseados em JavaScript, como Node.js.
 - **Kotlin/Wasm:** uma adição mais recente ainda em fase de desenvolvimento, este backend permite a compilação de Kotlin para WebAssembly (Wasm), facilitando a execução de aplicações Kotlin com alto desempenho em navegadores web.
 
-<div><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*zqru0IhmSZ9RltfGGoV4DA.png" style="object-fit:cover;background-color:white;"></div>
+![Desenvolvimento nativo](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kotlin-compiler-backend.webp?raw=true)
 
 ## Representação Intermediária (IR) no Compilador Kotlin
 
