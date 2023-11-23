@@ -23,14 +23,53 @@ O compilador do Kotlin identifica essas pastas especiais e se encarrega de compi
 
 Cada *source set* em um projeto multiplataforma possui **um nome único** e contém um conjunto de arquivos de código-fonte e recursos (arquivos, ícones, etc). Ele especifica **um alvo** (target) para o qual o código será compilado.
 
-Assumindo as configurações necessárias (abordadas em artigos futuros), a estrutura abaixo orienta o compilador do Kotlin a:
+Assumindo as configurações necessárias (iremos abordada-las em artigos futuros), a estrutura abaixo orienta o compilador do Kotlin a:
 
 1. Inicializar e compilar os seguintes alvos: `android`, `iOS`, `watchOS`, `tvOS`, `js`, `wasm` e `desktop`.
 2. Compilar o código-fonte dentro do source set `common` para todas as plataformas, tornando os membros do arquivo `Common.kt` disponíveis nativamente para cada plataforma definida.
 3. Ao final da compilação, gerar arquivos específicos para cada plataforma (`.class`, `.so`, `.js`, `.wasm`), com todos os membros do `Common.kt` disponíveis.
 
-
 ![Desenvolvimento nativo](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp101-sourcesets-basic.png?raw=true)
+
+### A natureza hierárquica dos source sets
+Os source sets do KMP funcionam como uma árvore genealógica. 
+
+Na base da árvore, temos os ancestrais comuns (o source set `commonMain`), cujas características são compartilhadas por todos na família. À medida que avançamos para os galhos, encontramos os source sets intermediários, que representam ramos da família com características únicas compartilhadas por um subconjunto de membros (por exemplo, `apple` ou `native`). Finalmente, nas extremidades dos galhos, estão os membros individuais da família (os source sets específicos da plataforma, como `iosArm64` ou `iosSimulatorArm64`), cada um com suas próprias características únicas.
+
+Isso permite organizar uma hierarquia de *source sets* intermediários com total controle do que cada source set irá compartilhar.
+
+![Source sets intermediários KMP](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/intermediate-source-sets-diagram.png?raw=true)
+
+![Hierarquia padrão do KMP](https://kotlinlang.org/docs/images/default-hierarchy-example.svg)
+
+
+Além disso, a partir do Kotlin `1.9.20`, o plugin Gradle do Kotlin oferece um modelo de hierarquia padrão, que contém *source sets* intermediários predefinidos para casos de uso comuns. Esse modelo é automaticamente configurado com base nos alvos especificados no projeto. Um exemplo interessante é que os *source sets* `apple` e `native` compilam apenas para os alvos `iosArm64` e `iosSimulatorArm64`, mas têm acesso à API completa do iOS. Essa abordagem hierárquica oferece flexibilidade e controle detalhado sobre como o código é compartilhado e utilizado entre diferentes plataformas e alvos.
+
+
+
+### Convencões
+O KMP é extremamente flexível, nos possibilitando nomear nossos source sets com praticamente qualquer nome.
+
+Porém, no decorrer dos anos, a comunidade foi adotando algumas convenções, e o próprio KMP foi se adequando ao redor dessas convenções também, oferecendo algumas facilidades na configuração do projeto. Vamos explorar as principais delas 
+
+#### 1: Nomes utilizando "camelCase"
+A comunidade geralmente adota a nomenclatura `cammelCase` para a definição dos source sets. 
+
+#### 2: Sufixo "main"
+O diretório `main` em projetos que utilizam linguagens da JVM, como Java e Kotlin, é tradicionalmente usado para armazenar o código-fonte principal da aplicação. Este diretório é parte de uma estrutura de pastas convencional, onde `main` geralmente contém os pacotes e classes que implementam a lógica principal do programa. 
+
+Em projetos KMP, essa tradição foi levada adiante e se utiliza o `main` como sufixo para declarar nossos source sets: `commonMain`, `androidMain`, `nativeMain`, `desktopMain`, etc.
+
+#### 3: Código compartilhado usando o `commonMain`
+Esse source set é o "topo" da hierarquia
+
+
+
+
+
+
+
+
 
 
 ## Source Sets Específicos de Plataforma
