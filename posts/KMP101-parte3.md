@@ -23,11 +23,11 @@ O compilador do Kotlin então identifica essa pasta especial e se encarrega de c
 
 Cada *source set* em um projeto multiplataforma tem **um nome único** e contém um conjunto de arquivos de código-fonte e recursos (arquivos, ícones, etc). Um source set especifica **um alvo** (target) para o qual o código nesse source set será compilado.
 
-Assumindo as configurações corretas, a estrutura a seguir orienta o compilador do Kotlin a:
+Assumindo que realizamos as configurações necessárias (próximos artigos), a estrutura a seguir orienta o compilador do Kotlin a:
 
-1. Configurar uma compilação para "Android"
-2. Configurar uma compilação para "iOS"
-3. Configurar uma compilação em comum para todas as plataformas, fazendo com que os membros do arquivo `Common.kt` seja compilado nativamente para cada plataforma definida (android e iOS).
+1. Inicializar e compilar os seguintes alvos: `android`, `iOS`, `watchOS`, `tvOS`, `js`, `wasm` e `desktop`.
+2. Compilar o código-fonte dentro do source set `common` para todas as plataformas, fazendo com que os membros do arquivo `Common.kt` esteja disponível nativamente para cada plataforma definida.
+3. No final da compilação, serão compilados arquivos para cada plataforma  (`.class`, `.so`, `.js`, `.wasm`), e todos os membros do `Common.kt` estarão disponíveis.
 
 ![Desenvolvimento nativo](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp101-sourcesets-basic.png?raw=true)
 
