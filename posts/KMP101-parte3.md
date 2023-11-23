@@ -13,21 +13,22 @@ Dessa vez, vamos entender um conceito chave para codar em KMP: os `source sets`
 
 ## Introdução aos `source sets` do KMP
 
-Os *source sets* no Kotlin são fundamentais para o desenvolvimento multiplataforma. Se utilizando de uma estratégia de hierarquia, os source sets nos permite a organização do código-fonte e a definição de dependências e opções de compilação de maneira isolada para diferentes plataformas dentro do mesmo projeto.
+Os *source sets* no Kotlin são essenciais para o desenvolvimento multiplataforma. Utilizando uma estratégia hierárquica, eles permitem a organização do código-fonte e a definição de dependências e opções de compilação de forma isolada para diferentes plataformas em um mesmo projeto.
 
-Imagine um *source set* no Kotlin como se fossem uma "pasta especial" em um projeto. Cada pasta é designada para um propósito ou plataforma específica. Por exemplo, a pasta "comum" contém arquivos usados por todas as plataformas, enquanto pastas específicas, como "android" ou "iOS", contêm arquivos exclusivos para essas plataformas.
+Pense em um *source set* no Kotlin como uma "pasta especial" em um projeto, onde cada pasta é designada para um propósito ou plataforma específica. Por exemplo, a pasta "comum" contém arquivos usados em todas as plataformas, enquanto pastas específicas, como "android" ou "iOS", abrigam arquivos exclusivos para essas plataformas.
 
-O compilador do Kotlin então identifica essa pasta especial e se encarrega de compilar o seu conteúdo (o código-fonte) utilizando as estratégias de compilação exploradas no 🔗 [KMP 101: Entendendo como o Kotlin compila para multiplas plataformas](https://dev.to/rsicarelli/kotlin-multiplataforma-101-entendendo-como-o-kotlin-compila-para-multiplas-plataformas-5hba).
+O compilador do Kotlin identifica essas pastas especiais e se encarrega de compilar seu conteúdo (código-fonte), conforme as estratégias de compilação exploradas em 🔗 [KMP 101: Entendendo como o Kotlin compila para multiplas plataformas](https://dev.to/rsicarelli/kotlin-multiplataforma-101-entendendo-como-o-kotlin-compila-para-multiplas-plataformas-5hba).
 
 ### Estrutura básica de um source set
 
-Cada *source set* em um projeto multiplataforma tem **um nome único** e contém um conjunto de arquivos de código-fonte e recursos (arquivos, ícones, etc). Um source set especifica **um alvo** (target) para o qual o código nesse source set será compilado.
+Cada *source set* em um projeto multiplataforma possui **um nome único** e contém um conjunto de arquivos de código-fonte e recursos (arquivos, ícones, etc). Ele especifica **um alvo** (target) para o qual o código será compilado.
 
-Assumindo que realizamos as configurações necessárias (próximos artigos), a estrutura a seguir orienta o compilador do Kotlin a:
+Assumindo as configurações necessárias (abordadas em artigos futuros), a estrutura abaixo orienta o compilador do Kotlin a:
 
 1. Inicializar e compilar os seguintes alvos: `android`, `iOS`, `watchOS`, `tvOS`, `js`, `wasm` e `desktop`.
-2. Compilar o código-fonte dentro do source set `common` para todas as plataformas, fazendo com que os membros do arquivo `Common.kt` esteja disponível nativamente para cada plataforma definida.
-3. No final da compilação, serão compilados arquivos para cada plataforma  (`.class`, `.so`, `.js`, `.wasm`), e todos os membros do `Common.kt` estarão disponíveis.
+2. Compilar o código-fonte dentro do source set `common` para todas as plataformas, tornando os membros do arquivo `Common.kt` disponíveis nativamente para cada plataforma definida.
+3. Ao final da compilação, gerar arquivos específicos para cada plataforma (`.class`, `.so`, `.js`, `.wasm`), com todos os membros do `Common.kt` disponíveis.
+
 
 ![Desenvolvimento nativo](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp101-sourcesets-basic.png?raw=true)
 
