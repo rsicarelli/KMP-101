@@ -34,16 +34,21 @@ Assumindo as configurações necessárias (iremos abordada-las em artigos futuro
 ### A natureza hierárquica dos source sets
 Os source sets do KMP funcionam como uma árvore genealógica. 
 
-Na base da árvore, temos os ancestrais comuns (o source set `commonMain`), cujas características são compartilhadas por todos na família. À medida que avançamos para os galhos, encontramos os source sets intermediários, que representam ramos da família com características únicas compartilhadas por um subconjunto de membros (por exemplo, `apple` ou `native`). Finalmente, nas extremidades dos galhos, estão os membros individuais da família (os source sets específicos da plataforma, como `iosArm64` ou `iosSimulatorArm64`), cada um com suas próprias características únicas.
+Na base da árvore, temos os ancestrais comuns (o source set `commonMain`), cujas características são compartilhadas por todos na família. À medida que avançamos para os galhos, encontramos os source sets intermediários, que representam ramos da família com características únicas compartilhadas por um subconjunto de membros (por exemplo, `apple` ou `native`). 
+
+Finalmente, nas extremidades dos galhos, estão os membros individuais da família (os source sets específicos da plataforma, como `iosArm64` ou `iosSimulatorArm64`), cada um com suas próprias características únicas.
 
 Isso permite organizar uma hierarquia de *source sets* intermediários com total controle do que cada source set irá compartilhar.
 
 ![Source sets intermediários KMP](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/intermediate-source-sets-diagram.png?raw=true)
 
+#### Hierarquia padrão
+
+A partir do Kotlin `1.9.20`, o plugin Gradle do KMP oferece **um modelo de hierarquia padrão**, que contém *source sets* intermediários predefinidos para casos de uso comuns. Esse modelo é automaticamente configurado com base nos alvos especificados no projeto. 
+
+Um exemplo interessante é que os *source sets* `apple` e `native` compilam apenas para os alvos `iosArm64` e `iosSimulatorArm64`, mas têm acesso à API completa do iOS. Essa abordagem hierárquica oferece flexibilidade e controle detalhado sobre como o código é compartilhado e utilizado entre diferentes plataformas e alvos.
+
 ![Hierarquia padrão do KMP](https://kotlinlang.org/docs/images/default-hierarchy-example.svg)
-
-
-Além disso, a partir do Kotlin `1.9.20`, o plugin Gradle do Kotlin oferece um modelo de hierarquia padrão, que contém *source sets* intermediários predefinidos para casos de uso comuns. Esse modelo é automaticamente configurado com base nos alvos especificados no projeto. Um exemplo interessante é que os *source sets* `apple` e `native` compilam apenas para os alvos `iosArm64` e `iosSimulatorArm64`, mas têm acesso à API completa do iOS. Essa abordagem hierárquica oferece flexibilidade e controle detalhado sobre como o código é compartilhado e utilizado entre diferentes plataformas e alvos.
 
 
 
@@ -62,10 +67,6 @@ Em projetos KMP, essa tradição foi levada adiante e se utiliza o `main` como s
 
 #### 3: Código compartilhado usando o `commonMain`
 Esse source set é o "topo" da hierarquia
-
-
-
-
 
 
 
