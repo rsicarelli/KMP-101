@@ -1,20 +1,23 @@
-<!-- TOC -->
-  * [Introdução aos *source sets* no KMP](#introdução-aos-source-sets-no-kmp)
-  * [Entendendo a função e a estrutura básica de um *source set*](#entendendo-a-função-e-a-estrutura-básica-de-um-source-set)
-    * [A natureza hierárquica dos *source sets*](#a-natureza-hierárquica-dos-source-sets)
-  * [*Source sets* comuns vs. específicos](#source-sets-comuns-vs-específicos)
-    * [*Source set* comum (`commonMain`)](#source-set-comum-commonmain)
-    * [*Source sets* específicos de plataforma](#source-sets-específicos-de-plataforma)
-    * [Escolhendo entre comum e específico](#escolhendo-entre-comum-e-específico)
-  * [*Source set* intermediário](#source-set-intermediário)
-  * [*Source sets* de teste](#source-sets-de-teste)
-  * [Convenções adotadas pela comunidade](#convenções-adotadas-pela-comunidade)
-    * [1: Nomes utilizando "camelCase"](#1-nomes-utilizando-camelcase)
-    * [2: Sufixo "main"](#2-sufixo-main)
-    * [3: Código compartilhado usando o `commonMain`](#3-código-compartilhado-usando-o-commonmain)
-    * [4: Utilizando os "Source set conventions"](#4-utilizando-os-source-set-conventions)
-  * [Feedbacks](#feedbacks)
-<!-- TOC -->
+> * [Introdução aos *source sets* no KMP](#introdução-aos-source-sets-no-kmp)
+> * [Entendendo a função e a estrutura básica de um *source set*](#entendendo-a-função-e-a-estrutura-básica-de-um-source-set)
+>   * [A natureza hierárquica dos *source sets*](#a-natureza-hierárquica-dos-source-sets)
+> * [*Source sets* comuns vs. específicos](#source-sets-comuns-vs-específicos)
+>   * [*Source set* comum (`commonMain`)](#source-set-comum-commonmain)
+>   * [*Source sets* específicos de plataforma](#source-sets-específicos-de-plataforma)
+>   * [Escolhendo entre comum e específico](#escolhendo-entre-comum-e-específico)
+> * [*Source set* intermediário](#source-set-intermediário)
+> * [*Source set* de teste](#source-set-de-teste)
+> * [Gerenciando dependências nos *source sets*](#gerenciando-dependências-nos-source-sets)
+>   * [Dependências no *source set* comum](#dependências-no-source-set-comum)
+>   * [Dependências em *source sets* específicos](#dependências-em-source-sets-específicos)
+> * [Convenções adotadas pela comunidade](#convenções-adotadas-pela-comunidade)
+>   * [1: Nomes utilizando "camelCase"](#1-nomes-utilizando-camelcase)
+>   * [2: Sufixo "main"](#2-sufixo-main)
+>   * [3: Código compartilhado usando o `commonMain`](#3-código-compartilhado-usando-o-commonmain)
+>   * [4: Utilizando os "Source set conventions"](#4-utilizando-os-source-set-conventions)
+> * [Conclusão](#conclusão)
+> * [Feedbacks](#feedbacks)
+
 
 No último artigo (🔗 [KMP 101: Entendendo como o Kotlin compila para multiplas plataformas](https://dev.to/rsicarelli/kotlin-multiplataforma-101-entendendo-como-o-kotlin-compila-para-multiplas-plataformas-5hba)), aprendemos sobre o frontend, IR e backend do compilador do Kotlin.
 
@@ -178,6 +181,18 @@ Dentro do KPM Gradle Plugin, temos uma classe chamada [🔗 KotlinMultiplatformS
 
 ---
 
+## Conclusão
+
+Neste artigo, exploramos o conceito vital de *source sets* no KMP, desvendando como eles facilitam a organização do código, a declaração de dependências específicas para cada plataforma e a configuração de opções de compilação de forma isolada. Compreendemos a distinção entre *source sets* comuns e específicos, a importância dos *source sets* intermediários, e como gerenciar eficientemente as dependências para manter a modularidade e eficiência do código.
+
+A flexibilidade e o poder do KMP nos permitem criar aplicações robustas e eficientes, maximizando a reutilização do código e mantendo a consistência em todas as plataformas. A adoção das convenções da comunidade e a compreensão profunda da estrutura de *source sets* são essenciais para qualquer dev que busca aproveitar ao máximo o potencial do Kotlin Multiplataforma.
+
+No nosso próximo artigo, mergulharemos no Plugin do KMP para Gradle, explorando como ele nos ajuda a configurar e gerenciar nossos projetos multiplataforma de maneira eficiente.
+
+Até a próxima!
+
+---
+
 ## Feedbacks
 
 🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
@@ -186,6 +201,7 @@ Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mai
 
 Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
 
+---
 
 > Referencias
 > - [Hierarchical project structure | Kotlin Documentation](https://kotlinlang.org/docs/multiplatform-hierarchy.html)
