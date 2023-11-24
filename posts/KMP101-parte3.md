@@ -90,13 +90,31 @@ Esse conceito é chamado de [intermediary *source sets*](https://kotlinlang.org/
 
 ![Exemplo *source sets*](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-24-110205.png?raw=true)
 
-## *Source sets* de teste
+## *Source set* de teste
 
 Testes no Kotlin multiplataforma também é tratado como um *source set*. O que significa que cada plataforma pode ter seus próprios testes específicos se utilizando, por exemplo, o SDK nativo ou outras bibliotecas open source nativas.
 
 O *source set* comum também pode (e deve!) ter seus próprios testes, porém você irá precisar utilizar outras bibliotecas KMP para a escrita multiplataforma, como, por exemplo, o [🔗 kotlin.test](https://kotlinlang.org/api/latest/kotlin.test/), [🔗 turbine](https://github.com/cashapp/turbine) ou [🔗 assertk](https://github.com/willowtreeapps/assertk).
 
 ![Exemplo *source sets*](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/test-source-set-kmp.png?raw=true)
+
+## Gerenciando dependências nos *source sets*
+
+Em projetos Kotlin Multiplataforma, a gestão eficiente de dependências nos source sets é crucial para manter a modularidade e a eficiência do código. 
+
+O KMP nos permite ter controle individual das dependências de cada *source set*, nos possibilitando ainda criar relações/dependências entre elas.
+
+### Dependências no *source set* comum
+
+No source set comum (`commonMain`), as dependências incluem bibliotecas utilizáveis em todas as plataformas suportadas pelo projeto. Estas bibliotecas fornecem funcionalidades que são independentes de qualquer plataforma específica, como lógica de negócios, algoritmos ou utilitários comuns. A inclusão de uma biblioteca no source set comum significa que essa funcionalidade estará disponível para todos os alvos do projeto, promovendo a reutilização do código e a consistência entre plataformas.
+
+Isso significa que, ao declarar uma depêndencia comum, todos os outros *source sets* também terão essa dependencia, que, por sua vez, é uma dependência KMP que oferece funcionalidades agnósticas de plataforma.
+
+### Dependências em *source sets* específicos
+
+Contrastando com o *source set* comum, os *source sets* específicos de plataforma, como `androidMain` ou `iosMain`, focam em dependências que são relevantes apenas para uma plataforma particular. Essas dependências são utilizadas para acessar APIs, bibliotecas ou recursos que são exclusivos a uma plataforma, permitindo que os desenvolvedores aproveitem as funcionalidades nativas e otimizem a experiência do usuário em cada plataforma.
+
+![Exemplo *source sets*](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-24-125307.png?raw=true)
 
 ## Convenções adotadas pela comunidade
 
