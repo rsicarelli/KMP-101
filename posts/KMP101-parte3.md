@@ -13,9 +13,9 @@ Dessa vez, vamos entender um conceito chave para codar em KMP: os `source sets`
 
 ## Introdução aos `source sets` do KMP
 
-Os *source sets* no Kotlin são essenciais para o desenvolvimento multiplataforma. Utilizando uma estratégia hierárquica, eles permitem a organização do código-fonte e a definição de dependências e opções de compilação de forma isolada para diferentes plataformas em um mesmo projeto.
+Os *source sets* no Kotlin são essenciais para o desenvolvimento multiplataforma. Utilizando uma arquitetura hierárquica, os source sets nos permite organizar nosso código-fonte, declarar depêndencias específicas para cada alvo, e também de nos permite configurar opções de compilação de forma isolada para diferentes plataformas em um mesmo projeto.
 
-Pense em um *source set* no Kotlin como uma "pasta especial" em um projeto, onde cada pasta é designada para um propósito ou plataforma específica. Por exemplo, a pasta "comum" contém arquivos usados em todas as plataformas, enquanto pastas específicas, como "android" ou "iOS", abrigam arquivos exclusivos para essas plataformas.
+Pense em um *source set* no KMP como uma "pasta especial" em um projeto, onde cada pasta têm um propósito (ou plataforma) específica. Por exemplo, a pasta "comum" contém arquivos usados em todas as plataformas, enquanto pastas específicas, como "android" ou "iOS", abrigam arquivos exclusivos para essas plataformas.
 
 O compilador do Kotlin identifica essas pastas especiais e se encarrega de compilar seu conteúdo (código-fonte), conforme as estratégias de compilação exploradas em 🔗 [KMP 101: Entendendo como o Kotlin compila para multiplas plataformas](https://dev.to/rsicarelli/kotlin-multiplataforma-101-entendendo-como-o-kotlin-compila-para-multiplas-plataformas-5hba).
 
@@ -23,7 +23,7 @@ O compilador do Kotlin identifica essas pastas especiais e se encarrega de compi
 
 Cada *source set* em um projeto multiplataforma possui **um nome único** e contém um conjunto de arquivos de código-fonte e recursos (arquivos, ícones, etc). Ele especifica **um alvo** (target) para o qual o código será compilado.
 
-Assumindo as configurações necessárias (iremos abordada-las em artigos futuros), a estrutura abaixo orienta o compilador do Kotlin a:
+Assumindo que as configurações necessárias foram aplicadas (iremos abordada-las em artigos futuros), a estrutura de pastas abaixo orienta o compilador do Kotlin a:
 
 1. Inicializar e compilar os seguintes alvos: `android`, `iOS`, `watchOS`, `tvOS`, `js`, `wasm` e `desktop`.
 2. Compilar o código-fonte dentro do source set `common` para todas as plataformas, tornando os membros do arquivo `Common.kt` disponíveis nativamente para cada plataforma definida.
@@ -50,6 +50,32 @@ Um exemplo interessante é que os *source sets* `apple` e `native` compilam apen
 
 ![Hierarquia padrão do KMP](https://kotlinlang.org/docs/images/default-hierarchy-example.svg)
 
+### Exemplo: compartilhando uma interface entre source sets
+
+Vamos supor que temos um projeto KMP com os source sets `commonMain`, `androidMain` e `appleMain`. Dentro do source set comúm, temos uma interface definida chamada `InterfaceComum` que funciona como um contrato que todas as plataformas precisam aderir.  
+
+Derivando da `InterfaceComum`, temos `InterfaceApple` e `InterfaceAndroid`: a `InterfaceApple` adiciona funcionalidades específicas para o ecossistema Apple, enquanto `InterfaceAndroid` faz o mesmo para dispositivos Android. Esse design garante que, embora compartilhemos a lógica comum pela `InterfaceComum`, cada plataforma pode ter suas próprias extensões e funcionalidades, mantendo a separação e a especialização do código conforme necessário.
+
+![Mermaid](mermaid-diagram-2023-11-24-110205)
+
+### Utilizando da hierarquia para compartilhar código
+Como você pode perceber, Essa natureza hierarquica
+
+
+#### Reutilização de Código Entre Plataformas
+O Kotlin Multiplatform permite a reutilização eficiente do código entre *source sets* específicos de plataformas. Isso significa que a lógica de negócios reutilizável e partes da interface do usuário podem ser desenvolvidas uma única vez e usadas em diferentes plataformas, economizando tempo e esforços de desenvolvimento&#8203;``【oaicite:7】``&#8203;.
+
+### Desenvolvimento de APIs Específicas de Plataforma
+Utilizando o mecanismo de declarações *expected* e *actual*, o Kotlin Multiplatform oferece uma maneira eficaz de definir e acessar APIs específicas da plataforma no código comum. Isso permite que tarefas comuns sejam especializadas e otimizadas para cada plataforma, aumentando a eficiência e a eficácia do código&#8203;``【oaicite:6】``&#8203;.
+
+### Suporte de Ferramentas e Integração com o Gradle
+O IntelliJ IDEA, da JetBrains, oferece suporte integrado para a programação multiplataforma em Kotlin. Além disso, o plugin `kotlin-multiplatform` do Gradle ajuda a configurar projetos multiplataforma, facilitando a gestão de *source sets* e dependências&#8203;``【oaicite:5】``&#8203;.
+
+### Mudanças Recentes e Práticas Recomendadas
+Com as atualizações constantes do Kotlin Multiplatform, é vital estar ciente das mudanças recentes, como a nova abordagem para alvos auto-gerados pelo Gradle e alterações nos nomes das configurações de compilação. Isso garante que os projetos estejam em conformidade com as práticas atuais e evita problemas de compatibilidade&#8203;``【oaicite:4】``&#8203;&#8203;``【oaicite:3】``&#8203;&#8203;``【oaicite:2】``&#8203;.
+
+### Suporte para Estrutura Hierárquica e API Obsoleta
+O Kotlin tem introduzido suporte para estruturas de projeto hierárquicas, permitindo criar *source sets* intermediários entre o `commonMain` e os específicos da plataforma. É importante estar atento às APIs obsoletas e às propriedades do Gradle que estão sendo gradualmente descontinuadas, para garantir a estabilidade e a modernidade do projeto&#8203;``【oaicite:1】``&#8203;&#8203;``【oaicite:0】``&#8203;.
 
 
 ### Convencões
