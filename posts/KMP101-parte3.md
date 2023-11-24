@@ -18,18 +18,17 @@
 > * [Conclusão](#conclusão)
 > * [Feedbacks](#feedbacks)
 
-
 No último artigo (🔗 [KMP 101: Entendendo como o Kotlin compila para multiplas plataformas](https://dev.to/rsicarelli/kotlin-multiplataforma-101-entendendo-como-o-kotlin-compila-para-multiplas-plataformas-5hba)), aprendemos sobre o frontend, IR e backend do compilador do Kotlin.
 
-Dessa vez, vamos entender um conceito chave para codar em KMP: os `*source sets*`
+Dessa vez, vamos entender um conceito-chave para codar em KMP: os *source sets*
 
 ---
 
 ## Introdução aos *source sets* no KMP
 
-Os *source sets* no Kotlin são essenciais para o desenvolvimento multiplataforma. Utilizando uma arquitetura hierárquica, os *source sets* nos permite organizar nosso código-fonte, declarar depêndencias específicas para cada alvo, e também de nos permite configurar opções de compilação de forma isolada para diferentes plataformas em um mesmo projeto.
+Os *source sets* no Kotlin são essenciais para o desenvolvimento multiplataforma. Utilizando uma arquitetura hierárquica, os *source sets* nos permitem organizar nosso código-fonte, declarar dependências específicas para cada alvo e também nos permitem configurar opções de compilação de forma isolada para diferentes plataformas em um mesmo projeto.
 
-Pense em um *source set* no KMP como uma "pasta especial" em um projeto, onde cada pasta têm um propósito (ou plataforma) específica. Por exemplo, a pasta "comum" contém arquivos usados em todas as plataformas, enquanto pastas específicas, como "android" ou "iOS", abrigam arquivos exclusivos para essas plataformas.
+Pense em um *source set* no KMP como uma 'pasta especial' em um projeto, onde cada pasta tem um propósito (ou plataforma) específico. Por exemplo, a pasta "comum" contém arquivos usados em todas as plataformas, enquanto pastas específicas, como "android" ou "iOS", abrigam arquivos exclusivos para essas plataformas.
 
 O compilador do Kotlin identifica essas pastas especiais e se encarrega de compilar seu conteúdo (código-fonte), conforme as estratégias de compilação exploradas em 🔗 [KMP 101: Entendendo como o Kotlin compila para multiplas plataformas](https://dev.to/rsicarelli/kotlin-multiplataforma-101-entendendo-como-o-kotlin-compila-para-multiplas-plataformas-5hba).
 
@@ -37,7 +36,7 @@ O compilador do Kotlin identifica essas pastas especiais e se encarrega de compi
 
 Cada *source set* em um projeto multiplataforma possui **um nome único** e contém um conjunto de arquivos de código-fonte e recursos (arquivos, ícones, etc). Ele especifica **um alvo** (*target*) para o qual o código será compilado.
 
-Assumindo que as configurações necessárias foram aplicadas (iremos abordada-las em artigos futuros), a estrutura de pastas abaixo orienta o compilador do Kotlin a:
+Assumindo que as configurações necessárias foram aplicadas (as quais abordaremos em artigos futuros), a estrutura de pastas abaixo orienta o compilador do Kotlin a:
 
 1. Inicializar e compilar os seguintes alvos: `android`, `iOS`, `watchOS`, `tvOS`, `js`, `wasm` e `desktop`.
 2. Compilar o código-fonte dentro do *source set* `common` para todas as plataformas, tornando os membros do arquivo `Common.kt` disponíveis nativamente para cada plataforma definida.
@@ -81,7 +80,7 @@ Essa abordagem não só simplifica a manutenção do código, como também asseg
 
 ## *Source set* intermediário
 
-Vamos supor que temos um projeto KMP com os *source sets* `commonMain`, `androidMain` e `appleMain`. Dentro do *source set* comúm, temos uma interface definida chamada `InterfaceComum` que funciona como um contrato que todas as plataformas precisam aderir.
+Vamos supor que temos um projeto KMP com os *source sets* `commonMain`, `androidMain` e `appleMain`. Dentro do *source set* comum, temos uma interface definida chamada `InterfaceComum` que funciona como um contrato ao qual todas as plataformas precisam aderir.
 
 Derivando da `InterfaceComum`, temos `InterfaceApple` e `InterfaceAndroid`: a `InterfaceApple` adiciona funcionalidades específicas para o ecossistema Apple, enquanto `InterfaceAndroid` faz o mesmo para dispositivos Android.
 
@@ -95,7 +94,7 @@ Esse conceito é chamado de [intermediary *source sets*](https://kotlinlang.org/
 
 ## *Source set* de teste
 
-Testes no Kotlin multiplataforma também é tratado como um *source set*. O que significa que cada plataforma pode ter seus próprios testes específicos se utilizando, por exemplo, o SDK nativo ou outras bibliotecas open source nativas.
+Os testes no Kotlin Multiplataforma também são tratados como um *source set*. O que significa que cada plataforma pode ter seus próprios testes específicos se utilizando, por exemplo, o SDK nativo ou outras bibliotecas open source nativas.
 
 O *source set* comum também pode (e deve!) ter seus próprios testes, porém você irá precisar utilizar outras bibliotecas KMP para a escrita multiplataforma, como, por exemplo, o [🔗 kotlin.test](https://kotlinlang.org/api/latest/kotlin.test/), [🔗 turbine](https://github.com/cashapp/turbine) ou [🔗 assertk](https://github.com/willowtreeapps/assertk).
 
@@ -103,13 +102,13 @@ O *source set* comum também pode (e deve!) ter seus próprios testes, porém vo
 
 ## Gerenciando dependências nos *source sets*
 
-Em projetos Kotlin Multiplataforma, a gestão eficiente de dependências nos source sets é crucial para manter a modularidade e a eficiência do código. 
+Em projetos Kotlin Multiplataforma, a gestão eficiente de dependências nos *source sets* é crucial para manter a modularidade e a eficiência do código.
 
 O KMP nos permite ter controle individual das dependências de cada *source set*, nos possibilitando ainda criar relações/dependências entre elas.
 
 ### Dependências no *source set* comum
 
-No source set comum (`commonMain`), as dependências incluem bibliotecas utilizáveis em todas as plataformas suportadas pelo projeto. Estas bibliotecas fornecem funcionalidades que são independentes de qualquer plataforma específica, como lógica de negócios, algoritmos ou utilitários comuns. A inclusão de uma biblioteca no source set comum significa que essa funcionalidade estará disponível para todos os alvos do projeto, promovendo a reutilização do código e a consistência entre plataformas.
+No *source set* comum (`commonMain`), as dependências incluem bibliotecas utilizáveis em todas as plataformas suportadas pelo projeto. Estas bibliotecas fornecem funcionalidades que são independentes de qualquer plataforma específica, como lógica de negócios, algoritmos ou utilitários comuns. A inclusão de uma biblioteca no source set comum significa que essa funcionalidade estará disponível para todos os alvos do projeto, promovendo a reutilização do código e a consistência entre plataformas.
 
 Isso significa que, ao declarar uma depêndencia comum, todos os outros *source sets* também terão essa dependencia, que, por sua vez, é uma dependência KMP que oferece funcionalidades agnósticas de plataforma.
 
