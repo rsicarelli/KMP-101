@@ -50,35 +50,30 @@ Um exemplo interessante é que os *source sets* `apple` e `native` compilam apen
 
 ![Hierarquia padrão do KMP](https://kotlinlang.org/docs/images/default-hierarchy-example.svg)
 
-### Exemplo: compartilhando uma interface entre source sets
+### Source set intermediário
 
 Vamos supor que temos um projeto KMP com os source sets `commonMain`, `androidMain` e `appleMain`. Dentro do source set comúm, temos uma interface definida chamada `InterfaceComum` que funciona como um contrato que todas as plataformas precisam aderir.  
 
-Derivando da `InterfaceComum`, temos `InterfaceApple` e `InterfaceAndroid`: a `InterfaceApple` adiciona funcionalidades específicas para o ecossistema Apple, enquanto `InterfaceAndroid` faz o mesmo para dispositivos Android. Esse design garante que, embora compartilhemos a lógica comum pela `InterfaceComum`, cada plataforma pode ter suas próprias extensões e funcionalidades, mantendo a separação e a especialização do código conforme necessário.
+Derivando da `InterfaceComum`, temos `InterfaceApple` e `InterfaceAndroid`: a `InterfaceApple` adiciona funcionalidades específicas para o ecossistema Apple, enquanto `InterfaceAndroid` faz o mesmo para dispositivos Android. 
 
-![Mermaid](mermaid-diagram-2023-11-24-110205)
+Esse design garante que, embora compartilhemos a lógica comum pela `InterfaceComum`, cada plataforma pode ter suas próprias extensões e funcionalidades, mantendo a separação e a especialização do código conforme necessário.
 
-### Utilizando da hierarquia para compartilhar código
-Como você pode perceber, Essa natureza hierarquica
+Esse conceito é chamado de [intermediary source sets](https://kotlinlang.org/docs/multiplatform-discover-project.html#intermediate-source-sets):
 
+> Um source set intermediário é um conjunto de source set que compila para alguns, mas não para todos os alvos do projeto. 
 
-#### Reutilização de Código Entre Plataformas
-O Kotlin Multiplatform permite a reutilização eficiente do código entre *source sets* específicos de plataformas. Isso significa que a lógica de negócios reutilizável e partes da interface do usuário podem ser desenvolvidas uma única vez e usadas em diferentes plataformas, economizando tempo e esforços de desenvolvimento&#8203;``【oaicite:7】``&#8203;.
+![Exemplo source sets](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/mermaid-diagram-2023-11-24-110205.png?raw=true)
 
-### Desenvolvimento de APIs Específicas de Plataforma
-Utilizando o mecanismo de declarações *expected* e *actual*, o Kotlin Multiplatform oferece uma maneira eficaz de definir e acessar APIs específicas da plataforma no código comum. Isso permite que tarefas comuns sejam especializadas e otimizadas para cada plataforma, aumentando a eficiência e a eficácia do código&#8203;``【oaicite:6】``&#8203;.
+### Source sets de teste
+Testes no Kotlin multiplataforma também é tratado como um source set. O que significa que cada plataforma pode ter seus próprios testes específicos se utilizando, por exemplo, o SDK nativo ou outras bibliotecas open source nativas.
 
-### Suporte de Ferramentas e Integração com o Gradle
-O IntelliJ IDEA, da JetBrains, oferece suporte integrado para a programação multiplataforma em Kotlin. Além disso, o plugin `kotlin-multiplatform` do Gradle ajuda a configurar projetos multiplataforma, facilitando a gestão de *source sets* e dependências&#8203;``【oaicite:5】``&#8203;.
+O source set comum também pode (e deve!) ter seus próprios testes, porém você irá precisar utilizar outras bibliotecas KMP para a escrita multiplataforma, como por exemplo o [🔗 kotlin.test](https://kotlinlang.org/api/latest/kotlin.test/), [🔗 turbine](https://github.com/cashapp/turbine) ou [🔗 assertk](https://github.com/willowtreeapps/assertk).
 
-### Mudanças Recentes e Práticas Recomendadas
-Com as atualizações constantes do Kotlin Multiplatform, é vital estar ciente das mudanças recentes, como a nova abordagem para alvos auto-gerados pelo Gradle e alterações nos nomes das configurações de compilação. Isso garante que os projetos estejam em conformidade com as práticas atuais e evita problemas de compatibilidade&#8203;``【oaicite:4】``&#8203;&#8203;``【oaicite:3】``&#8203;&#8203;``【oaicite:2】``&#8203;.
-
-### Suporte para Estrutura Hierárquica e API Obsoleta
-O Kotlin tem introduzido suporte para estruturas de projeto hierárquicas, permitindo criar *source sets* intermediários entre o `commonMain` e os específicos da plataforma. É importante estar atento às APIs obsoletas e às propriedades do Gradle que estão sendo gradualmente descontinuadas, para garantir a estabilidade e a modernidade do projeto&#8203;``【oaicite:1】``&#8203;&#8203;``【oaicite:0】``&#8203;.
+![Exemplo source sets](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/test-source-set-kmp.png?raw=true)
 
 
-### Convencões
+## Convenções dos source sets utilizados pela comunidade
+
 O KMP é extremamente flexível, nos possibilitando nomear nossos source sets com praticamente qualquer nome.
 
 Porém, no decorrer dos anos, a comunidade foi adotando algumas convenções, e o próprio KMP foi se adequando ao redor dessas convenções também, oferecendo algumas facilidades na configuração do projeto. Vamos explorar as principais delas 
@@ -92,19 +87,40 @@ O diretório `main` em projetos que utilizam linguagens da JVM, como Java e Kotl
 Em projetos KMP, essa tradição foi levada adiante e se utiliza o `main` como sufixo para declarar nossos source sets: `commonMain`, `androidMain`, `nativeMain`, `desktopMain`, etc.
 
 #### 3: Código compartilhado usando o `commonMain`
-Esse source set é o "topo" da hierarquia
+O código compartilhado geralmente reside em um source set chamado `commonMain`.   
 
+#### 4: Utilizando os "Source set conventions"
+Como aprendemos, o próprio KMP foi se ajustando ao redor dessas definições da comunidade. Dentro do KPM Gradle Plugin, temos uma classe chamada [🔗 KotlinMultiplatformSourceSetConventions](https://github.com/JetBrains/kotlin/blob/master/libraries/tools/kotlin-gradle-plugin/src/common/kotlin/org/jetbrains/kotlin/gradle/dsl/KotlinMultiplatformSourceSetConventions.kt) que reduz e muito a tarefa tediosa de definir e controlar os source sets.
 
+Em Nov 2023, esses são os nomes pre-definidos pelo KMP:  
 
-
-
-
-## Source Sets Específicos de Plataforma
-- O Kotlin cria *source sets* específicos da plataforma, conhecidos como *platform source sets*. Cada alvo (target) tem um *source set* correspondente que compila apenas para esse alvo. Por exemplo, um alvo `jvm` terá o *source set* correspondente `jvmMain`&#8203;``【oaicite:7】``&#8203;.
-- Durante a compilação para um alvo específico, o Kotlin coleta todos os *source sets* rotulados com esse alvo e produz binários a partir deles. Por exemplo, para o alvo JVM, ele seleciona `jvmMain` e `commonMain` e compila ambos juntos para os arquivos de classe JVM&#8203;``【oaicite:6】``&#8203;.
-
-## Intermediate Source Sets
-- Em projetos mais complexos, pode ser necessário um compartilhamento de código mais granular. Para isso, o Kotlin suporta *intermediate source sets*, que compilam para alguns, mas não todos, os alvos no projeto. Isso é útil para compartilhar código entre um subconjunto de alvos&#8203;``【oaicite:5】``&#8203;.
+| Source Set          | Plataforma |
+|---------------------|------------|
+| `androidMain`       | Android    |
+| `androidNativeMain` | Android    |
+| `androidNativeTest` | Android    |
+| `appleMain`         | Apple      |
+| `appleTest`         | Apple      |
+| `commonMain`        | Comum      |
+| `commonTest`        | Comum      |
+| `iosMain`           | iOS        |
+| `iosTest`           | iOS        |
+| `jsMain`            | JavaScript |
+| `jsTest`            | JavaScript |
+| `jvmMain`           | JVM        |
+| `jvmTest`           | JVM        |
+| `linuxMain`         | Linux      |
+| `linuxTest`         | Linux      |
+| `macosMain`         | macOS      |
+| `macosTest`         | macOS      |
+| `mingwMain`         | Windows    |
+| `mingwTest`         | Windows    |
+| `nativeMain`        | Nativo     |
+| `nativeTest`        | Nativo     |
+| `tvosMain`          | tvOS       |
+| `tvosTest`          | tvOS       |
+| `watchosMain`       | watchOS    |
+| `watchosTest`       | watchOS    |
 
 ## Integração com Testes
 - Todos os *source sets* criados por padrão têm os prefixos `Main` e `Test`. O `Main` contém código de produção, enquanto o `Test` contém testes para esse código. Por exemplo, `commonTest` é um *source set* de teste para `commonMain` e compila para todos os alvos declarados&#8203;``【oaicite:4】``&#8203;.
