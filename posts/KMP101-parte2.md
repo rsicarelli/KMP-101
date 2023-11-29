@@ -90,6 +90,15 @@ Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mai
 
 Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
 
+---
+
+> 🤖 Artigo foi escrito com o auxílio do ChatGPT 4, utilizando o plugin Web.
+>
+> As fontes e o conteúdo são revisados para garantir a relevância das informações fornecidas, assim como as fontes utilizadas em cada prompt.
+>
+> No entanto, caso encontre alguma informação incorreta ou acredite que algum crédito está faltando, por favor, entre em contato!
+
+---
 
 > Referencias
 > - [Crash Course on the Kotlin Compiler by Amanda Hinchman-Dominguez - KotlinConf'23](https://www.youtube.com/watch?v=wUGfuWHCqrc), [Github repo](https://github.com/ahinchman1/Kotlin-Compiler-Crash-Course)

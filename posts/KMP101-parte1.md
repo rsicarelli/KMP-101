@@ -256,17 +256,26 @@ Com esse conhecimento, podemos avançar para os conceitos mais específicos do f
 
 Iremos aprender como o compilador do Kotlin funciona, e como sua estrutura de frontend + backend + IR possibilitam as múltiplas compilações.
 
-**Confira o próximo artigo:**
-🔗 [KMP 101: Entendendo como o Kotlin compila para multiplas plataformas](https://dev.to/rsicarelli/kotlin-multiplataforma-101-entendendo-como-o-kotlin-compila-para-multiplas-plataformas-5hba)
-
 ---
 
 ## Feedbacks
 
-🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP-101/issues/new/choose)
+🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
 
 Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
 
-Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP-101)
+Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
 
-Também, pode dar um alô no Xwitter, ou no Slack do Kotlin, ou AndroidDevBR!
+---
+
+> 🤖 Artigo foi escrito com o auxílio do ChatGPT 4, utilizando o plugin Web.
+>
+> As fontes e o conteúdo são revisados para garantir a relevância das informações fornecidas, assim como as fontes utilizadas em cada prompt.
+>
+> No entanto, caso encontre alguma informação incorreta ou acredite que algum crédito está faltando, por favor, entre em contato!
+
+---
+
+> Referencias
+> - [Simplifying Application Development with Kotlin Multiplatform Mobile Robert Nagy](https://github.com/PacktPublishing/Simplifying-Application-Development-with-Kotlin-Multiplatform-Mobile)
+> - [Kotlin In-Depth - Aleksei Sedunov ](https://www.amazon.com/Kotlin-Depth-Multipurpose-Programming-Multiplatform/dp/9391030637)
