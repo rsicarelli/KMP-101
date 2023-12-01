@@ -60,7 +60,18 @@ Se tudo deu certo, o Fleet realizou as seguintes etapas
 
 Agora é só testar! Clique em cada uma das plataformas, e execute nosso Olá Mundo:
 
-![Demo em todas as plataformas](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/hello-world-kmp-compose.gif)
+![Demo em todas as plataformas](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/hello-world-kmp-compose.gif?raw=true)
+
+## Conclusão
+Simples, né? Pois é, levou anos para o KMP chegar nesse estágio, e nós da comunidade estamos alvoroçados com a praticidade de criar um projeto multiplataforma nativo para Android, iOS e Desktop em questão de minutos.
+
+Agora que temos nosso projeto base pronto e rodando, podemos finalmente avançar em tópicos mais específicos do KMP.
+
+No próximo artigo, vamos explorar um aspecto crucial do Kotlin Multiplataforma: a integração com o Gradle através do Plugin KMP.
+
+Até a próxima!
+
+
 
 ---
 
