@@ -1,3 +1,18 @@
+> * [O que é o Gradle?](#o-que-é-o-gradle)
+>   * [Por que o Gradle é tão importante no KMP?](#por-que-o-gradle-é-tão-importante-no-kmp)
+>   * [Groovy vs Kotlin](#groovy-vs-kotlin)
+> * [Dissecando os arquivos Gradle](#dissecando-os-arquivos-gradle)
+>   * [O arquivo `settings.gradle.kts` da raíz](#o-arquivo-settingsgradlekts-da-raíz)
+>   * [O arquivo `build.gradle.kts` da raíz](#o-arquivo-buildgradlekts-da-raíz)
+>   * [O arquivo `build.gradle.kts` do módulo `composeApp`](#o-arquivo-buildgradlekts-do-módulo-composeapp)
+>     * [1. Aplicando plugins](#1-aplicando-plugins)
+>     * [2. Extensão `kotlin` (aka *KotlinMultiplatformExtension*)](#2-extensão-kotlin-aka-kotlinmultiplatformextension)
+
+>     * [3. Extensão `android` (também conhecida como `BaseAppModuleExtension`)](#3-extensão-android-também-conhecida-como-baseappmoduleextension)
+>     * [4. Extensão `compose` (também conhecida como `ComposeExtension`)](#4-extensão-compose-também-conhecida-como-composeextension)
+>   * [Outros arquivos Gradle](#outros-arquivos-gradle)
+> * [Conclusão](#conclusão)
+> * [Feedbacks](#feedbacks)
 
 No último artigo, criamos um projeto utilizando o KMP Wizard e, sem muitos esforços, executamos nosso app em aparelhos Android, iOS e Desktop.
 
@@ -313,6 +328,18 @@ Este arquivo representa nosso catálogo de bibliotecas, versões e plugins.
 Arquivos e pastas como `.gradle`, `gradlew`, `gradlew.bat`, `local.properties`, `.idea` e `.fleet` são gerenciados pelos comandos do Gradle ou pela própria IDE, não havendo configurações específicas do KMP que precisem ser analisadas.
 
 
+## Conclusão
+
+Com este guia, aprendemos aspectos cruciais do Gradle em projetos KMP.  
+
+A capacidade de gerenciar eficientemente as dependências, definir caminhos para recursos e manifestos, e configurar extensões específicas é crucial para o dia a dia como dev KMP. Além disso, a compreensão dos arquivos Gradle, como `gradle.properties` e `libs.versions.toml`, é fundamental para manter seu projeto atualizado e alinhado com as melhores práticas da indústria.
+
+A meu ver, o Gradle em projetos KMP não é apenas uma habilidade técnica; é um ativo estratégico que potencializa o desenvolvimento de aplicações robustas e adaptáveis em várias plataformas. À medida que o KMP continua a evoluir, o conhecimento adquirido aqui será uma base sólida para explorar novas funcionalidades e integrar tecnologias emergentes em seus projetos.
+
+No próximo artigo, vamos finalmente mexer em código Kotlin, aprendendo uma característica essencial do KMP: `expect` e `actual`.
+
+Até a próxima!
+
 ---
 
 ## Feedbacks
@@ -333,11 +360,10 @@ Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-10
 
 ---
 
-- [Gradle vs. Other Build Tools - unrepo.com](https://www.unrepo.com)
-- [Gradle vs. npm - Gradle Hero](https://gradlehero.com)
-- [Yarn vs NPM - phoenixnap.com](https://phoenixnap.com/kb/yarn-vs-npm)
-- [Webpack Comparison - webpack.js.org](https://webpack.js.org/comparison/)
-- [Multiplatform Gradle Plugin Improved for Connecting KMM Modules | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/07/multiplatform-gradle-plugin-improved-for-connecting-kmm-modules/)
-- https://github.com/JetBrains/amper/blob/4f2676a8328ddbca7e9b899e59a004a7d2d02197/prototype-implementation/gradle-integration/src/org/jetbrains/amper/gradle/kmpp/KMPPBindingPluginPart.kt#L101
-- [Compose Multiplatform for iOS Is in Alpha | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2023/02/compose-multiplatform-for-ios-is-in-alpha/)
-- [Android source set layout | Kotlin Documentation](https://kotlinlang.org/docs/mpp-android-source-set-layout.html)
+> Referências
+> - [Gradle vs. Other Build Tools - unrepo.com](https://www.unrepo.com)
+> - [Gradle vs. npm - Gradle Hero](https://gradlehero.com)
+> - [Webpack Comparison - webpack.js.org](https://webpack.js.org/comparison/)
+> - [Multiplatform Gradle Plugin Improved for Connecting KMM Modules | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2021/07/multiplatform-gradle-plugin-improved-for-connecting-kmm-modules/)
+> - [Compose Multiplatform for iOS Is in Alpha | The Kotlin Blog](https://blog.jetbrains.com/kotlin/2023/02/compose-multiplatform-for-ios-is-in-alpha/)
+> - [Android source set layout | Kotlin Documentation](https://kotlinlang.org/docs/mpp-android-source-set-layout.html)

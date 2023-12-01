@@ -1,3 +1,11 @@
+ > * [Primeiro passo: formas de criar projetos](#primeiro-passo-formas-de-criar-projetos)
+ >   * [Criando um projeto utilizando o KMP Wizard](#criando-um-projeto-utilizando-o-kmp-wizard)
+ >   * [Importando o novo projeto no Fleet](#importando-o-novo-projeto-no-fleet)
+ >     * [O que é o Smart Mode no Fleet?](#o-que-é-o-smart-mode-no-fleet)
+ >   * [Testando nas plataformas](#testando-nas-plataformas)
+ > * [Conclusão](#conclusão)
+ > * [Feedbacks](#feedbacks)
+
 Nos últimos artigos, focamos em diversos conceitos-chave do KMP e entendemos desde o paradigma multiplataforma, até a configuração do ambiente.
 
 Dessa vez, vamos colocar a mão na massa efetivamente, e criar nosso primeiro "Olá mundo" em Android, iOS e Desktop!
