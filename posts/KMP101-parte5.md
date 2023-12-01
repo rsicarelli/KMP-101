@@ -47,9 +47,20 @@ Sendo representado por um ícone de raio ⚡️ no topo direito do Fleet, o Smar
 - etc
 
 ### Testando nas plataformas
-Se tudo deu certo, você deve conseguir clicar no botão ▶️ ***play*** no topo:
+
+Se tudo deu certo, o Fleet realizou as seguintes etapas
+1. Inicializou o projeto
+2. Identificou que temos 3 alvos: 
+   1. Android com o ícone do robo verde
+   2. iOS com o ícone da fruta mordida
+   3. Desktop com o ícone do elefante (do Gradle)
+3. Configurou cada alvo, e o tornou disponível na janela "Run & Debug" (clicando no ícone ▶️ ***run & debug***)
 
 ![Executando o projeto no Fleet](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/fleet-hello-world-run.png?raw=true)
+
+Agora é só testar! Clique em cada uma das plataformas, e execute nosso Olá Mundo:
+
+![Demo em todas as plataformas](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/hello-world-kmp-compose.gif)
 
 ---
 
