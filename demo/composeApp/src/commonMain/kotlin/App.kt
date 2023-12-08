@@ -1,3 +1,5 @@
+import CheckBalanceForTransferUseCase.CheckBalanceForTransferResult.HasSufficientFunds
+import CheckBalanceForTransferUseCase.CheckBalanceForTransferResult.InsufficientFunds
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -35,5 +37,24 @@ fun App() {
                 )
             }
         }
+    }
+}
+
+class CheckBalanceForTransferUseCase(
+    val accountRepository: AccountRepository
+) {
+    operator fun invoke(valueToTransfer: Double): CheckBalanceForTransferResult {
+        require(valueToTransfer > 0)
+
+        val currentBalance: Double = accountRepository.currentBalance
+
+        return if (currentBalance >= valueToTransfer)
+            HasSufficientFunds
+        else InsufficientFunds(missingAmount = valueToTransfer - currentBalance)
+    }
+
+    sealed interface CheckBalanceForTransferResult {
+        data object HasSufficientFunds : CheckBalanceForTransferResult
+        data class InsufficientFunds(val missingAmount: Double) : CheckBalanceForTransferResult
     }
 }
