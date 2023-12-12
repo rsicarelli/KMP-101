@@ -26,7 +26,7 @@ Esse tipo de compartilhamento infere que não há nenhuma implementação espec�
 
 No início do KMP, esse tipo de compartilhamento poderia não ser tão comum, já que a comunidade do código livre ainda estava se aquecendo e bibliotecas KMP estavam se formando. Atualmente, dado ao leque de código livre disponível para nosso uso, é o formato mais comum para compartilhamento de código.
 
-#### Constantes
+#### 1.1 Constantes
 
 Constante é aquele tipo de informação que é estática e super específica. É um tipo de informação que, geralmente, tem um tipo primitivo (`String`, `Int`, `Boolean`, etc) e se repete para todas as plataformas.
 
@@ -73,7 +73,7 @@ object AnalyticsEvents {
 }
 ```
 
-#### Modelos: entidades, DTO, objetos de valor, respostas e requisições com um servidor
+#### 1.2 Modelos: entidades, DTO, objetos de valor, respostas e requisições com um servidor
 
 Modelos geralmente refletem informações mais específicas do negócio, e na grande maioria das vezes não requerem nenhuma implementação específica de plataforma.
 
@@ -133,7 +133,7 @@ data class LoginRequest(
 
 > ⏱️ Vamos aprender sobre essa biblioteca nos próximos artigos
 
-#### Lógica de negócio
+#### 1.3 Lógica de negócio
 
 A natureza de uma regra de negócio é geralmente agnóstica a plataforma, e imposta pelo contexto específico do seu projeto, sendo um candidato perfeito para ser solucionado apenas com Kotlin.
 
@@ -170,6 +170,70 @@ class CheckBalanceForTransferUseCase(
 > 
 > [🔗 How To Avoid Use Cases Boilerplate in Android](https://betterprogramming.pub/how-to-avoid-use-cases-boilerplate-in-android-d0c9aa27ef27)
 
+#### 1.4 Testes unitários e de integração
+Uma das grandes vantagens do KMP é a possibilidade de ter seu código testado uma vez e reutilizada em todas as plataformas. Lembrando que, dentro do source-set `commonMain` ou `commonTest`, não podemos utilizar nenhuma biblioteca específica da plataforma. Ou seja, precisamos escrever testes numa infraestrutura multiplataforma.
 
+Para isso, temos o [🔗 kotlin.test](https://kotlinlang.org/api/latest/kotlin.test/), que oferece uma API parecida com o `JUnit4/5` com suporte a anotações de `@Test`, além de recursos para verificar o conteúdo por funções como `assertEquals` e `assertContains`.
 
+Vamos ver como seria um teste unitário para nosso use case acima:
+
+```kotlin
+import kotlin.test.Test
+import kotlin.test.assertTrue
+import kotlin.test.assertFalse
+
+// Implementação Fake
+private class FakeAccountRepository(val balance: Double) : AccountRepository {
+    override val currentBalance: Double
+        get() = balance
+}
+
+// Classe de teste
+class CheckBalanceForTransferUseCaseTest {
+
+    @Test
+    fun `deve retornar HasSufficientFunds quando o saldo atual é maior que o valor da transferência`() {
+        // DADO: Um repositório fake com saldo suficiente
+        val fakeRepository = FakeAccountRepository(balance = 1000.0)
+        val useCase = CheckBalanceForTransferUseCase(fakeRepository)
+
+        // QUANDO: Verificando o saldo para uma transferência
+        val result = useCase(500.0)
+
+        // ENTÃO: Deve retornar HasSufficientFunds
+        assertTrue(result is HasSufficientFunds)
+    }
+
+    @Test
+    fun `deve retornar InsufficientFunds com o valor correto faltante quando o saldo é menor que o valor da transferência`() {
+        // DADO: Um repositório fake com saldo insuficiente
+        val fakeRepository = FakeAccountRepository(balance = 300.0)
+        val useCase = CheckBalanceForTransferUseCase(fakeRepository)
+
+        // QUANDO: Verificando o saldo para uma transferência
+        val result = useCase(500.0)
+
+        // ENTÃO: Deve retornar InsufficientFunds com o valor faltante correto
+        assertTrue(result is InsufficientFunds)
+        val insufficientFundsResult = result as InsufficientFunds
+        assertTrue(insufficientFundsResult.missingAmount == 200.0)
+    }
+}
+```
+
+> Para aprender sobre anotações no Kotlin: [The Full Guide to ANNOTATIONS In Kotlin por Philipp Lackner](https://www.youtube.com/watch?v=qdnhQzVGywQ) 
+>
+> Para aprender sobre o uso de "fakes" no Kotlin: [No Mocks Allowed por Marcello Galhardo](https://marcellogalhardo.dev/posts/no-mocks-allowed/)
+
+> ⏱️ Vamos aprender mais sobre testes no KMP em artigos futuros 
+
+#### Conclusão sobre compartilhando códigos 100% Kotlin
+Como você pode perceber, podemos utilizar apenas o Kotlin em diversos aspectos do nosso projeto. Essa capacidade do KMP é extremamente poderosa, já que sem muito esforço, podemos utilizar o maquinário do KMP para gerar compilações nativas do nosso código.
+
+Mas, como pode perceber pelos exemplos, geralmente conseguimos utilizar essa abordagem e 100% Kotlin para implementações específicas do seu domínio (camada `domain`).
+
+E a camada de data/infra? Como podemos acessar recursos específicos e nativo da plataforma no KMP?
+
+### 2. Compartilhando código com implementações específicas de cada plataforma
+Em um dos exemplos anteriores, vimos como podemos escrever nossos modelos utilizando apenas o Kotlin
 

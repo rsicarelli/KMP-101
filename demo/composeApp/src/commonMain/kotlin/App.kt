@@ -40,6 +40,16 @@ fun App() {
     }
 }
 
+interface AccountRepository {
+    val currentBalance: Double
+}
+
+
+private class FakeAccountRepository(val balance: Double) : AccountRepository {
+    override val currentBalance: Double
+        get() = balance
+}
+
 class CheckBalanceForTransferUseCase(
     val accountRepository: AccountRepository
 ) {
