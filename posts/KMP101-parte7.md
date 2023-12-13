@@ -235,5 +235,23 @@ Mas, como pode perceber pelos exemplos, geralmente conseguimos utilizar essa abo
 E a camada de data/infra? Como podemos acessar recursos específicos e nativo da plataforma no KMP?
 
 ### 2. Compartilhando código com implementações específicas de cada plataforma
-Em um dos exemplos anteriores, vimos como podemos escrever nossos modelos utilizando apenas o Kotlin
+Aprendemos que cada plataforma tem uma forma específica de acessar recursos exclusivos do sistema operacional como internet, bluetooth, disco, notificações, imagens, etc. Esses recursos, apesar de na teoria terem o mesmo conceito, diferem nas suas implementações.
+
+Para resolver esse desafio, o KMP introduz [duas novas palavras reservadas](https://kotlinlang.org/docs/multiplatform-expect-actual.html): `expect` (o contrato) e `actual` (a implementação).
+
+#### 2.1 A palavra reservada `expect` no KMP
+A palavra `expect` informa o compilador do Kotlin para ele pode "esperar" ou "exigir" uma implementação específica de cada plataforma para aquele componente específico durante a compilação de um source-set específico. Podemos utilizar a palavra `expect` para funções, propriedades, classes, objetos, interfaces, enumerações ou anotações.
+
+Só é possível utilizar o `expect` no source set comum (`commonMain`): o source set comum declara, e os source sets específicos implementam.
+
+Ao declarar um componente com a palavra `expect`:
+1. Você tem a obrigação de declarar a implementação (`actual`) em cada source-set específico. Inclusive, ao declarar um `expect` qualquer, a IDE já informa um erro informando que precisamos declarar a versão `actual` de cada plataforma:
+![Erro ao declarar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-actual-kotlin.png?raw=true)
+2. 
+
+
+
+
+
+  
 
