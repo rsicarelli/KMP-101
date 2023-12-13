@@ -1,34 +1,36 @@
 ## Explorando as palavras reservadas 'actual/expect' no KMP
 
-Nos últimos artigos, focamos mais nos "bastidores" do KMP: paradigma, arquitetura do compilador, os source sets, ambiente de desenvolvimento, criação e execução de um projeto de exemplo, e o papel do Gradle nisso tudo.
+Nos últimos artigos, aprofundamos nos bastidores do Kotlin Multiplataforma: seu paradigma, a arquitetura do compilador, os source sets, o ambiente de desenvolvimento, a criação e execução de um projeto exemplo, e o papel fundamental do Gradle.
 
-Dessa vez, vamos começar iniciar nossa jornada para a superfície do KMP, entendendo sobre as palavras reservadas `actual` e `expect` e seu papel no compartilhamento do código.
+Agora, vamos emergir à superfície do KMP, desvendando as palavras reservadas `actual` e `expect` e como elas facilitam o compartilhamento de código.
 
 
 ---
 
-## Como o KMP possibilita o compartilhamento do código
+## Como o KMP Facilita o Compartilhamento de Código
 
-No artigo [🔗 Dominando os princípios dos Source Sets](https://dev.to/rsicarelli/kotlin-multiplataforma-101-dominando-os-principios-dos-source-sets-4pg), aprendemos que o KMP se utiliza da estrutura de source sets, e que todo source-set específico é descendente do source-set raíz `commonMain`. Todo código Kotlin dentro do source-set `commmonMain` está automagicamente disponível nos source-sets específicos como o `androidMain`, `appleMain`, etc.
+No artigo [🔗 Dominando os Princípios dos Source Sets](https://dev.to/rsicarelli/kotlin-multiplataforma-101-dominando-os-principios-dos-source-sets-4pg), aprendemos que o KMP usa a estrutura de source sets e que todo source-set específico é herdeiro do source-set raiz `commonMain`. Todo código Kotlin no `commonMain` fica automaticamente acessível nos source-sets específicos, como `androidMain`, `appleMain`, entre outros.
 
-O código Kotlin compartilhado no `commonMain` pode ser:
+O código no `commonMain` pode ser:
 
-1. Genérico o bastante que conseguimos resolver apenas com o Kotlin
-2. Compartilha certos comportamentos, porém a implementação difere devido à necessidade ou peculiaridade de cada plataforma
+1. Suficientemente genérico para ser resolvido apenas com Kotlin.
+2. Comportar-se de maneira consistente, mas com implementações que variam conforme as exigências de cada plataforma.
 
-> Lembrando que, independente do tipo de compartilhamento, o Kotlin sempre irá compilar para código nativo.
+> Lembre-se: o Kotlin sempre compilará para código nativo, independente do tipo de compartilhamento.
 
-Vamos entender melhor sobre cada um desse tipo.
+Vamos examinar mais detalhadamente cada tipo de compartilhamento.
 
 ### 1. Compartilhando código genérico utilizando 100% Kotlin
 
-Esse tipo de compartilhamento infere que não há nenhuma implementação específica que precisa ser feita no lado nativo, nos possibilitando utilizar apenas o Kotlin para satisfazer nosso requisito.
+Esse tipo de compartilhamento pressupõe que não existem implementações específicas de plataforma a serem feitas. Assim, podemos utilizar apenas Kotlin para atender aos nossos requisitos.
 
-No início do KMP, esse tipo de compartilhamento poderia não ser tão comum, já que a comunidade do código livre ainda estava se aquecendo e bibliotecas KMP estavam se formando. Atualmente, dado ao leque de código livre disponível para nosso uso, é o formato mais comum para compartilhamento de código.
+No início do KMP, essa abordagem não era comum, pois a comunidade open-source e as bibliotecas KMP ainda estavam em fase inicial. Atualmente, com o aumento de recursos open-source disponíveis, tornou-se o método mais frequente de compartilhamento de código.
+
+Vamos explorar alguns casos.
 
 #### 1.1 Constantes
 
-Constante é aquele tipo de informação que é estática e super específica. É um tipo de informação que, geralmente, tem um tipo primitivo (`String`, `Int`, `Boolean`, etc) e se repete para todas as plataformas.
+Constantes são informações estáticas e altamente específicas. Geralmente, possuem um tipo primitivo (`String`, `Int`, `Boolean`, etc.) e são consistentes em todas as plataformas.
 
 ```kotlin
 object AppConfig {
@@ -73,9 +75,9 @@ object AnalyticsEvents {
 }
 ```
 
-#### 1.2 Modelos: entidades, DTO, objetos de valor, respostas e requisições com um servidor
+#### 1.2 Modelos: entidades, DTOs, objetos de valor, respostas e requisições
 
-Modelos geralmente refletem informações mais específicas do negócio, e na grande maioria das vezes não requerem nenhuma implementação específica de plataforma.
+Modelos refletem aspectos mais específicos do negócio e raramente exigem implementações específicas de plataforma.
 
 Compartilhar modelos vai além da conveniência, mas também reforça uma linguagem de domínio único para todo o time de frontend (mobile, web e desktop). Para os praticantes do [Domain Driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design), essa prática é um artefato extremamente poderoso, já que dessa forma, o time terá um único dicionário do domínio.
 
@@ -92,12 +94,14 @@ data class User(
     }
 }
 ```
+
 ```kotlin
 data class UserDTO(
     val name: String,
     val email: String
 )
 ```
+
 ```kotlin
 data class Money(
     val amount: Double,
@@ -105,7 +109,7 @@ data class Money(
 )
 ```
 
-Graças ao [kotlin.serialization](https://github.com/Kotlin/kotlinx.serialization), não precisamos nos preocupar com implementações específicas de cada plataforma. Isso possibilita utilizar apenas código Kotlin para configurar a serialização e deserialização dos objetos conforme demonstrado a seguir.
+Com [kotlin.serialization](https://github.com/Kotlin/kotlinx.serialization), as implementações específicas de serialização são desnecessárias, permitindo o uso exclusivo de Kotlin:
 
 ```kotlin
 @Serializable
@@ -120,6 +124,7 @@ data class ApiResponse<T>(
     val status: Int
 )
 ```
+
 ```kotlin
 @Serializable
 data class LoginRequest(
@@ -165,12 +170,13 @@ class CheckBalanceForTransferUseCase(
 ```
 
 > No mundo do Kotlin/Android, o uso do padrão [UseCase](https://en.wikipedia.org/wiki/Use_case) se tornou uma prática comum e constantemente utilizada em projetos inner e open source.
-> 
+>
 > Existem diversas formas de criar UseCases no Kotlin, caso tenha curiosidade em aprender outras formas:
-> 
+>
 > [🔗 How To Avoid Use Cases Boilerplate in Android](https://betterprogramming.pub/how-to-avoid-use-cases-boilerplate-in-android-d0c9aa27ef27)
 
 #### 1.4 Testes unitários e de integração
+
 Uma das grandes vantagens do KMP é a possibilidade de ter seu código testado uma vez e reutilizada em todas as plataformas. Lembrando que, dentro do source-set `commonMain` ou `commonTest`, não podemos utilizar nenhuma biblioteca específica da plataforma. Ou seja, precisamos escrever testes numa infraestrutura multiplataforma.
 
 Para isso, temos o [🔗 kotlin.test](https://kotlinlang.org/api/latest/kotlin.test/), que oferece uma API parecida com o `JUnit4/5` com suporte a anotações de `@Test`, além de recursos para verificar o conteúdo por funções como `assertEquals` e `assertContains`.
@@ -221,18 +227,19 @@ class CheckBalanceForTransferUseCaseTest {
 }
 ```
 
-> Para aprender sobre anotações no Kotlin: [The Full Guide to ANNOTATIONS In Kotlin por Philipp Lackner](https://www.youtube.com/watch?v=qdnhQzVGywQ) 
+> Para aprender sobre anotações no Kotlin: [The Full Guide to ANNOTATIONS In Kotlin por Philipp Lackner](https://www.youtube.com/watch?v=qdnhQzVGywQ)
 >
 > Para aprender sobre o uso de "fakes" no Kotlin: [No Mocks Allowed por Marcello Galhardo](https://marcellogalhardo.dev/posts/no-mocks-allowed/)
 
-> ⏱️ Vamos aprender mais sobre testes no KMP em artigos futuros 
+> ⏱️ Vamos aprender mais sobre testes no KMP em artigos futuros
 
 #### Conclusão sobre compartilhando códigos 100% Kotlin
-Como você pode perceber, podemos utilizar apenas o Kotlin em diversos aspectos do nosso projeto. Essa capacidade do KMP é extremamente poderosa, já que sem muito esforço, podemos utilizar o maquinário do KMP para gerar compilações nativas do nosso código.
+
+Percebemos que podemos utilizar apenas o Kotlin em diversos aspectos do nosso projeto. Essa capacidade do KMP é extremamente poderosa, já que sem muito esforço, podemos utilizar o maquinário do KMP para gerar compilações nativas do nosso código.
 
 Mas, como pode perceber pelos exemplos, geralmente conseguimos utilizar essa abordagem e 100% Kotlin para implementações específicas do seu domínio (camada `domain`).
 
-E a camada de data/infra? Como podemos acessar recursos específicos e nativo da plataforma no KMP?
+Mas e quanto ao acesso a recursos específicos e nativos da plataforma no KMP?
 
 ### 2. Compartilhando código com implementações específicas de cada plataforma
 Aprendemos que cada plataforma tem uma forma específica de acessar recursos exclusivos do sistema operacional como internet, bluetooth, disco, notificações, imagens, etc. Esses recursos, apesar de na teoria terem o mesmo conceito, diferem nas suas implementações.
@@ -244,11 +251,10 @@ A palavra reservada `expect` informa o compilador do Kotlin para ele pode "esper
 
 Só é possível utilizar o `expect` no source set comum (`commonMain`): o source set comum declara, e os source sets específicos implementam.
 
-Ao declarar um componente com a palavra `expect`:
-1. Você tem a obrigação de declarar a implementação (`actual`) em cada source-set específico. Inclusive, ao declarar um `expect` qualquer, a IDE já alega um erro informando que precisamos declarar a versão `actual` de cada plataforma:
-![Erro ao declarar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-actual-kotlin.png?raw=true)
-2. Não é possível declarar a implementação ou atribuir um valor para seu componente. Por exemplo, ao declarar uma variável com `expect`, não é possível assinar um valor:
-![Erro ao inicializar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-no-initializer.png?raw=true)
+| Regra                                                                                                                                                                                                                                                                                                   | Exemplo                                                                                                                              |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| Ao declarar um componente com a palavra `expect`, você tem a obrigação <br> de declarar  a implementação (`actual`) em cada source-set específico. <br> Inclusive, ao declarar um `expect` qualquer, a IDE já sinaliza um erro informando que precisamos declarar a versão `actual` de cada plataforma. | ![Erro ao declarar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-actual-kotlin.png?raw=true)     |
+| Não é possível declarar a implementação ou atribuir um valor para seu componente. Por exemplo, ao declarar uma variável com `expect`, não é possível assinar um valor.                                                                                                                                  | ![Erro ao inicializar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-no-initializer.png?raw=true) |
 
 Agora que entendemos a palavra reservada `expect`, vamos aprender mais sobre sua seu outro par: o `actual`
 
@@ -260,13 +266,8 @@ Essa palavra é reservada para os source-sets específicos. Ou seja, não é pos
 
 O compilador do Kotlin garante que:
 
-- Toda declaração esperada no source-set comum tem uma declaração real correspondente em cada source-set específico da plataforma.
-  ![Demo em todas as plataformas](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/fullfilling-expect-actual.gif?raw=true)
-
-- Toda declaração real compartilha o mesmo pacote que a declaração esperada correspondente, como `org.mygroup.myapp.MyType`.
-![Error: não pode ter pacotes diferentes](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-cannot-have-different-packages.gif?raw=true)
-
-
-
-  
+| Regra                                                                                                                                                                                                                                                   | Imagem                                                                                                                                                                                                                                                                                                                                            |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Toda declaração esperada no source-set comum tem uma declaração real correspondente em cada source-set específico da plataforma.                                                                                                                        | ![Demo em todas as plataformas](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/fullfilling-expect-actual.gif?raw=true)                                                                                                                                                                                                              |
+| Toda declaração real compartilha o mesmo pacote que a declaração <br> esperada correspondente, como `br.com.rsicarelli.example`. <br><br> A imagem ao lado mostra o erro relacionado a tentar refatorar declarações que não compartilham o mesmo pacote | ![Error: não pode ter pacotes diferentes](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-cannot-have-different-packages.gif?raw=true) <br> <br>_"Não é Possível Realizar Refatoração. <br> Esta refatoração moverá a declaração selecionada sem seus correspondentes esperados/reais que podem levar a erros de compilação."_ |
 
