@@ -1,1 +1,1 @@
-expect const val ExpectString: String
+expect val ExpectString: String
