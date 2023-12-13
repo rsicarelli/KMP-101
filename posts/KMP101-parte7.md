@@ -1,9 +1,22 @@
-## Explorando as palavras reservadas 'actual/expect' no KMP
+## Como compartilhar código no KMP: conectando plataformas com expect e actual
+
+> * [Como compartilhar código no KMP: conectando plataformas com expect e actual](#como-compartilhar-código-no-kmp-conectando-plataformas-com-expect-e-actual)
+> * [Como o KMP Facilita o Compartilhamento de Código](#como-o-kmp-facilita-o-compartilhamento-de-código)
+>   * [1. Compartilhando código genérico utilizando 100% Kotlin](#1-compartilhando-código-genérico-utilizando-100-kotlin)
+>     * [1.1 Constantes](#11-constantes)
+>     * [1.2 Modelos: entidades, DTOs, objetos de valor, respostas e requisições](#12-modelos-entidades-dtos-objetos-de-valor-respostas-e-requisições)
+>     * [1.3 Lógica de negócio](#13-lógica-de-negócio)
+>     * [1.4 Testes unitários e de integração](#14-testes-unitários-e-de-integração)
+>     * [Conclusão sobre compartilhando códigos 100% Kotlin](#conclusão-sobre-compartilhando-códigos-100-kotlin)
+>   * [2. Compartilhando código com implementações específicas de cada plataforma](#2-compartilhando-código-com-implementações-específicas-de-cada-plataforma)
+>     * [2.1 A palavra reservada `expect` no KMP](#21-a-palavra-reservada-expect-no-kmp)
+>     * [2.2 A palavra reservada `actual` no KMP](#22-a-palavra-reservada-actual-no-kmp)
+> * [Conclusões](#conclusões)
+> * [Feedbacks](#feedbacks)
 
 Nos últimos artigos, aprofundamos nos bastidores do Kotlin Multiplataforma: seu paradigma, a arquitetura do compilador, os source sets, o ambiente de desenvolvimento, a criação e execução de um projeto exemplo, e o papel fundamental do Gradle.
 
 Agora, vamos emergir à superfície do KMP, desvendando as palavras reservadas `actual` e `expect` e como elas facilitam o compartilhamento de código.
-
 
 ---
 
@@ -251,10 +264,10 @@ A palavra reservada `expect` informa o compilador do Kotlin para ele pode "esper
 
 Só é possível utilizar o `expect` no source set comum (`commonMain`): o source set comum declara, e os source sets específicos implementam.
 
-| Regra                                                                                                                                                                                                                                                                                                   | Exemplo                                                                                                                              |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Ao declarar um componente com a palavra `expect`, você tem a obrigação <br> de declarar  a implementação (`actual`) em cada source-set específico. <br> Inclusive, ao declarar um `expect` qualquer, a IDE já sinaliza um erro informando que precisamos declarar a versão `actual` de cada plataforma. | ![Erro ao declarar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-actual-kotlin.png?raw=true)     |
-| Não é possível declarar a implementação ou atribuir um valor para seu componente. Por exemplo, ao declarar uma variável com `expect`, não é possível assinar um valor.                                                                                                                                  | ![Erro ao inicializar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-no-initializer.png?raw=true) |
+- Ao declarar um componente com a palavra `expect`, você tem a obrigação de declarar a implementação (`actual`) em cada source-set específico. Inclusive, ao declarar um `expect` qualquer, a IDE já sinaliza um erro informando que precisamos declarar a versão `actual` de cada plataforma. 
+ ![Erro ao declarar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-actual-kotlin.png?raw=true) 
+- Não é possível declarar a implementação ou atribuir um valor para seu componente. Por exemplo, ao declarar uma variável com `expect`, não é possível assinar um valor 
+ ![Erro ao inicializar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-no-initializer.png?raw=true) 
 
 Agora que entendemos a palavra reservada `expect`, vamos aprender mais sobre sua seu outro par: o `actual`
 
@@ -266,8 +279,40 @@ Essa palavra é reservada para os source-sets específicos. Ou seja, não é pos
 
 O compilador do Kotlin garante que:
 
-| Regra                                                                                                                                                                                                                                                   | Imagem                                                                                                                                                                                                                                                                                                                                            |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Toda declaração esperada no source-set comum tem uma declaração real correspondente em cada source-set específico da plataforma.                                                                                                                        | ![Demo em todas as plataformas](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/fullfilling-expect-actual.gif?raw=true)                                                                                                                                                                                                              |
-| Toda declaração real compartilha o mesmo pacote que a declaração <br> esperada correspondente, como `br.com.rsicarelli.example`. <br><br> A imagem ao lado mostra o erro relacionado a tentar refatorar declarações que não compartilham o mesmo pacote | ![Error: não pode ter pacotes diferentes](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-cannot-have-different-packages.gif?raw=true) <br> <br>_"Não é Possível Realizar Refatoração. <br> Esta refatoração moverá a declaração selecionada sem seus correspondentes esperados/reais que podem levar a erros de compilação."_ |
+- Toda declaração esperada no source-set comum tem uma declaração real correspondente em cada source-set específico da plataforma.
 
+ ![Demo em todas as plataformas](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/fullfilling-expect-actual.gif?raw=true)                                                                                                                                                                                                             
+- Toda declaração real compartilha o mesmo pacote que a declaração esperada correspondente, como `br.com.rsicarelli.example`. A imagem a seguir mostra o erro relacionado a tentar refatorar declarações que não compartilham o mesmo pacote:
+
+ ![Error: não pode ter pacotes diferentes](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-cannot-have-different-packages.gif?raw=true) <br> _"Não é Possível Realizar Refatoração. <br> Esta refatoração moverá a declaração selecionada sem seus correspondentes esperados/reais que podem levar a erros de compilação."_
+
+## Conclusões
+
+Neste artigo, desbravamos as funcionalidades das palavras reservadas `actual` e `expect`, que são peças-chave para a portabilidade do código entre diferentes plataformas. Compreendemos como essas palavras reservadas orquestram a harmonia entre o código comum e as especificidades de cada plataforma, assegurando a coesão e a integridade do nosso projeto multiplataforma.
+
+No próximo artigo, vamos nos aprofundar no ecossistema das bibliotecas KMP. Aprenderemos como navegar por este território, escolher as bibliotecas adequadas para as nossas necessidades, entender seus detalhes e peculiaridades, e como elas podem impulsionar ainda mais nosso trabalho no desenvolvimento multiplataforma.
+
+Até a próxima!
+
+---
+
+## Feedbacks
+
+🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
+
+Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
+
+Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
+
+---
+
+> 🤖 Artigo foi escrito com o auxílio do ChatGPT 4, utilizando o plugin Web.
+>
+> As fontes e o conteúdo são revisados para garantir a relevância das informações fornecidas, assim como as fontes utilizadas em cada prompt.
+>
+> No entanto, caso encontre alguma informação incorreta ou acredite que algum crédito está faltando, por favor, entre em contato!
+
+---
+
+> Referências
+> - [Rules for expected and actual declarations](https://kotlinlang.org/docs/multiplatform-expect-actual.html)
