@@ -1,16 +1,15 @@
 ## Como compartilhar código no KMP: conectando plataformas com expect e actual
 
-> * [Como compartilhar código no KMP: conectando plataformas com expect e actual](#como-compartilhar-código-no-kmp-conectando-plataformas-com-expect-e-actual)
 > * [Como o KMP Facilita o Compartilhamento de Código](#como-o-kmp-facilita-o-compartilhamento-de-código)
 >   * [1. Compartilhando código genérico utilizando 100% Kotlin](#1-compartilhando-código-genérico-utilizando-100-kotlin)
->     * [1.1 Constantes](#11-constantes)
->     * [1.2 Modelos: entidades, DTOs, objetos de valor, respostas e requisições](#12-modelos-entidades-dtos-objetos-de-valor-respostas-e-requisições)
->     * [1.3 Lógica de negócio](#13-lógica-de-negócio)
->     * [1.4 Testes unitários e de integração](#14-testes-unitários-e-de-integração)
->     * [Conclusão sobre compartilhando códigos 100% Kotlin](#conclusão-sobre-compartilhando-códigos-100-kotlin)
+>      * [1.1 Constantes](#11-constantes)
+>      * [1.2 Modelos: entidades, DTOs, objetos de valor, respostas e requisições](#12-modelos-entidades-dtos-objetos-de-valor-respostas-e-requisições)
+>      * [1.3 Lógica de negócio](#13-lógica-de-negócio)
+>      * [1.4 Testes unitários e de integração](#14-testes-unitários-e-de-integração)
+>      * [Conclusão sobre compartilhando códigos 100% Kotlin](#conclusão-sobre-compartilhando-códigos-100-kotlin)
 >   * [2. Compartilhando código com implementações específicas de cada plataforma](#2-compartilhando-código-com-implementações-específicas-de-cada-plataforma)
->     * [2.1 A palavra reservada `expect` no KMP](#21-a-palavra-reservada-expect-no-kmp)
->     * [2.2 A palavra reservada `actual` no KMP](#22-a-palavra-reservada-actual-no-kmp)
+>      * [2.1 A palavra reservada `expect` no KMP](#21-a-palavra-reservada-expect-no-kmp)
+>      * [2.2 A palavra reservada `actual` no KMP](#22-a-palavra-reservada-actual-no-kmp)
 > * [Conclusões](#conclusões)
 > * [Feedbacks](#feedbacks)
 
