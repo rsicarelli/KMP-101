@@ -240,16 +240,28 @@ Aprendemos que cada plataforma tem uma forma específica de acessar recursos exc
 Para resolver esse desafio, o KMP introduz [duas novas palavras reservadas](https://kotlinlang.org/docs/multiplatform-expect-actual.html): `expect` (o contrato) e `actual` (a implementação).
 
 #### 2.1 A palavra reservada `expect` no KMP
-A palavra `expect` informa o compilador do Kotlin para ele pode "esperar" ou "exigir" uma implementação específica de cada plataforma para aquele componente específico durante a compilação de um source-set específico. Podemos utilizar a palavra `expect` para funções, propriedades, classes, objetos, interfaces, enumerações ou anotações.
+A palavra reservada `expect` informa o compilador do Kotlin para ele pode "esperar" ou "exigir" uma implementação específica de cada plataforma para aquele componente específico durante a compilação de um source-set específico. Podemos utilizar a palavra `expect` para funções, propriedades, classes, objetos, interfaces, enumerações ou anotações.
 
 Só é possível utilizar o `expect` no source set comum (`commonMain`): o source set comum declara, e os source sets específicos implementam.
 
 Ao declarar um componente com a palavra `expect`:
 1. Você tem a obrigação de declarar a implementação (`actual`) em cada source-set específico. Inclusive, ao declarar um `expect` qualquer, a IDE já alega um erro informando que precisamos declarar a versão `actual` de cada plataforma:
 ![Erro ao declarar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-actual-kotlin.png?raw=true)
-2. Não é possível declarar a implementação ou atribuir um valor para seu componente. Por exemplo, ao declarar uma variável com `expect`, não é possível assinar um valor
+2. Não é possível declarar a implementação ou atribuir um valor para seu componente. Por exemplo, ao declarar uma variável com `expect`, não é possível assinar um valor:
 ![Erro ao inicializar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-no-initializer.png?raw=true)
 
+Agora que entendemos a palavra reservada `expect`, vamos aprender mais sobre sua seu outro par: o `actual`
+
+#### 2.2 A palavra reservada `actual` no KMP
+
+A palavra reservada `actual` satisfaz o contrato do `expect`, informando o compilador que aquela declaração é a implementação "atual" ou "real" do source-set específico. Durante a compilação, o Kotlin vai tentar combinar todo `actual` com seu `expect` de origem no source-set comum.
+
+Essa palavra é reservada para os source-sets específicos. Ou seja, não é possível utilizar no source-set comum `commonMain`.
+
+O compilador do Kotlin garante que:
+
+- Toda declaração esperada no source-set comum tem uma declaração real correspondente em cada source-set específico da plataforma.
+- Toda declaração real compartilha o mesmo pacote que a declaração esperada correspondente, como `org.mygroup.myapp.MyType`. 
 
 
 

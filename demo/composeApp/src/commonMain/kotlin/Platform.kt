@@ -4,5 +4,3 @@ interface Platform {
 
 expect fun getPlatform(): Platform
 
-
-expect const val ExpectString: String = ""
