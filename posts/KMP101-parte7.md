@@ -245,10 +245,10 @@ A palavra `expect` informa o compilador do Kotlin para ele pode "esperar" ou "ex
 Só é possível utilizar o `expect` no source set comum (`commonMain`): o source set comum declara, e os source sets específicos implementam.
 
 Ao declarar um componente com a palavra `expect`:
-1. Você tem a obrigação de declarar a implementação (`actual`) em cada source-set específico. Inclusive, ao declarar um `expect` qualquer, a IDE já informa um erro informando que precisamos declarar a versão `actual` de cada plataforma:
+1. Você tem a obrigação de declarar a implementação (`actual`) em cada source-set específico. Inclusive, ao declarar um `expect` qualquer, a IDE já alega um erro informando que precisamos declarar a versão `actual` de cada plataforma:
 ![Erro ao declarar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-actual-kotlin.png?raw=true)
-2. 
-
+2. Não é possível declarar a implementação ou atribuir um valor para seu componente. Por exemplo, ao declarar uma variável com `expect`, não é possível assinar um valor
+![Erro ao inicializar expect](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-expect-no-initializer.png?raw=true)
 
 
 

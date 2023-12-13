@@ -5,3 +5,5 @@ class AndroidPlatform : Platform {
 }
 
 actual fun getPlatform(): Platform = AndroidPlatform()
+actual val ExpectString: String
+    get() = TODO("Not yet implemented")
