@@ -263,7 +263,8 @@ O compilador do Kotlin garante que:
 - Toda declaração esperada no source-set comum tem uma declaração real correspondente em cada source-set específico da plataforma.
   ![Demo em todas as plataformas](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/fullfilling-expect-actual.gif?raw=true)
 
-- Toda declaração real compartilha o mesmo pacote que a declaração esperada correspondente, como `org.mygroup.myapp.MyType`. 
+- Toda declaração real compartilha o mesmo pacote que a declaração esperada correspondente, como `org.mygroup.myapp.MyType`.
+![Error: não pode ter pacotes diferentes](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/error-cannot-have-different-packages.gif?raw=true)
 
 
 
