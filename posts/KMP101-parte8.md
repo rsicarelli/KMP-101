@@ -6,7 +6,7 @@ Nesse artigo, vamos explorar sobre a utilização de bibliotecas de código livr
 
 ---
 
-## Código Kotlin vs Código Nativo
+## Depêndencias e os Source Sets
 Aprendemos que o Kotlin se utiliza de uma estrutura de Source Sets para orquestrar as diferentes compilações.
 
 Cada source set do Kotlin, seja o `common` ou específicos `android`, `native/ios`, `desktop`, `js`, possuem flexibilidade para declarar apenas as depêndencias utilizadas naquele source set.
@@ -17,10 +17,10 @@ commonMain.dependencies {
     // compartilhado por todos os source sets 
 }
 androidMain.dependencies {
-    // common + Android }
+    // common + Android 
 }
 appleMain.dependencies {
-    // common + família Apple }
+    // common + família Apple
 }
 iosMain.dependencies {
     // common + apple + iOS 
@@ -36,7 +36,6 @@ No iOS, você ganha acesso ao DarwinOS e ao SDK da Apple como `platform.UiKit` c
 componentes do `platform.Foundation` como `NSBundle`, `NSFileManager`, `NSError`, etc.  
 
 O código a seguir, implementamos um Logger em KMP de forma totalmente nativa e sem depêndencias externas. Ou seja, apenas com os SDKs nativos:
-
 ```kotlin
 commonMain.dependencies {
     // vazio 
@@ -50,15 +49,17 @@ appleMain.dependencies {
 ```
 ```kotlin
 // src/commonMain/Logger.kt
-public interface Logger {
-    public fun e(message: String, error: Throwable)
+
+interface Logger {
+    fun e(message: String, error: Throwable)
 }
 ```
 ```kotlin
 // src/androidMain/Logger.android.kt
-import android.util.Log
 
-public class AndroidLogger : Logger {
+import android.util.Log
+ 
+class AndroidLogger : Logger {
     override fun e(message: String, error: Throwable) {
         Log.e("TAG", message)
         error.printStackTrace()
@@ -67,13 +68,14 @@ public class AndroidLogger : Logger {
 ```
 ```kotlin
 // src/appleMain/Exemplo.apple.kt
+
 import kotlinx.cinterop.ptr
 import platform.darwin.OS_LOG_DEFAULT
 import platform.darwin.OS_LOG_TYPE_ERROR
 import platform.darwin.__dso_handle
 import platform.darwin._os_log_internal
 
-public class DarwinLogger : Logger {
+class DarwinLogger : Logger {
     override fun e(message: String, error: Throwable) {
         _os_log_internal(
             __dso_handle.ptr,
@@ -88,34 +90,21 @@ public class DarwinLogger : Logger {
 ```
 
 ## Entendendo como as depêndencias no KMP funcionam
-Vamos partir do `build.gradle.kts` a seguir, onde aplicamos o (https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html)[`ktor-client`] e declaramos as depêndencias.
+Vamos partir do `build.gradle.kts` a seguir, onde aplicamos o [ktor-client](`https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html`) e declaramos as depêndencias.
 ```kotlin
 kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
-
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64(),
-        watchosArm32(),
-        watchosArm64(),
-        watchosSimulatorArm64(),
-        macosArm64(),
-        tvosArm64(),
-    ).forEach {
-        it.binaries.framework {
-            baseName = "shared"
-            isStatic = true
-        }
-    }
-
+    androidTarget()
+    
     jvm("desktop")
+    
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    watchosArm32()
+    watchosArm64()
+    watchosSimulatorArm64()
+    macosArm64()
+    tvosArm64()
 
     sourceSets {
         commonMain.dependencies {
@@ -137,7 +126,7 @@ A imagem a seguir representa apenas uma parte dessas depêndencias:
 
 ![Dependencia com todos os source sets](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-all-targets-imported.png?raw=true)
 
-Essas depêndencias são regidas baseado nos `targets` que você declara no seu projeto.
+Ao declarar os targets e importar uma depêndencia no `commonMain` essas depêndencias são importadas no projeto.
 
 Se removêssemos alguns targets do nosso `build.gradle.kts` e sincronizar o projeto, observamos que as depêndencias específicas de cada source set sumiram:
 ```kotlin
@@ -153,24 +142,13 @@ tvosArm64()
 Ou seja, cada target declarado espera que uma depêndencia exista, seja ela publicada em algum artefato como Maven, ou depêndencia de um módulo interno.
 
 ### Relação entre depêndencias externas e os targets do módulo
-Para utilizar uma depêndencia em um source set comum ou específico, é obrigatório que essa depêndencia seja compilada para o target em específico.
+Para utilizar uma depêndencia um source set, é obrigatório que essa depêndencia exista para o target em específico.
 
-Por exemplo, para você declarar depêndencias no `commonMain`, um artefato (interno ou externo) específico para o common main exista.
+Por exemplo, para você declarar depêndencias no `commonMain`, um artefato (interno ou externo) específico para o common main deve existir.
 
 O mesmo se aplica para os outros targets. Por exemplo, se você declara o `watchosArm32()` como target, e seu módulo interno ou biblioteca não possuem esses alvos declarados, você recebe um erro.
 
-### Analisando se a depêndencia é apta para o uso no KMP
-Descobrir se uma biblioteca open-source é compatível com sua configuração específica de targets pode não ser tão fácil, 
-já que esse tipo de informação nem sempre está disponível no README ou documentação do projeto. 
-
-Vamos utilizar alguns exemplos de bibliotecas de código livre, e analisar quais targets elas suportam
-
-#### (kotlinx-coroutines-core/build.gradle)[https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/build.gradle]
-Logo de cara nesse arquivo já fica claro quais targets o coroutines suporta:
-
-![Dependencia com alguns dos source sets](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-kotlinx-coroutines-doc.png?raw=true)
-
-
+Vamos entender melhor as peculiaridades das depêndencias de cada Source Set
 
 ### Common
 A `commonMain` funciona de forma singular em relação aos outros Source Sets. No momento da compilação, ela funciona 
@@ -181,9 +159,9 @@ Estes metadados são então usados pelos backends do Kotlin (Kotlin/JVM, Kotlin/
 específica para gerar o código executável correspondente para cada plataforma.  
 
 #### Dissecando a depêndencia `commonMain`
-Ao explorar o conteúdo dessa depêndencia, notamos uma extensão especial do KMP: a `klib`. 
+Ao explorar o conteúdo dessa depêndencia, notamos uma extensão especial do KMP: a `.klib`. 
 
-![Dependencias Common Kotlinx Serialization](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-common-dependency.png?raw=true)
+![Dependencia do ktor client common](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-common-klib.png?raw=true)
 
 O arquivo `.klib` no KMP é uma biblioteca que contém código compartilhável entre diferentes plataformas. 
 No contexto do `commonMain`, o `.klib` funciona como uma coleção de código-fonte e recursos que podem ser compilados 
