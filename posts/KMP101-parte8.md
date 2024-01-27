@@ -1,15 +1,15 @@
 ## Aprendendo sobre como interpretar e utilizar depêndencias no KMP
 
-Nos últimos artigos, criamos uma fundação de conhecimento sobre o Kotlin Multiplataforma e compreendemos como o Kotlin compila para múltiplas plataformas. 
+Nos artigos anteriores, estabelecemos uma base sobre o Kotlin Multiplatform (KMP) e como ele compila para múltiplas plataformas. 
 
-Nesse artigo, vamos explorar sobre a utilização de bibliotecas de código livre (open-source), como entender se é possível utilizar no seu projeto, e, finalmente, as utilizando.
+Neste artigo, vamos explorar o uso de bibliotecas _open-source_, compreender sua aplicabilidade em nossos projetos e, por fim, sua implementação.
 
 ---
 
 ## Depêndencias e os Source Sets
-Aprendemos que o Kotlin se utiliza de uma estrutura de Source Sets para orquestrar as diferentes compilações.
+Descobrimos que o Kotlin utiliza uma estrutura de _source sets_ para gerenciar as compilações distintas.
 
-Cada source set do Kotlin, seja o `common` ou específicos `android`, `native/ios`, `desktop`, `js`, possuem flexibilidade para declarar apenas as depêndencias utilizadas naquele source set.
+Cada _source set_ no Kotlin, seja `commonMain` ou específicos como `androidMain`, `native/ios`, `desktop`, `js`, pode declarar dependências usadas exclusivamente nesse contexto.
 
 Exemplo:
 ```kotlin
@@ -28,25 +28,13 @@ iosMain.dependencies {
 ```
 
 ### Source Set é um ambiente único
-Cada Source Set do Kotlin se torna um ambiente isolado dos outros Source Sets. 
+Cada _source set_ do Kotlin se torna um ambiente isolado, com acesso a APIs e SDKs específicos da plataforma. 
 
-Por exemplo, dentro do Source Set do Android você tem acesso ao Android SDK.
+Por exemplo, no _source set_ do Android, você tem acesso ao Android SDK; no iOS, ao DarwinOS e ao SDK da Apple como 
+`platform.UiKit` e componentes do `platform.Foundation`.
 
-No iOS, você ganha acesso ao DarwinOS e ao SDK da Apple como `platform.UiKit` como `UIViewController`, 
-componentes do `platform.Foundation` como `NSBundle`, `NSFileManager`, `NSError`, etc.  
+Implementamos abaixo um Logger em KMP de forma totalmente nativa, sem dependências externas, usando apenas os SDKs nativos:
 
-O código a seguir, implementamos um Logger em KMP de forma totalmente nativa e sem depêndencias externas. Ou seja, apenas com os SDKs nativos:
-```kotlin
-commonMain.dependencies {
-    // vazio 
-}
-androidMain.dependencies {
-    // vazio
-}
-appleMain.dependencies {
-    // vazio
-}
-```
 ```kotlin
 // src/commonMain/Logger.kt
 
@@ -90,7 +78,9 @@ class DarwinLogger : Logger {
 ```
 
 ## Entendendo como as depêndencias no KMP funcionam
-Vamos partir do `build.gradle.kts` a seguir, onde aplicamos o [ktor-client](`https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html`) e declaramos as depêndencias.
+Considere o `build.gradle.kts` com o [ktor-client](https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html) 
+aplicado e dependências declaradas. Ao sincronizar o projeto, dependências são incluídas conforme os _targets_ especificados.
+
 ```kotlin
 kotlin {
     androidTarget()
@@ -114,15 +104,13 @@ kotlin {
 }
 ```
 
-Ao sincronizar o projeto, observamos que uma série de depêndencias foram incluídas.
-
 A imagem a seguir representa apenas uma parte dessas depêndencias:
 
 ![Dependencia com todos os source sets](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-all-targets-imported.png?raw=true)
 
-Ao declarar os targets e importar uma depêndencia no `commonMain` essas depêndencias são importadas no projeto.
+Ao declarar os _targets_ e importar uma depêndencia no `commonMain` todas essas depêndencias são importadas no projeto.
 
-Se removêssemos alguns targets do nosso `build.gradle.kts` e sincronizar o projeto, observamos que as depêndencias específicas de cada source set sumiram:
+Se removêssemos alguns _targets_ do nosso `build.gradle.kts` e sincronizar o projeto, observamos que as depêndencias específicas de cada source set sumiram:
 ```kotlin
 // removidos:
 watchosArm32()
@@ -146,11 +134,11 @@ Vamos entender melhor as peculiaridades das depêndencias de cada Source Set
 
 ### Common
 A `commonMain` funciona de forma singular em relação aos outros Source Sets. No momento da compilação, ela funciona 
-apenas como `metadata` (termo muito utilizado internamente para a `commonMain`), ou seja, não é compilado diretamente
-em código executável para uma plataforma específica, mas sim em um formato intermediário que contém metadados. 
+apenas como `metadata`, ou seja, não é compilado diretamente em código executável para uma plataforma específica, 
+mas sim em um formato intermediário que contém metadados. 
 
-Estes metadados são então usados pelos backends do Kotlin (Kotlin/JVM, Kotlin/Native, Kotlin/JS, Kotlin/WASM) 
-específica para gerar o código executável correspondente para cada plataforma.  
+Estes metadados são então usados pelos backends do Kotlin específica para gerar o código executável correspondente 
+para cada plataforma.  
 
 #### Dissecando a depêndencia `commonMain`
 Ao explorar o conteúdo dessa depêndencia, notamos uma extensão especial do KMP: a `.klib`. 
@@ -171,19 +159,9 @@ bibliotecas `klib` do Kotlin/Native, especialmente em conjunto com a ferramenta 
 Esse formato contém metadados e informações que o compilador do Kotlin usa para compilar e interligar bibliotecas nativas.
 Os arquivos `.knm` são detalhes de implementação para facilitar a interoperabilidade e a criação de bibliotecas no contexto do Kotlin/Native.
 
-O último arquivo é o `manifest`:
-```
-unique_name=ktor-client-core_commonMain
-compiler_version=1.8.22
-abi_version=1.7.0
-metadata_version=1.4.1
-```
-
-Esse arquivo contém metadados sobre a própria biblioteca. Isso inclui informações como a versão da biblioteca, 
+O último arquivo é o `manifest`. Esse arquivo contém metadados sobre a própria biblioteca. Isso inclui informações como a versão da biblioteca, 
 dependências necessárias, e outros metadados usados pelo sistema de build e pelo compilador para entender como integrar 
-e usar a biblioteca no projeto. 
-
-Cada `.klib` tem um manifesto que descreve seu conteúdo e como ele deve ser tratado durante a compilação e o link de execução.
+e usar a biblioteca no projeto. Cada `.klib` tem um manifesto que descreve seu conteúdo e como ele deve ser tratado durante a compilação e o link de execução.
 
 ### Dissecando a depêndencia do iOS
 Dependendo de quais plataforma Apple você inclui no seu Source Set, uma depêndencia diferente é importada no projeto.
@@ -191,8 +169,8 @@ Dependendo de quais plataforma Apple você inclui no seu Source Set, uma depênd
 Note que, além dos Source Sets declarados no nosso `build.gradle.kts`, também existe a depêndencia `posix`. 
 
 A dependência "posix" em um contexto de Kotlin Multiplatform para iOS se refere a interfaces de programação de aplicativos
-para sistemas operacionais compatíveis com POSIX (Portable Operating System Interface), um conjunto de padrões especificados
-pela IEEE para manter a compatibilidade entre sistemas operacionais.
+para sistemas operacionais compatíveis com POSIX (Portable Operating System Interface), 
+
 No caso de iOS, `posixMain` indica que essa biblioteca está usando APIs POSIX, comuns em sistemas baseados em Unix, como o iOS.
 
 ![Dependencia do iOS no projeto](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-ios-imports.png?raw=true)
@@ -216,9 +194,7 @@ contém código intermediário utilizado pelo compilador LLVM.
 ![Dependencia do iosarm64 no projeto](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-iosarm64-klib.png?raw=true)
 
 ### Dissecando a depêndencia do JS
-Já que estamos aqui, vamos dar uma olhada em como fica a depêndencia do JS no projeto.
-
-Note que ainda é um arquivo `.klib`, mas com um `package.json` declarado.
+Para o _target_ JS, ainda temos um arquivo `.klib`, mas acompanhado de um `package.json`.
 
 ![Dependencia do JS](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-js-include-klib.png?raw=true)
 
@@ -232,30 +208,30 @@ Note que essa depêndencia é utilizada tanto pelo Source Set `android` quanto a
 ![Dependencia do Android e JVM](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-jvm-jar.png?raw=true)
 
 ### Como descobri se uma biblioteca open-source é compatível com meu target?
+Para verificar a compatibilidade de uma biblioteca _open-source_ com um _target_, é recomendável consultar onde a 
+biblioteca está hospedada e quais artefatos estão disponíveis. Você também pode analisar o `build.gradle.kts` da biblioteca,
+e verificar quais _targets_ aquela biblioteca compila. 
 
-O jeito mais fácil é verificar onde essa biblioteca está hospedada, e verificar quais artefatos estão disponíveis.
-
-No caso do `ktor-client-core`, ao acessar o Maven Central e pesquisar pelo grupo, encontramos uma lista de artefatos para cada source set.
+No caso do `ktor-client-core`, ao acessar o [Maven Central](https://mvnrepository.com/search?q=ktor-client-core) e pesquisar pelo grupo, encontramos uma lista de artefatos para cada source set.
 
 ![Demo em todas as plataformas](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-maven-ktor-ezgif.com-video-to-gif-converter.gif?raw=true)
 
 ## Depêndencias de módulos internos
-Agora que aprendemos sobre como são as depêndencias externas do Kotlin, chegou a hora de falarmos sobre as depêndencias 
-internas, ou seja, de módulos diferentes.
+Para módulos internos, é essencial que o módulo consumidor tenha _targets_ compatíveis com o módulo consumido.
 
-Vamos supor que o módulo `:bar` quer consumir o módulo `:foo`. Note que o módulo `:foo` possuí os mesmos targets do `:bar` + o `js()`.
+Vamos supor que o módulo `:shared1` quer consumir o módulo `:shared2`. Note que o módulo `:shared2` possuí os mesmos targets do `:shared1` + o `js()`.
 
-Nesse caso, o `:bar` consegue consumir o `:foo` já que o `:foo` compila para o target que o `:bar` precisa.
+Nesse caso, o `:shared1` consegue consumir o `:shared2` já que o `:shared2` compila para o target que o `:shared1` precisa.
 
-Agora, o contrário já não é possível: o módulo `:foo` espera um target `js()` que o módulo `:bar` não oferece! Nesse caso, há um erro de compilação.
+Agora, o contrário já não é possível: o módulo `:shared2` espera um target `js()` que o módulo `:shared1` não oferece! Nesse caso, há um erro de compilação.
 ```kotlin
-// :bar build.gradle.kts
+// :shared1 build.gradle.kts
 kotlin {
     androidTarget()
     iosARM64()
 }
 
-// :foo build.gradle.kts
+// :shared2 build.gradle.kts
 kotlin {
     androidTarget()
     iosARM64()
@@ -263,12 +239,25 @@ kotlin {
 }
 ```
 
-
-
 ## Conclusões
+Compreender o funcionamento das dependências internas e externas no Kotlin Multiplatform (KMP) é crucial, pois isso nos 
+ajuda a selecionar bibliotecas que atendam às necessidades de nossos projetos.
 
+Neste artigo, exploramos mais profundamente as "entranhas" dessas dependências e como a declaração dos _targets_ em 
+nossa aplicação influencia as dependências incluídas no projeto.
 
-Até a próxima!
+Além disso, aprofundamo-nos nos conceitos de `.klib` e `.knm`. Embora não afetem nosso dia a dia de desenvolvimento de 
+forma significativa, essas peças são essenciais para entender como o KMP realiza sua "mágica".
+
+## Fim da série KMP101!
+É com grande satisfação que concluímos esta fundação no KMP! 
+
+Espero que o conhecimento adquirido sirva como um trampolim para que você possa explorar e navegar pelo mundo do KMP com confiança.
+
+Fique atento para a série KMP102, onde mergulharemos ainda mais em implementações, arquitetura, testes, 
+interoperabilidade com Swift e outras linguagens, e muito mais!
+
+Um abraço e até a próxima!
 
 ---
 
