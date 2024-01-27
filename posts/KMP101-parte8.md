@@ -167,7 +167,12 @@ O arquivo `.klib` no KMP é uma biblioteca que contém código compartilhável e
 No contexto do `commonMain`, o `.klib` funciona como uma coleção de código-fonte e recursos que podem ser compilados 
 para várias plataformas utilizando os diferentes backends.
 
-Além do `.klib`, vamos um formato `.knm`. O formato de arquivo `.knm` é um formato binário utilizado internamente pelas 
+Se expandirmos a pasta `linkdata`, vamos nos deparar com outro formato de arquivo especial do KMP: `.knm`
+
+![Dependencia do ktor client common](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-common-knm.png?raw=true)
+
+
+O formato de arquivo `.knm` é um formato binário utilizado internamente pelas 
 bibliotecas `klib` do Kotlin/Native, especialmente em conjunto com a ferramenta `cinterop`. 
 
 Esse formato contém metadados e informações que o compilador do Kotlin usa para compilar e interligar bibliotecas nativas.
