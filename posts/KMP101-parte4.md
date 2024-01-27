@@ -19,7 +19,6 @@
 >   * [Fleet](#fleet)
 >   * [Afinal, qual escolher?](#afinal-qual-escolher)
 > * [Conclusão](#conclusão)
-> * [Feedbacks](#feedbacks)
 
 O desenvolvimento de software é um processo complexo que exige não apenas habilidade e criatividade, mas também um ambiente de desenvolvimento bem configurado.
 
@@ -252,16 +251,6 @@ A seleção cuidadosa das ferramentas e configurações corretas não apenas sim
 No próximo artigo, abordaremos outro aspecto fundamental do KMP: o Plugin do Gradle, uma ferramenta chave para aproveitar ao máximo o potencial do desenvolvimento multiplataforma.
 
 Até a próxima!
-
----
-
-## Feedbacks
-
-🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
-
-Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
-
-Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
 
 ---
 

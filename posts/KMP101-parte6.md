@@ -12,7 +12,6 @@
 >     * [4. Extensão `compose` (também conhecida como `ComposeExtension`)](#4-extensão-compose-também-conhecida-como-composeextension)
 >   * [Outros arquivos Gradle](#outros-arquivos-gradle)
 > * [Conclusão](#conclusão)
-> * [Feedbacks](#feedbacks)
 
 No último artigo, criamos um projeto utilizando o KMP Wizard e, sem muitos esforços, executamos nosso app em aparelhos Android, iOS e Desktop.
 
@@ -339,16 +338,6 @@ A meu ver, o Gradle em projetos KMP não é apenas uma habilidade técnica; é u
 No próximo artigo, vamos finalmente mexer em código Kotlin, aprendendo uma característica essencial do KMP: `expect` e `actual`.
 
 Até a próxima!
-
----
-
-## Feedbacks
-
-🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
-
-Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
-
-Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
 
 ---
 

@@ -82,16 +82,6 @@ Esse entendimento fornece uma perspectiva sobre a versatilidade e a eficiência 
 
 ---
 
-## Feedbacks
-
-🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
-
-Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
-
-Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
-
----
-
 > 🤖 Artigo foi escrito com o auxílio do ChatGPT 4, utilizando o plugin Web.
 >
 > As fontes e o conteúdo são revisados para garantir a relevância das informações fornecidas, assim como as fontes utilizadas em cada prompt.

@@ -4,7 +4,6 @@
  >     * [O que é o Smart Mode no Fleet?](#o-que-é-o-smart-mode-no-fleet)
  >   * [Testando nas plataformas](#testando-nas-plataformas)
  > * [Conclusão](#conclusão)
- > * [Feedbacks](#feedbacks)
 
 Nos últimos artigos, focamos em diversos conceitos-chave do KMP e entendemos desde o paradigma multiplataforma, até a configuração do ambiente.
 
@@ -79,18 +78,6 @@ Agora que temos um projeto base configurado e funcionando, estamos prontos para 
 No próximo artigo, exploraremos um aspecto crucial do Kotlin Multiplataforma: a integração com o Gradle através do Plugin KMP.
 
 Até lá!
-
-
-
----
-
-## Feedbacks
-
-🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
-
-Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
-
-Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
 
 ---
 

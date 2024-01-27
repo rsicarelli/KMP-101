@@ -16,7 +16,6 @@
 >   * [3: Código compartilhado usando o `commonMain`](#3-código-compartilhado-usando-o-commonmain)
 >   * [4: Utilizando os "Source set conventions"](#4-utilizando-os-source-set-conventions)
 > * [Conclusão](#conclusão)
-> * [Feedbacks](#feedbacks)
 
 No último artigo (🔗 [KMP 101: Entendendo como o Kotlin compila para multiplas plataformas](https://dev.to/rsicarelli/kotlin-multiplataforma-101-entendendo-como-o-kotlin-compila-para-multiplas-plataformas-5hba)), aprendemos sobre o frontend, IR e backend do compilador do Kotlin.
 
@@ -189,16 +188,6 @@ A flexibilidade e o poder do KMP nos permitem criar aplicações robustas e efic
 No nosso próximo artigo, mergulharemos no Plugin do KMP para Gradle, explorando como ele nos ajuda a configurar e gerenciar nossos projetos multiplataforma de maneira eficiente.
 
 Até a próxima!
-
----
-
-## Feedbacks
-
-🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
-
-Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
-
-Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
 
 ---
 

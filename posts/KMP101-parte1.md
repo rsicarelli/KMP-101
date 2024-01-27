@@ -7,7 +7,6 @@
 > * [Introduzindo o Flutter](#introduzindo-o-flutter)
 > * [Introduzindo o Kotlin Multiplataforma (KMP)](#introduzindo-o-kotlin-multiplataforma-kmp)
 > * [Considerações finais](#considerações-finais)
-> * [Feedbacks](#feedbacks)
 
 Usamos diariamente uma variedade de aplicativos em dispositivos como celulares, relógios, TVs e computadores, inseridos em um amplo ecossistema digital.
 
@@ -255,16 +254,6 @@ Com KMP, você consegue separar seu aplicativo em um "backend" (nativo ou como u
 Com esse conhecimento, podemos avançar para os conceitos mais específicos do funcionamento do Kotlin Multiplataforma, como o compilador, síntaxe, configuração, etc.
 
 Iremos aprender como o compilador do Kotlin funciona, e como sua estrutura de frontend + backend + IR possibilitam as múltiplas compilações.
-
----
-
-## Feedbacks
-
-🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
-
-Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
-
-Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
 
 ---
 

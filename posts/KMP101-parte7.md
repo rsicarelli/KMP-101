@@ -11,7 +11,6 @@
 >      * [2.1 A palavra reservada `expect` no KMP](#21-a-palavra-reservada-expect-no-kmp)
 >      * [2.2 A palavra reservada `actual` no KMP](#22-a-palavra-reservada-actual-no-kmp)
 > * [Conclusões](#conclusões)
-> * [Feedbacks](#feedbacks)
 
 Nos últimos artigos, aprofundamos nos bastidores do Kotlin Multiplataforma: seu paradigma, a arquitetura do compilador, os source sets, o ambiente de desenvolvimento, a criação e execução de um projeto exemplo, e o papel fundamental do Gradle.
 
@@ -292,16 +291,6 @@ Neste artigo, desbravamos as funcionalidades das palavras reservadas `actual` e 
 No próximo artigo, vamos nos aprofundar no ecossistema das bibliotecas KMP. Aprenderemos como navegar por este território, escolher as bibliotecas adequadas para as nossas necessidades, entender seus detalhes e peculiaridades, e como elas podem impulsionar ainda mais nosso trabalho no desenvolvimento multiplataforma.
 
 Até a próxima!
-
----
-
-## Feedbacks
-
-🔗 [Nova issue no repositório KMP-101](https://github.com/rsicarelli/KMP101/issues/new/choose)
-
-Sua opinião e contribuição fazem desse conteúdo uma fonte de aprendizado mais completo para todo mundo!
-
-Qualquer dúvida, crítica ou sugestão podem ser feitas no repositório [KMP-101](https://github.com/rsicarelli/KMP101)
 
 ---
 
