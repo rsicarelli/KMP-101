@@ -110,12 +110,6 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.ktor.client.core)
         }
-        androidMain.dependencies {
-            implementation(libs.ktor.client.okhttp)
-        }
-        appleMain.dependencies {
-            implementation(libs.ktor.client.darwin)
-        }
     }
 }
 ```
@@ -236,6 +230,39 @@ Nesse caso, observamos um formato de `.jar` normal de qualquer programa em Java/
 Note que essa depêndencia é utilizada tanto pelo Source Set `android` quanto ao `desktop`:
 
 ![Dependencia do Android e JVM](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-jvm-jar.png?raw=true)
+
+### Como descobri se uma biblioteca open-source é compatível com meu target?
+
+O jeito mais fácil é verificar onde essa biblioteca está hospedada, e verificar quais artefatos estão disponíveis.
+
+No caso do `ktor-client-core`, ao acessar o Maven Central e pesquisar pelo grupo, encontramos uma lista de artefatos para cada source set.
+
+![Demo em todas as plataformas](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-maven-ktor-ezgif.com-video-to-gif-converter.gif?raw=true)
+
+## Depêndencias de módulos internos
+Agora que aprendemos sobre como são as depêndencias externas do Kotlin, chegou a hora de falarmos sobre as depêndencias 
+internas, ou seja, de módulos diferentes.
+
+Vamos supor que o módulo `:bar` quer consumir o módulo `:foo`. Note que o módulo `:foo` possuí os mesmos targets do `:bar` + o `js()`.
+
+Nesse caso, o `:bar` consegue consumir o `:foo` já que o `:foo` compila para o target que o `:bar` precisa.
+
+Agora, o contrário já não é possível: o módulo `:foo` espera um target `js()` que o módulo `:bar` não oferece! Nesse caso, há um erro de compilação.
+```kotlin
+// :bar build.gradle.kts
+kotlin {
+    androidTarget()
+    iosARM64()
+}
+
+// :foo build.gradle.kts
+kotlin {
+    androidTarget()
+    iosARM64()
+    js()
+}
+```
+
 
 
 ## Conclusões
