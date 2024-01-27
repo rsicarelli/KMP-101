@@ -221,6 +221,13 @@ contém código intermediário utilizado pelo compilador LLVM.
 
 ![Dependencia do iosarm64 no projeto](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-iosarm64-klib.png?raw=true)
 
+### Dissecando a depêndencia do JS
+Já que estamos aqui, vamos dar uma olhada em como fica a depêndencia do JS no projeto.
+
+Note que ainda é um arquivo `.klib`, mas com um `package.json` declarado.
+
+![Dependencia do JS](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-js-include-klib.png?raw=true)
+
 ### Dissecando a depêndencia do Android
 No caso do Android e JVM, a depêndencia não é um `.klib`, mas sim um `.jar` convencional do mundo JVM.
 
@@ -228,7 +235,8 @@ Nesse caso, observamos um formato de `.jar` normal de qualquer programa em Java/
 
 Note que essa depêndencia é utilizada tanto pelo Source Set `android` quanto ao `desktop`:
 
-![Dependencia do Android e JVM](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-iosarm64-klib.png?raw=true)
+![Dependencia do Android e JVM](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-jvm-jar.png?raw=true)
+
 
 ## Conclusões
 
