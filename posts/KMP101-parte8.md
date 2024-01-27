@@ -171,7 +171,6 @@ Se expandirmos a pasta `linkdata`, vamos nos deparar com outro formato de arquiv
 
 ![Dependencia do ktor client common](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-common-knm.png?raw=true)
 
-
 O formato de arquivo `.knm` é um formato binário utilizado internamente pelas 
 bibliotecas `klib` do Kotlin/Native, especialmente em conjunto com a ferramenta `cinterop`. 
 
@@ -180,7 +179,7 @@ Os arquivos `.knm` são detalhes de implementação para facilitar a interoperab
 
 O último arquivo é o `manifest`:
 ```
-unique_name=ktor-serialization-kotlinx-json_commonMain
+unique_name=ktor-client-core_commonMain
 compiler_version=1.8.22
 abi_version=1.7.0
 metadata_version=1.4.1
@@ -193,50 +192,43 @@ e usar a biblioteca no projeto.
 Cada `.klib` tem um manifesto que descreve seu conteúdo e como ele deve ser tratado durante a compilação e o link de execução.
 
 ### Dissecando a depêndencia do iOS
-Ao declarar o `kotlinx.serialization` no `commonMain`, trouxemos as depêndencias transitivas dos Source Sets do projeto.
+Dependendo de quais plataforma Apple você inclui no seu Source Set, uma depêndencia diferente é importada no projeto.
 
-Na imagem a seguir, observamos 4 novas depêndencias:
-![Dependencias iOS Kotlinx Serialization](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ios-imported.png?raw=true)
+Note que, além dos Source Sets declarados no nosso `build.gradle.kts`, também existe a depêndencia `posix`. 
 
-Você deve estar perguntando, por que trouxemos 4 dependencias, sendo que estamos declarando apenas um único `iOS`?
+A dependência "posix" em um contexto de Kotlin Multiplatform para iOS se refere a interfaces de programação de aplicativos
+para sistemas operacionais compatíveis com POSIX (Portable Operating System Interface), um conjunto de padrões especificados
+pela IEEE para manter a compatibilidade entre sistemas operacionais.
+No caso de iOS, `posixMain` indica que essa biblioteca está usando APIs POSIX, comuns em sistemas baseados em Unix, como o iOS.
 
-Uma informação omitida anteriormente foi a definição dos Source Sets na configuração do módulo.
-
-A definição dos Source Sets influenciam em quais alvos nosso módulo KMP irá compilar. Por conta dessa declaração, 
-automaticamente recebemos as depêndencias específicas de cada plataforma.
-
-Por exemplo, se removêssemos o `iosArm64()`, apenas depêndencias do `iosArm64` e `iosSimulatorArm64` seriam importadas.
-
-```kotlin
-kotlin {
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "KotlinShared"
-        }
-    }
-}
-```
-
-#### Depêndencia "posix"
-A dependência "posix" em um contexto de Kotlin Multiplatform para iOS se refere a interfaces de programação de aplicativos 
-para sistemas operacionais compatíveis com POSIX (Portable Operating System Interface), um conjunto de padrões especificados 
-pela IEEE para manter a compatibilidade entre sistemas operacionais. 
-
-No caso de iOS, `posixMain` indica que a biblioteca `kotlinx-serialization` está usando APIs POSIX, comuns em sistemas 
-baseados em Unix, como o iOS.
+![Dependencia do iOS no projeto](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-ios-imports.png?raw=true)
 
 #### Explorando arquivos do `.klib` do iOS
+Ao analisarmos o conteúdo da `.klib` de um target iOS, verificamos uma estrutura similar ao `commonMain`, porém com uma pasta `ir` 
+e outra `targets.ios_X`.
 
+A pasta `ir` representa diferentes componentes do código e metadados compilados:
+- `bodies.knb`: Contém os corpos das funções compiladas.
+- `debugInfo.knd`: Informações de depuração que permitem o rastreamento de erros e a inspeção do código durante o desenvolvimento e a depuração.
+- `files.knf`: Lista dos arquivos de origem compilados na biblioteca.
+- `irDeclarations.knd`: Declarações intermediárias da Representação Intermediária (IR) que o compilador utiliza para compilar o código Kotlin.
+- `signatures.knt`: Assinaturas das funções e tipos na biblioteca, usadas para identificação única dentro do código compilado.
+- `strings.knt`: Strings literais usadas no código da biblioteca.
+- `types.knt`: Informações sobre os tipos usados na biblioteca, como classes, interfaces e tipos primitivos.
 
+A pasta `targets.ios_X` não possuí nenhum conteúdo nesse caso. Mas, nessa pasta reside arquivos de "bitcode" LLVM, que 
+contém código intermediário utilizado pelo compilador LLVM.
 
-### Regras impostas pelo compilador do Kotlin
-Para garantir a separação completa desses diversos ambientes dos Source Sets, o KMP impõe algumas regras:
-- Não é possível utilizar depêndencias de outras plataformas ou Source Sets. Por exemplo, ao tentar incluir uma depêndencia 
+![Dependencia do iosarm64 no projeto](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-iosarm64-klib.png?raw=true)
 
+### Dissecando a depêndencia do Android
+No caso do Android e JVM, a depêndencia não é um `.klib`, mas sim um `.jar` convencional do mundo JVM.
+
+Nesse caso, observamos um formato de `.jar` normal de qualquer programa em Java/Kotlin.
+
+Note que essa depêndencia é utilizada tanto pelo Source Set `android` quanto ao `desktop`:
+
+![Dependencia do Android e JVM](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ktor-client-iosarm64-klib.png?raw=true)
 
 ## Conclusões
 
