@@ -156,7 +156,7 @@ watchosSimulatorArm64()
 macosArm64()
 tvosArm64()
 ```
-![Dependencia com alguns dos source sets](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-limited-importes.png?raw=true)
+![Dependencia com alguns dos source sets](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-limited-imports.png?raw=true)
 
 #### Dissecando a depêndencia `commonMain`
 Ao explorar o conteúdo dessa depêndencia, notamos uma extensão especial do KMP: a `klib`. 
