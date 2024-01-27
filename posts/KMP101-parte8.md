@@ -88,17 +88,7 @@ public class DarwinLogger : Logger {
 ```
 
 ## Entendendo como as depêndencias no KMP funcionam
-Cada Source Set do Kotlin impõe diferentes aspectos e peculiaridades. Vamos explorar brevemente cada um dos source sets e suas restrições do ambiente
-
-### Common
-A `commonMain` funciona de forma singular em relação aos outros Source Sets. No momento da compilação, ela funciona 
-apenas como `metadata` (termo muito utilizado internamente para a `commonMain`), ou seja, não é compilado diretamente
-em código executável para uma plataforma específica, mas sim em um formato intermediário que contém metadados. 
-
-Estes metadados são então usados pelos backends do Kotlin (Kotlin/JVM, Kotlin/Native, Kotlin/JS, Kotlin/WASM) 
-específica para gerar o código executável correspondente para cada plataforma.  
-
-No `build.gradle.kts` a seguir, vamos aplicar o (https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html)[`ktor-client`] e declarar as depêndencias:  
+Vamos partir do `build.gradle.kts` a seguir, onde aplicamos o (https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html)[`ktor-client`] e declaramos as depêndencias.
 ```kotlin
 kotlin {
     androidTarget {
@@ -141,13 +131,15 @@ kotlin {
 }
 ```
 
-Ao sincronizar o projeto, observamos que uma série de depêndencias foram importadas no projeto. 
+Ao sincronizar o projeto, observamos que uma série de depêndencias foram incluídas.
 
-A imagem a seguir representa apenas uma parte das depêndencias para exemplificar:
+A imagem a seguir representa apenas uma parte dessas depêndencias:
 
 ![Dependencia com todos os source sets](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-all-targets-imported.png?raw=true)
 
-Se removêssemos alguns targets do nosso `build.gradle.kts` e sincronizar o projeto, observamos que as depêndencias específicas de cada source set sumiram:  
+Essas depêndencias são regidas baseado nos `targets` que você declara no seu projeto.
+
+Se removêssemos alguns targets do nosso `build.gradle.kts` e sincronizar o projeto, observamos que as depêndencias específicas de cada source set sumiram:
 ```kotlin
 // removidos:
 watchosArm32()
@@ -157,6 +149,36 @@ macosArm64()
 tvosArm64()
 ```
 ![Dependencia com alguns dos source sets](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-limited-imports.png?raw=true)
+
+Ou seja, cada target declarado espera que uma depêndencia exista, seja ela publicada em algum artefato como Maven, ou depêndencia de um módulo interno.
+
+### Relação entre depêndencias externas e os targets do módulo
+Para utilizar uma depêndencia em um source set comum ou específico, é obrigatório que essa depêndencia seja compilada para o target em específico.
+
+Por exemplo, para você declarar depêndencias no `commonMain`, um artefato (interno ou externo) específico para o common main exista.
+
+O mesmo se aplica para os outros targets. Por exemplo, se você declara o `watchosArm32()` como target, e seu módulo interno ou biblioteca não possuem esses alvos declarados, você recebe um erro.
+
+### Analisando se a depêndencia é apta para o uso no KMP
+Descobrir se uma biblioteca open-source é compatível com sua configuração específica de targets pode não ser tão fácil, 
+já que esse tipo de informação nem sempre está disponível no README ou documentação do projeto. 
+
+Vamos utilizar alguns exemplos de bibliotecas de código livre, e analisar quais targets elas suportam
+
+#### (kotlinx-coroutines-core/build.gradle)[https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/build.gradle]
+Logo de cara nesse arquivo já fica claro quais targets o coroutines suporta:
+
+![Dependencia com alguns dos source sets](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-kotlinx-coroutines-doc.png?raw=true)
+
+
+
+### Common
+A `commonMain` funciona de forma singular em relação aos outros Source Sets. No momento da compilação, ela funciona 
+apenas como `metadata` (termo muito utilizado internamente para a `commonMain`), ou seja, não é compilado diretamente
+em código executável para uma plataforma específica, mas sim em um formato intermediário que contém metadados. 
+
+Estes metadados são então usados pelos backends do Kotlin (Kotlin/JVM, Kotlin/Native, Kotlin/JS, Kotlin/WASM) 
+específica para gerar o código executável correspondente para cada plataforma.  
 
 #### Dissecando a depêndencia `commonMain`
 Ao explorar o conteúdo dessa depêndencia, notamos uma extensão especial do KMP: a `klib`. 
