@@ -9,12 +9,17 @@ O principal objetivo deste projeto é fornecer uma base de conhecimento para dev
 ### Publicações
 
 - [Introdução ao paradigma da Multiplataforma](https://dev.to/rsicarelli/kotlin-multiplataforma-101-introducao-ao-paradigma-da-multiplataforma-eo3)
+- [Entendendo como o Kotlin compila para múltiplas plataformas](https://dev.to/rsicarelli/kotlin-multiplataforma-101-entendendo-como-o-kotlin-compila-para-multiplas-plataformas-5hba)
+- [Dominando os princípios dos Source Sets](https://dev.to/rsicarelli/kotlin-multiplataforma-101-dominando-os-principios-dos-source-sets-4pg)
+- [Entendendo e configurando o ambiente dev no Kotlin Multiplataforma](https://dev.to/rsicarelli/kmp-101-guia-pratico-para-configurar-e-entender-o-ambiente-no-kotlin-multiplataforma-2jcn)
+- [Criando e executando seu primeiro projeto multiplataforma no Fleet](https://dev.to/rsicarelli/kmp-101-criando-e-executando-seu-primeiro-projeto-multiplataforma-no-fleet-4ep7)
+- [Aprendendo sobre o uso do Gradle no Kotlin Multiplataforma](https://dev.to/rsicarelli/kmp-101-aprendendo-sobre-o-uso-do-gradle-no-kotlin-multiplataforma-47f8)
+- [Como compartilhar código no KMP - conectando plataformas com expect e actual](https://dev.to/rsicarelli/kmp-101-como-compartilhar-codigo-no-kmp-conectando-plataformas-com-expect-e-actual-49ma)
+- [Explorando as dependências internas e externas no KMP (fim da série)](https://dev.to/rsicarelli/kmp-101-explorando-as-dependencias-internas-e-externas-no-kmp-4j76)
 
 ## Como Contribuir
 
 🔗 [Nova issue: dúvida, crítica ou sugestão](https://github.com/rsicarelli/KMP-101/issues/new/choose)
-
-Seu feedback é essencial para o crescimento deste projeto! Se você tem sugestões, críticas ou quer contribuir com conteúdo, sinta-se à vontade para abrir uma issue ou enviar um pull request.
 
 ## Licença
 
