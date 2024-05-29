@@ -1,28 +1,28 @@
 ## KMP102 - XCFramework para Devs Kotlin Multiplataforma
 
-Olá! Dou as boas-vindas a série do KMP-102. Vamos avançar nos conceitos do Kotlin Multiplatform aprendendo mais como integrar nosso código Kotlin no iOS e outras plataformas.
+Olá! Dou as boas-vindas a série KMP-102. Vamos aprofundar os conceitos do Kotlin Multiplatform, aprendendo mais sobre como integrar nosso código Kotlin no iOS e em outras plataformas.
 
-Como início dessa série, vamos aprender mais sobre um formato de arquivo especial para compartilhar código com a família Apple: O XCFramework.
+Como início desta série, vamos aprender mais sobre um formato de arquivo especial para compartilhar código com a família Apple: o `XCFramework`.
 
 ### Introdução ao `.framework` da Apple
 
-Um [framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WhatAreFrameworks.html) é um pacote que representa um conjunto de recursos e código-fonte a ser utilizado em projetos para a família Apple. No mundo da JVM, é como se fosse um `.jar` ou `.aar` no caso do Android. 
+Um [framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WhatAreFrameworks.html) é um pacote que contém um conjunto de recursos e código-fonte destinados a serem utilizados em projetos para a família Apple. No mundo da JVM, isso é equivalente a um `.jar` ou, no caso do Android, a um `.aar`.
 
-É um formato pré-compilado que pode ser utilizado entre projetos do Xcode livremente. Esse formato de arquivo possibilita a criação de bibliotecas para a família Apple, possibilitando a distribuição e consumação por gerenciadores de pacotes (como Cocoapods ou o Swift Package Manager)
+Trata-se de um formato pré-compilado que pode ser utilizado livremente entre projetos no Xcode. Esse formato de arquivo facilita a criação de bibliotecas para dispositivos Apple, permitindo sua distribuição e utilização por meio de gerenciadores de pacotes, como CocoaPods ou o Swift Package Manager.
 
-![AppKit.framework](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Art/framework_2x.png)
+<p align="center">
+  <img src="https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Art/framework_2x.png" alt="AppKit.framework" width="450">
+</p>
 
 ### Introdução ao XCFramework
 
-O [XCFramework](https://developer.apple.com/documentation/xcode/creating-a-multi-platform-binary-framework-bundle) é um tipo de pacote ou artefato que facilita a distribuição de bibliotecas para a família Apple. Basicamente, ao invés de distribuírmos vários `.framework` para cada plataforma, temos apenas um único `.xcframework` com múltiplos `.framework` lá dentro, cada um representando uma plataforma específica que a biblioteca suporta.
+O [XCFramework](https://developer.apple.com/documentation/xcode/creating-a-multi-platform-binary-framework-bundle) é um tipo de pacote ou artefato que facilita a distribuição de bibliotecas para a família Apple. Basicamente, ao invés de distribuirmos vários `.frameworks` para cada plataforma, temos um único `.xcframework` contendo múltiplos `.frameworks`, cada um representando uma plataforma específica suportada pela biblioteca.
 
-O Kotlin Multiplataforma (mais especificadamente, o Kotlin/Native) se utiliza desse artefato para pre-compilar código Kotlin para Objective-C, possuindo total interoperabilidade com Swift. Com isso, nosso código Kotlin é facilmente compartilhado entre todos os alvos suportados do seu projeto, e facilita muito o processo de desenvolvimento: ao invés de compilar vários `.framework` para cada alvo suportado no KMP, temos apenas `.xcframework` para cada alvo ou arquitetura de processador.
-
-
+O Kotlin Multiplataforma, mais especificamente o Kotlin/Native, utiliza este artefato para pré-compilar código Kotlin para Objective-C, garantindo total interoperabilidade com Swift. Com isso, nosso código Kotlin é facilmente compartilhado entre todos os alvos suportados do projeto, simplificando significativamente o processo de desenvolvimento: ao invés de compilar vários `.frameworks` para cada alvo suportado no KMP, compilamos apenas um `.xcframework` para cada alvo ou arquitetura de processador.
 
 ### Gerando um XCFramework no KMP
 
-Por de baixo dos panos, o KGP (Kotlin Gradle Plugin) se utiliza da toolchain do Xcode e nos fornece uma API que possibilita a criação do XCFramework através dos nossos `build.gradle.kts`:
+Por trás dos panos, o KGP (Kotlin Gradle Plugin) utiliza a toolchain do Xcode e nos oferece uma API que possibilita a criação de um `XCFramework` através dos nossos arquivos `build.gradle.kts`:
 
 ```kotlin
 kotlin {
@@ -46,24 +46,28 @@ kotlin {
 Ao sincronizar o projeto, observamos que a task `assembleKotlinSharedXCFramework` foi registrada no nosso projeto. Observe que a task tem o miolo `KotlinShared`, que corresponde com o parâmetro `xcFrameworkName` da classe `XCFramework`:
 ![XCFramework registered task](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/xcframework-gradle-task.png?raw=true)
 
-### Analisando o resultado da task `assemble...XCFramework`
+### Analisando o resultado da tarefa assemble...XCFramework
 
-Ao executarmos a task `assembleKotlinSharedXCFramework`, o Kotlin/Native irá gerar os `.xcframework` para todos os targets que definimos no `build.gradle.kts`.
+Ao executarmos a task `assembleKotlinSharedXCFramework`, o Kotlin/Native gera os `.xcframeworks` para todos os alvos que definimos no `build.gradle.kts`.
 
-Esse artefato é justamente o arquivo que precisamos linkar no projeto Xcode para consumir nosso código KMP compilado para Objective-C!
+Este artefato é exatamente o arquivo que precisamos vincular ao projeto Xcode para consumir nosso código KMP compilado para Objective-C!
 
-> **Nota**: tome cuidado com o nome do projeto! Caso haja caracteres especiais, como "-", irá resultar em um erro (apesar do XCFramework ser gerado). 
+> **Nota**: Tenha cuidado com o nome do projeto! Caracteres especiais, como "-", podem resultar em erro, apesar de o XCFramework ser gerado.
 
-![XCFramework task result](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/xcframework-task-result.png?raw=true)
+<p align="center">
+  <img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/xcframework-task-result.png?raw=true" alt="AppKit.framework" width="450">
+</p>
+
 
 ## NativeBuildTypes: debug e release
-Observe que temos 2 frameworks gerados: a versão `debug` e `release`. Esses dois tipos possuem características especiais, e são provenientes da classe [NativeBinaryType](https://github.com/JetBrains/kotlin/blob/master/libraries/tools/kotlin-gradle-plugin-api/src/common/kotlin/org/jetbrains/kotlin/gradle/plugin/mpp/NativeBinaryTypes.kt):
 
-Analisando esse enum, entendemos que a versão `release` possui a flag `optimized = true` e `debuggable = false`. Em contrapartida, a versão `debug` possuí `optimized = false` e `debuggable = true`. 
+Observe que temos dois frameworks gerados: a versão `debug` e a versão `release`. Esses dois tipos possuem características especiais, provenientes da classe [NativeBinaryType](https://github.com/JetBrains/kotlin/blob/master/libraries/tools/kotlin-gradle-plugin-api/src/common/kotlin/org/jetbrains/kotlin/gradle/plugin/mpp/NativeBinaryTypes.kt):
 
-Como você pode imaginar, devemos ter cuidado na hora de escolher qual `XCFramework` utilizar no fluxo de desenvolvimento:
-- Para ambiente de desenvolvimento local, a versão `debug` é a escolha, já que podemos debuggar nosso código KMP.
-- Para ambiente de produção, a versão `release` é a escolha correta, já que o binário é otimizado, além de evitar shipar informações de debug no seu produto final. 
+Analisando esse enum, entendemos que a versão `release` possui a flag `optimized = true` e `debuggable = false`, enquanto a versão `debug` possui `optimized = false` e `debuggable = true`.
+
+Como você pode imaginar, devemos ter cuidado ao escolher qual `XCFramework` utilizar no fluxo de desenvolvimento:
+- Para o ambiente de desenvolvimento local, a versão `debug` é a escolha ideal, pois permite debugar nosso código KMP.
+- Para o ambiente de produção, a versão `release` é a escolha correta, pois o binário é otimizado e evita a inclusão de informações de debug no produto final.
 
 ```kotlin
 // kotlin/libraries/tools/kotlin-gradle-plugin-api/src/common/kotlin/org/jetbrains/kotlin/gradle/plugin/mpp/NativeBinaryTypes.kt
@@ -78,12 +82,12 @@ enum class NativeBuildType(
 ```
 
 ## Controlando qual tipo de build gerar
-A configuração de gerar os tipos de binário são provenientes da função `iosTarget.binaries.framework()`. Ao analisarmos a classe [AbstractKotlinNativeBinaryContainer](https://github.com/JetBrains/kotlin/blob/master/libraries/tools/kotlin-gradle-plugin/src/common/kotlin/org/jetbrains/kotlin/gradle/dsl/AbstractKotlinNativeBinaryContainer.kt), observamos que a função `framework()` possuí um argumento `buildTypes` com um valor padrão.
+
+A configuração para gerar os tipos de binário é proveniente da função `iosTarget.binaries.framework()`. Ao analisarmos a classe [AbstractKotlinNativeBinaryContainer](https://github.com/JetBrains/kotlin/blob/master/libraries/tools/kotlin-gradle-plugin/src/common/kotlin/org/jetbrains/kotlin/gradle/dsl/AbstractKotlinNativeBinaryContainer.kt), observamos que a função `framework()` possui um argumento `buildTypes` com um valor padrão.
+
 ```kotlin
 // kotlin/libraries/tools/kotlin-gradle-plugin/src/common/kotlin/org/jetbrains/kotlin/gradle/dsl/AbstractKotlinNativeBinaryContainer.kt
 
-/** Creates an Objective-C framework with the given [namePrefix] for each build type and configures it. */
-@JvmOverloads
 fun framework(
     namePrefix: String,
     buildTypes: Collection<NativeBuildType> = NativeBuildType.DEFAULT_BUILD_TYPES,
@@ -99,7 +103,7 @@ enum class NativeBuildType(...) : Named {
 }
 ```
 
-Durante o fluxo de desenvolvimento, você pode querer evitar compilar as duas versões devido ao aumento do tempo de compilação. Para isso, basta adaptarmos nosso `build.gradle.kts`:
+Durante o fluxo de desenvolvimento, pode ser desejável evitar a compilação das duas versões devido ao aumento do tempo de compilação. Para isso, basta adaptar nosso `build.gradle.kts`:
 
 ```kotlin
 kotlin {
@@ -127,9 +131,9 @@ kotlin {
 ```
 
 ## Conclusões
-O XCFramework é um tema central no universo KMP. Entender o que é, como funciona e como gerar nos possibilita um maior controle e compreensão dos bastidores do KMP.
+O XCFramework é um tema central no universo do Kotlin Multiplatform (KMP). Compreender o que é, como funciona e como gerá-lo nos proporciona um maior controle e compreensão dos bastidores do KMP.
 
-No próximo artigo, vamos explorar melhor a função `framework()`!
+No próximo artigo, exploraremos melhor a função `framework()`!
 
 ## Fontes
 
