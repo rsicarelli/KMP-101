@@ -44,9 +44,11 @@ kotlin {
 ```
 
 Ao sincronizar o projeto, observamos que a task `assembleKotlinSharedXCFramework` foi registrada no nosso projeto. Observe que a task tem o miolo `KotlinShared`, que corresponde com o parâmetro `xcFrameworkName` da classe `XCFramework`:
-![Flutter Play Store 2022](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/xcframework-gradle-task?raw=true)
+![XCFramework task registered](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/xcframework-gradle-task?raw=true)
 
 ### Analisando o resultado da task `assemble...XCFramework`
+
+![XCFramework task result](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/xcframework-task-result?raw=true)
 
 ## Fontes
 
