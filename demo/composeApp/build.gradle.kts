@@ -1,49 +1,54 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.composeCompiler)
 }
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    compilerOptions {
+        languageVersion.set(KotlinVersion.KOTLIN_2_0)
     }
-    
+
+    androidTarget()
+
     jvm("desktop")
-    
+
+    val xcFramework = XCFramework(xcFrameworkName = "KotlinShared")
+
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "ComposeApp"
+            baseName = "KotlinShared"
             isStatic = true
+
+            xcFramework.add(this)
         }
     }
-    
+
     sourceSets {
         val desktopMain by getting
         androidMain.dependencies {
-            implementation(libs.compose.ui)
-            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.androidx.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
         }
         commonMain.dependencies {
+            implementation(compose.ui)
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material)
-            @OptIn(ExperimentalComposeLibrary::class)
+            implementation(compose.material3)
             implementation(compose.components.resources)
         }
     }
@@ -67,9 +72,6 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -85,7 +87,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     dependencies {
-        debugImplementation(libs.compose.ui.tooling)
+        debugImplementation(libs.androidx.compose.ui.tooling)
     }
 }
 
