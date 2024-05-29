@@ -136,5 +136,5 @@ O XCFramework é um tema central no universo do Kotlin Multiplatform (KMP). Comp
 No próximo artigo, exploraremos melhor a função `framework()`!
 
 ## Fontes
-
-- https://medium.com/@mihail_salari/embracing-the-power-of-xcframeworks-a-comprehensive-guide-for-ios-developers-77fe192d47fe
+- [KotlinLang | Build final native binaries](https://kotlinlang.org/docs/multiplatform-build-native-binaries.html)
+- [Embracing the Power of XCFrameworks: A Comprehensive Guide for iOS Developers](https://medium.com/@mihail_salari/embracing-the-power-of-xcframeworks-a-comprehensive-guide-for-ios-developers-77fe192d47fe)
