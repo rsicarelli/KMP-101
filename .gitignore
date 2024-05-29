@@ -49,3 +49,6 @@ captures/
 
 # OSX
 .DS_STORE
+
+# Fleet
+.fleet
