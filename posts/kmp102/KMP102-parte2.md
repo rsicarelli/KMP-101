@@ -9,9 +9,9 @@ O pacote XCFramework irá oferecer um `.framework` para cada Kotlin Native targe
 
 Consumir um `.framework` varia conforme o ambiente e o codebase existente, mas de forma geral, basta criar um _build phase_ no projeto Xcode para conseguir utilizar o import das classes exportadas pelo Kotlin/Native.
 
-- :link: (Utilizando o Swift Package Manager)[https://kotlinlang.org/docs/native-spm.html]
-- :link: (CocoaPods overview and setup)[https://kotlinlang.org/docs/native-cocoapods.html]
-- :link: (Kotlin/Native as an Apple framework – tutorial)[https://kotlinlang.org/docs/apple-framework.html]
+- :link: [Utilizando o Swift Package Manager](https://kotlinlang.org/docs/native-spm.html)
+- :link: [CocoaPods overview and setup](https://kotlinlang.org/docs/native-cocoapods.html)
+- :link: [Kotlin/Native as an Apple framework – tutorial](https://kotlinlang.org/docs/apple-framework.html)
 
 Existem diversas formas que podemos utilizar para importar no projeto.
 
@@ -29,7 +29,7 @@ Essa abordagem "Fat" tem implicações importantes para a modularização e o ge
 
 A natureza "Fat" dos frameworks no KMP cria um desafio técnico para modularizar nossas distribuições. Isso ocorre porque todas as dependências são empacotadas juntas, forçando-nos a consolidar todo o código do KMP em uma única exportação. Esse modelo pode levar a duplicações de dependências e aumento do tamanho do pacote final, complicando a gestão do projeto, especialmente em ambientes de desenvolvimento colaborativos.
 
-## Contexto sobre aplicações Kotlin.
+## Contexto sobre aplicações Kotlin
 
 Projetos Kotlin possuem uma natureza multi modular para reutilização de cache e desempenho de build. Modularizar projetos influenciam positivamente a experiência de desenvolvimento em projetos Kotlin que utilizam o Gradle.
 
@@ -233,7 +233,7 @@ Integrar código KMP em projetos iOS existentes, especialmente aqueles desenvolv
 O modelo "fat" de frameworks impõe várias complicações no desenvolvimento com KMP, entre elas:
 - **Gestão de Dependências:** É necessário seguir uma linha do tempo específica para incorporar mudanças no código KMP ao repositório iOS, garantindo que todas as dependências estejam sincronizadas.
 - **Sensibilidade a Mudanças:** Qualquer alteração em atributos, parâmetros ou funções pode resultar em quebras no projeto iOS, exigindo correções imediatas para manter a estabilidade do projeto.
-  - **Dependência entre times**: Devs frequentemente precisam esperar que outras times corrijam quebras no iOS antes de poderem avançar com a integração de novas funcionalidades do KMP.
+- **Dependência entre times**: Devs frequentemente precisam esperar que outras times corrijam quebras no iOS antes de poderem avançar com a integração de novas funcionalidades do KMP.
 
 ## Impacto no ciclo de desenvolvimento diário
 
