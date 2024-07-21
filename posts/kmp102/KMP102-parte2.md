@@ -1,4 +1,4 @@
-## KMP-102 - Utilizando o XCFramework no Xcode
+## KMP-102 - Características do XCFramework e desafios para modularizar o KMP no iOS. 
 
 No post anterior, aprendemos sobre como o Kotlin/Native exporta uma coleção de `.frameworks` no formato XCFramework.
 
@@ -18,19 +18,16 @@ Existem diversas formas que podemos utilizar para importar no projeto.
 Todos esses modelos possuem características importantes a serem exploradas.
 
 ## Entendendo como o XCFramework é gerado
+No KMP, o `.framework` é do tipo "Fat". Isso significa que ele inclui não apenas seu código, mas também todas as dependências necessárias. Isso difere de outros tipos, que podem incluir menos conteúdo:
 
-Atualmente no KMP, um `.framework` é "fat". Esse termo é muito bem explicado (nesse artigo)[https://dzone.com/articles/the-skinny-on-fat-thin-hollow-and-uber]:
+- **Skinny**: Contém apenas o seu código, sem nenhuma dependência externa.
+- **Thin**: Inclui seu código e suas dependências diretas.
+- **Hollow**: O oposto do Thin, contendo apenas as dependências, sem seu código.
+- **Fat**: Inclui tudo: seu código, dependências diretas e tudo o necessário para funcionar de forma independente.
 
-- **Skinny** - Contém APENAS as partes que você literalmente digita no editor de código, e NADA mais.
-- **Thin** - Contém todos os itens acima MAIS as dependências diretas do seu aplicativo (drivers de banco de dados, bibliotecas de utilitários etc.).
-- **Hollow** - O inverso do _Thin_ - Contém apenas os bits necessários para executar seu aplicativo, mas NÃO contém o aplicativo em si.
-- **Fat/Uber** - Contém a parte que você literalmente escreve, MAIS as dependências diretas do seu aplicativo, MAIS as partes necessárias para executar o aplicativo "por conta própria".
+Essa abordagem "Fat" tem implicações importantes para a modularização e o gerenciamento de dependências, como discutiremos a seguir.
 
-Ou seja, toda e qualquer dependência que você utilizar será empacotada em um único `.framework`.
-
-E isso impõe um desafio para modularizar nossas distribuições, nos forçando a unificar todo código escrito em KMP em uma única exportação.
-
-Vamos entender melhor esse cenário.
+A natureza "Fat" dos frameworks no KMP cria um desafio técnico para modularizar nossas distribuições. Isso ocorre porque todas as dependências são empacotadas juntas, forçando-nos a consolidar todo o código do KMP em uma única exportação. Esse modelo pode levar a duplicações de dependências e aumento do tamanho do pacote final, complicando a gestão do projeto, especialmente em ambientes de desenvolvimento colaborativos.
 
 ## Contexto sobre aplicações Kotlin.
 
@@ -77,10 +74,9 @@ Então, esse modelo "fat" se torna uma característica adotada em projetos KMP, 
 Com isso, vamos avançar e entender melhor quais desafios esse modelo impõe.
 
 ## Utilizando um "fat" KMP no iOS
-Considere um projeto iOS existente e queremos integrar código KMP.
+Consideremos um cenário onde temos um projeto iOS existente e desejamos integrar código KMP. Para ilustrar, vamos supor que fizemos uma alteração em um módulo, como adicionar um novo parâmetro a uma função. Esta mudança, embora pareça simples, pode quebrar o código no iOS, pois o projeto iOS espera a versão anterior da função. Aqui está um exemplo passo a passo:
 
-Precisamos de uma forma de exportar todas as nossas depêndencias do projeto e compilar em um único XCFramework, algo como:
-
+Primeiro, vamos assumir o seguinte `build.gradle.kts`: 
 ```kotlin
 kotlin {
     val xcFramework = XCFramework(xcFrameworkName = "KotlinShared")
@@ -105,14 +101,14 @@ kotlin {
 }
 ```
 
-Ao executar a task `assembleKotlinSharedXCFramework`, teremos um pacotão com todos os módulos exportados.
+Ao executar a task `assembleKotlinSharedXCFramework`, teremos um pacotão com todos os módulos exportados. 
 
-Ou seja, para projetos KMP, precisamos sempre de um módulo **host**, comumente nomeado `ios-interop`, que exporta todas as dependências do projeto a ser consumida no Xcode.
+Para projetos KMP, é essencial ter um módulo central, muitas vezes chamado de `ios-interop`. Esse módulo funciona como um ponto de integração que agrupa e exporta todas as dependências necessárias para serem usadas no Xcode. Esse método centraliza a gestão das dependências e facilita a manutenção e atualização do projeto.
 
 ## Desafios para modularizar o KMP
-O modelo "fat" impõe um desafio para modularizar o código KMP. Esse desafio é especialmente presentes em projetos que utilizam o SwiftUI como UI no iOS. 
+Como discutimos anteriormente, a natureza "fat" dos frameworks XCFramework no KMP implica que cada módulo exportado inclui todas as suas dependências. Isso resulta em duplicação de dependências comuns entre módulos e um aumento geral no tamanho do pacote final. Além disso, essa abordagem gera desafios significativos na modularização, que são especialmente evidentes em projetos que integram o SwiftUI como interface de usuário no iOS. Vejamos esses desafios mais detalhadamente.
 
-Para entender melhor esse desafio, vamos assumir que a `feature1` e `feature2` expõem as seguintes classes a serem consumidas no iOS:
+Vamos assumir que a `feature1` e `feature2` expõem as seguintes classes Kotlin a serem consumidas no iOS:
 ```kotlin
 class Feature1ViewModel(
     val repository: Feature1Repository
@@ -127,7 +123,7 @@ class Feature2ViewModel(
 }
 ```
 
-Ao exportar o XCFramework, todas as classes de `feature1` e `feature2` estarão presentes no `.framework`, ou seja, conseguimos utilizar ambas `Feature1ViewModel` e `Feature2ViewModel` no iOS.
+Ao exportar o XCFramework, todas as classes de `feature1` e `feature2` estarão presentes no `.framework`, ou seja, conseguimos utilizar ambas `Feature1ViewModel` e `Feature2ViewModel` no iOS:
 
 ```swift
 import KotlinShared
@@ -157,7 +153,7 @@ class Feature2ViewModelWrapper {
 }
 ```
 
-Até aqui, tudo certo. Nosso código KMP foi integrado no iOS com sucesso e vamos assumir que esse código já está até em produção. Agora, vamos adicionar um novo parametro no `Feature1ViewModel`:
+Até aqui, tudo certo. Nosso código KMP foi integrado no iOS com sucesso e vamos assumir que esse código já está até em produção. Agora, vamos adicionar um novo parâmetro no `Feature1ViewModel`:
 
 ```kotlin
 class Feature1ViewModel(
@@ -176,17 +172,13 @@ class Feature1ViewModelWrapper {
     private let viewModel: KotlinSharedFeature1ViewModel
 
     init(repository: Feature1Repository) {
-        self.viewModel = KotlinSharedFeature1ViewModel(repository: repository) //irá quebrar, `repository2` não está sendo enviado
-    }
-
-    func fetch() {
-        viewModel.fetch()
+        //irá quebrar, `repository2` não está sendo enviado
+        self.viewModel = KotlinSharedFeature1ViewModel(repository: repository) 
     }
 }
 ```
 
-Agora, vamos assumir que esse XCFramework já foi gerado e exportado, porém ainda não foi integrado no repositório do iOS. O time responsável pela `feature2` precisa de uma nova funcionalidade e também precisa realizar uma alteração na `Feature2ViewModel`:
-
+Agora, vamos assumir que esse XCFramework já foi gerado e exportado, porém, ainda não foi integrado no repositório do iOS. O time responsável pela `feature2` precisa de uma nova funcionalidade e também precisa realizar uma alteração na `Feature2ViewModel`:
 
 ```kotlin
 class Feature2ViewModel(
@@ -213,44 +205,48 @@ class Feature2ViewModelWrapper {
 }
 ```
 
-Agregando esse cenário acima, temos a seguinte linha do tempo:
-1. `Feature1ViewModel` e `Feature2ViewModel` estão integradas no projeto iOS.
-2. `Feature1ViewModel` adiciona um parâmetro, causando uma quebra no iOS.
-3. Após o merge, uma nova versão do `XFramewok` é gerada e publicada (Swift Package Manager, CocoaPods, hash de commit, etc.).
-4. Essa versão contém a alteração da `Feature1ViewModel` e, consequentemente, a quebra no iOS.
-5. Essa versão ainda não foi integrada no projeto iOS e, simultaneamente, o time da `feature2` altera o `Feature2ViewModel`.
-6. A nova versão do `XFramewok` é gerada e publicada, contendo a alteração da `Feature2ViewModel` e, consequentemente, a quebra no iOS.
-7. Essa nova versão também possúi a alteração da `Feature1ViewModel`.
+**Agregando esse cenário acima, temos a seguinte linha do tempo:**
 
-Nesse cenário, o time responsável pela `feature2` precisa aguardar o time responsável pela `feature1` corrigir a quebra no iOS, para então integrar a versão que corrige a quebra da `feature2`!
+1. `Feature1ViewModel` e `Feature2ViewModel` são integradas ao projeto iOS.
+2. `Feature1ViewModel` é atualizada para incluir um novo parâmetro, causando uma quebra no iOS.
+3. Após o merge das alterações, uma nova versão do `XCFramework` é gerada e publicada através de ferramentas como Swift Package Manager, CocoaPods, controle de versão, etc.
+4. Essa versão, contendo as mudanças em `Feature1ViewModel`, resulta em quebras no iOS.
+5. Antes que essa versão seja integrada ao projeto iOS (corrigindo a quebra), o time de `feature2` realiza alterações no `Feature2ViewModel`.
+6. Uma versão subsequente do `XCFramework` é gerada e publicada, incluindo as novas alterações em `Feature2ViewModel` que também resultam em quebras no iOS.
 
-Resumindo mais ainda para ficar mais claro:
-1. Versão 1.0.0 do XCFramework é integrada no iOS.
-2. Versão 1.1.0 contém breaking change da `feature1`.
-3. Versão 1.2.0 contém breaking change da `feature2`.
-4. Versão 1.2.0 só pode ser integrada no iOS após a integração e correção da `feature1` presentes na versão 1.1.0.
+**Neste cenário complexo:**
 
-Ou seja, o modelo "fat" do XCFramework impõe um desafio enorme para modularizar o código KMP, pois qualquer alteração em qualquer módulo irá quebrar o código no iOS. Isso impõe um gargalo no desenvolvimento e na entrega de novas funcionalidades, já que existe um acoplamento entre os módulos exportados e, obrigatoriamente, precisamos seguir uma linha do tempo específica para incorporar nosso código KMP no repositório do iOS.
+- O time responsável por `feature2` precisa esperar que o time de `feature1` corrija as quebras no iOS antes de poder integrar a correção da `feature2`. Este processo pode criar um ciclo de espera e correção que retarda a entrega de novas funcionalidades.
+
+**Para resumir e simplificar a compreensão:**
+
+1. A versão 1.0.0 do XCFramework, já integrada no iOS, funciona sem problemas.
+2. A versão 1.1.0 introduz uma mudança significativa (`breaking change`) em `feature1`, causando problemas.
+3. A versão 1.2.0 traz uma mudança significativa em `feature2`.
+4. A versão 1.2.0 só pode ser integrada ao iOS depois que as correções de `feature1` na versão 1.1.0 forem integradas e validadas.
 
 ## Dores do desenvolvimento KMP
-Como mencionei acima, essa dor é especialmente presente no modelo onde já temos um projeto iOS existente e queremos integrar código KMP nele. Também presente caso o projeto iOS seja desenvolvido em SwiftUI, onde a comunicação entre os módulos é feita de forma mais direta.
+Integrar código KMP em projetos iOS existentes, especialmente aqueles desenvolvidos com SwiftUI, apresenta desafios únicos devido à necessidade de uma comunicação direta entre módulos. Este desafio é menos intenso em projetos que utilizam Compose Multiplatform (CMP), onde a comunicação entre módulos ocorre de forma mais indireta e desacoplada.
 
-Para projetos escritos exclusivamente em CMP (Compose Multiplatform), essa dor é menos presente, pois a comunicação entre os módulos é feita de forma indireta (internamente em código Kotlin) e menos acoplada.
+O modelo "fat" de frameworks impõe várias complicações no desenvolvimento com KMP, entre elas:
+- **Gestão de Dependências:** É necessário seguir uma linha do tempo específica para incorporar mudanças no código KMP ao repositório iOS, garantindo que todas as dependências estejam sincronizadas.
+- **Sensibilidade a Mudanças:** Qualquer alteração em atributos, parâmetros ou funções pode resultar em quebras no projeto iOS, exigindo correções imediatas para manter a estabilidade do projeto.
+  - **Dependência entre times**: Devs frequentemente precisam esperar que outras times corrijam quebras no iOS antes de poderem avançar com a integração de novas funcionalidades do KMP.
 
-Esse modelo "fat" impõe as seguintes dores para o desenvolvimento KMP:
-- Precisamos seguir uma linha do tempo específica para incorporar nosso código KMP no repositório do iOS.
-- Qualquer adição ou remoção de atributos, parâmetros, argumentos, funções, etc., irá quebrar o código no iOS.
-- Devs precisam aguardar outros devs corrigir o código no iOS para então integrar o código KMP.
+## Impacto no ciclo de desenvolvimento diário
 
-Além disso, no dia a dia, essa dor é mais latente. Por exemplo, estamos integrando novas funcionalidades na `main` branch do projeto host KMP (geralmente o projeto Android), e queremos testar no iOS.
+No dia a dia, esses desafios tornam-se ainda mais evidentes. Por exemplo, ao integrar novas funcionalidades na branch principal (`main`) do projeto KMP — geralmente associada ao desenvolvimento Android — e tentar testá-las no iOS, frequentemente nos deparamos com quebras devido a mudanças que ainda não foram integradas ao projeto iOS.
 
-Iremos gerar um XCFramework localmente no nosso ambiente para integrar no iOS. Porém, o código no iOS irá quebrar, pois a `main` branch do projeto KMP contém alterações que ainda não foram integradas no iOS!
+Para mitigar esse problema, geralmente geramos um XCFramework localmente para testes no iOS. No entanto, essa abordagem ainda sofre com o risco de quebras se a branch main contiver alterações não sincronizadas com o iOS, criando um ciclo contínuo de identificação e correção de quebras, o que atrasa significativamente o desenvolvimento.
 
-Isso gera um gargalo enorme no dia a dia, pois temos um desafio enorme de identificar qual time responsável pela quebra e, consequentemente, aguardar a correção para então integrar o código KMP no iOS. Alternativamente, podemos corrigir na nossa branch essa breaking change para conseguirmos avançar e integrar nosso código KMP no iOS. Porém, ainda sim, para mergear na `main` branch do iOS, precisamos aguardar a correção de outros times.
+Isso gera um gargalo enorme no dia a dia, pois temos um desafio enorme de identificar qual time responsável pela quebra e, consequentemente, aguardar a correção para então integrar o código KMP no iOS. 
 
 Em times pequenos ou projetos pessoais isso não é um problema, mas isso em escala é definitivamente o maior gargalo do desenvolvimento KMP atualmente.
 
 ## Como contornar esse problema
+- **Melhoria na Comunicação**: Reforçar a comunicação entre as times de desenvolvimento para planejar e sincronizar mudanças pode reduzir a frequência de quebras inesperadas.
+- **Automação de Testes**: Implementar testes automatizados e processos de integração contínua para detectar e corrigir quebras antes que elas impactem outros desenvolvedores ou o projeto principal.
+
 Existe uma estratégia que podemos adotar, porém, ficará para um artigo futuro. Primeiro, precisamos subir a escadinha de conhecimento em KMP em outros conceitos para conseguirmos compreender melhor essa estratégia alternativa.
 
 ## Conclusão
