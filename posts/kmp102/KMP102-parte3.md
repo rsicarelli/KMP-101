@@ -1,12 +1,13 @@
-## Utilizando código Kotlin no iOS
 
-No último post, aprendemos a criar um `XCFramework` a partir do código Kotlin, e alguma características sobre os tipos de build gerados.
+## Utilizando Código Kotlin no iOS
 
-Com isso, podemos avançar e aprender as caraterísticas do código Kotlin compilado para Objective-C e como consumir esse código no iOS.
+No último post, aprendemos a criar um `XCFramework` a partir de código Kotlin e exploramos algumas características dos tipos de build gerados.
+
+Com isso, podemos avançar e aprender como o código Kotlin compilado para Objective-C funciona e como consumi-lo no iOS.
 
 ## Exportando um 'Olá mundo' em Kotlin para Objective-C
 
-Para iniciarmos, vamos primeiro entender alguns pontos chave do código Kotlin que é convertido para Objective-C, e consequentemente, utilizar o mesmo código no iOS.
+Para começar, vamos entender alguns pontos importantes sobre como o código Kotlin é convertido para Objective-C e, consequentemente, como utilizá-lo no iOS.
 
 Vamos criar um simples `HelloWorld` em Kotlin:
 
@@ -18,12 +19,12 @@ public expect fun helloWorld(): String
 actual fun helloWorld(): String = "Olá mundo Apple Main"
 ```
 
-Agora precisamos compilar um XCFramework, e integrar no Xcode. A internet já conta com diversos tutoriais sobre como fazer isso, para esse demo eu segui "[How to Integrate Kotlin Multiplatform (KMP) into Your iOS Project](https://jyotibhambhu.medium.com/part-3-how-to-integrate-kotlin-multiplatform-kmp-into-your-ios-project-7dc4016f7fb5)".
+Agora precisamos compilar um `XCFramework` e integrá-lo no Xcode. Existem diversos tutoriais na internet sobre como realizar essa tarefa; para esta demonstração, segui o guia "[How to Integrate Kotlin Multiplatform (KMP) into Your iOS Project](https://jyotibhambhu.medium.com/part-3-how-to-integrate-kotlin-multiplatform-kmp-into-your-ios-project-7dc4016f7fb5)".
 
-Para isso, precisamos basicamente:
+Os passos básicos são:
 
-1. Compilar o XCFramework com `./gradlew assembleKotlinSharedXCFramework`. **NOTA:** substitua "KotlinShared" pelo nome do seu XCFramework! Abordamos isso nos artigos passados.
-2. Configurar o projeto Xcode para consumir o XCFramework gerado.
+1. Compilar o `XCFramework` com `./gradlew assembleKotlinSharedXCFramework`. **NOTA:** substitua "KotlinShared" pelo nome do seu `XCFramework`. Explicamos isso nos artigos anteriores.
+2. Configurar o projeto Xcode para consumir o `XCFramework` gerado.
 3. Utilizar o código Kotlin no iOS.
 
 Depois que toda a configuração for realizada, conseguimos avançar e criar uma tela bem simples em SwiftUI para consumir o código Kotlin:
@@ -48,14 +49,14 @@ Como resultado, teremos:
 
 ### O que está acontecendo aqui?
 
-Passo a passo o que está acontendo nos bastidores:
+Vamos entender o que está acontecendo nos bastidores:
 
-1. O código Kotlin é compilado para Objective-C e empacotado em um XCFramework.
-2. O XCFramework é integrado no projeto Xcode.
-3. Com o XCFramework integrado, podemos importar o código Kotlin no iOS através `import KotlinShared`.
-4. Dentro do `KotlinShared` (o nome do XCFramework!), temos acesso ao código Kotlin compilado para Objective-C.
-5. A classe `HelloWorld_appleKt` é gerada automaticamente pelo Kotlin/Native, e nos permite acessar o método `helloWorld()`.
-6. Com isso, podemos utilizar o código Kotlin no iOS!
+1. O código Kotlin é compilado para Objective-C e empacotado em um `XCFramework`.
+2. O `XCFramework` é integrado no projeto Xcode.
+3. Com o `XCFramework` integrado, podemos importar o código Kotlin no iOS usando `import KotlinShared`.
+4. Dentro de `KotlinShared` (o nome do `XCFramework`), temos acesso ao código Kotlin compilado para Objective-C.
+5. A classe `HelloWorld_appleKt` é gerada automaticamente pelo Kotlin/Native, permitindo o acesso ao método `helloWorld()`.
+6. Assim, podemos utilizar o código Kotlin no iOS!
 
 ```swift
 import KotlinShared
@@ -65,7 +66,7 @@ let helloWorld = HelloWorld_appleKt.helloWorld()
 
 Mas se notarmos, a sintaxe para acessar o código Kotlin no iOS é um pouco diferente do que estamos acostumados. `HelloWorld_appleKt.helloWorld()` é uma sintaxe nada idiomática para o Swift.
 
-Vamos entender melhor esse ponto
+Vamos entender melhor esse ponto.
 
 ## Compreendendo o código gerado pelo Kotlin/Native
 
@@ -73,7 +74,7 @@ A maior limitação hoje no Kotlin/Native é a interoperabilidade com Objective-
 
 Isso porque o Kotlin/Native é um compilador que gera código Objective-C, e não Swift. O código gerado é compatível com Objective-C, e não Swift.
 
-Ou seja, temos várias funcionalidades em Kotlin traduzidas diretamente para Swift (como high order functions), mas não temos uma tradução direta de Kotlin --> Swift.
+Ou seja, temos várias funcionalidades em Kotlin traduzidas diretamente para Swift (como **high order functions**, **enums**, etc), mas não temos uma tradução direta de Kotlin --> Swift.
 
 Para investigar como o código Kotlin é traduzido para Objective-C, podemos acessar o código gerado pelo Kotlin/Native. Para isso, basta dar um `cmd + click` na nossa classe `HelloWorld_appleKt`:
 
