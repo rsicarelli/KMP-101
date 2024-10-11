@@ -6,7 +6,7 @@ struct ContentView: View {
 
     var body: some View {
         Button("Show Text") { showText.toggle() }
-        if showText { Text(HelloWorld_appleKt.helloWorld()) }
+        if showText { Text(HelloWorld.shared.get()) }
     }
 }
 

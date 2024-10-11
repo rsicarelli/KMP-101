@@ -100,4 +100,24 @@ Agora, realizamos o mesmo passo a passo para utilizar no Xcode:
 1. Compilar o XCFramework com `./gradlew assembleKotlinSharedXCFramework`.
 2. No Xcode, `Products` > `Build for ...` > `Running`, ou simplesmente `cmd + shift + r`
 
-![Hello world em Obj-c](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kotlin-shared-hello-world-changed-xcode-error.png?raw=true)
+Logo após o build, notamos que a nossa classe anterior `HelloWorld_appleKt` não está mais disponível.
+![Hello world quebrado no Xcode](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kotlin-shared-hello-world-changed-xcode-error.png?raw=true)
+
+Antes de entender o porquê, vamos integrar nosso código KMP utilizando a nova abordagem:
+
+```swift
+struct ContentView: View {
+    @State private var showText = false
+
+    var body: some View {
+        Button("Show Text") { showText.toggle() }
+        if showText { Text(HelloWorld.shared.get()) }
+    }
+}
+```
+
+Sucesso! Esse código é mais idiomático ao Swift, e conseguimos utilizar o código Kotlin no iOS de uma forma mais amigável.
+
+Se abrirmos o código Objective-C gerado pelo Kotlin/Native, notamos algumas diferenças:
+![Hello world idiomático ao Swift](https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kotlin-shared-hello-world-changed-idiomatic-swift.png?raw=true)
+
