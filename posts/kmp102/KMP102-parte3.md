@@ -143,23 +143,29 @@ Nesse caso, expormos as duas maneiras para o Objective-C não faz sentido, pois 
 Para isso, utilizamos a anotação `@HiddenFromObjC` para esconder a função de alto nível do Objective-C, e expor apenas a extensão do objeto `HelloWorld`!
 
 Notas importantes:
+
 - A anotação `@HiddenFromObjC` é uma anotação do Kotlin/Native, ou seja, não podemos utilizar em nenhum outro source set do KMP.
 - A anotação `@HiddenFromObjC` pode ser utilizada para funções, classes, atributos, etc.
 
 Uma documentação completa entre a interoperabilidade entre Kotlin e Objective-C pode ser encontrada aqui [Interoperability with Swift/Objective-C](https://kotlinlang.org/docs/native-objc-interop.html).
 
 ## Outras maneiras de melhorar a interoperabilidade
+
 Essa abordagem já funciona muito bem, porém, pode ser bem tedioso ter que criar uma extensão para cada função que queremos expor para o iOS.
 
 No final, o que queremos é ter um código Kotlin que seja idiomático ao Swift, mas, ao mesmo tempo, codando Kotlin com todo seu potencial.
 
 Para isso, temos duas opções:
+
 1. Utilizar o plugin [SKIE (Swift Kotlin Interface Enhancer)](https://github.com/touchlab/SKIE)
 2. Atualizara para o Kotlin 2.1 e utilizar o novo sistema de interoperabilidade entre Kotlin --> Swift.
+3. Manualmente exportar extensions para cada acesso que queremos utilizar para o iOS, utilizando Swift.
 
 A primeira opção é a mais robusta e a mais recomendada, já que o SKIE possuí uma série de funcionalidades que facilitam a interoperabilidade entre Kotlin e Swift.
 
-A função de exportar código Swift utilizando Kotlin 2.1 continua em fase experimental, e não é recomendada para produção.
+A segunda opção, exportar código Swift utilizando Kotlin 2.1, continua em fase experimental, e não é recomendada para produção.
+
+A terceira forma é bem manual e pode ser bem tediosa, mas é uma opção válida para quem não quer utilizar o SKIE. Como DEVs KMP, queremos escrever menos código possível, então é uma abordagem custosa de se escalar.
 
 Para esse artigo, vamos utilizar o SKIE para melhorar a interoperabilidade entre Kotlin e Swift!
 
@@ -168,12 +174,14 @@ Para esse artigo, vamos utilizar o SKIE para melhorar a interoperabilidade entre
 Integrar o SKIE em um módulo KMP é bem tranquilo e o projeto fornece uma documentação detalhada sobre a integração, [SKIE > Installation](https://skie.touchlab.co/Installation)
 
 Mas de forma resumida:
+
 1. Aplicar o plugin `co.touchlab.skie` no `build.gradle.kts` do projeto KMP
 2. O plugin deve ser aplicado apenas no módulo que gera o XCFramework.
 
-Basicamente é isso, aplicar o plugin e sincronizar. 
+Basicamente é isso, aplicar o plugin e sincronizar.
 
 Agora, vamos retornar a nossa abordagem anterior e apenas exportar a função `helloWorld()` (sem a anotação `@HiddenFromObjC`):
+
 ```kotlin
 // HelloWorld.apple.kt appleMain
 
@@ -181,6 +189,7 @@ actual fun helloWorld(): String = "Olá mundo Apple Main"
 ```
 
 Seguimos o passo a passo para utilizar no Xcode:
+
 1. Compilar o XCFramework com `./gradlew assembleKotlinSharedXCFramework`.
 2. Aqui na minha máquina eu precisei de um clean build no Xcode, então `Products` > `Clean Build Folder`
 3. No Xcode, `Products` > `Build for ...` > `Running`, ou simplesmente `cmd + shift + r`
@@ -201,8 +210,34 @@ struct ContentView: View {
 }
 ```
 
-Analisando a função `helloWorld()`, observamos que o SKIE gera uma função global que é acessível diretamente no Swift. Essa função global acessa a função `helloWorld()` do Kotlin (na forma "feia"), e a expõe para o Swift. 
+Analisando a função `helloWorld()`, observamos que o SKIE gera uma função global que é acessível diretamente no Swift. Essa função global acessa a função `helloWorld()` do Kotlin (na forma "feia"), e a expõe para o Swift.
 
-<img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kotlin-shared-hello-world-skie.gif?raw=true" width="300" />
+<img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kotlin-shared-hello-world-skie.gif?raw=true" width="500" />
 
 Muito melhor hein? Agora, conseguimos utilizar o código Kotlin no iOS de uma forma idiomática ao Swift!
+
+### Considerações sobre o SKIE
+
+O SKIE é extremamente poderoso e facilita muito a interoperabilidade entre Kotlin e Swift.
+
+Porém, é importante lembrar que o SKIE é um plugin experimental, e está sujeito a mudança e depreciações.
+
+Além disso, como é adicionado uma camada extra de conversão, a construção do XCFramework é deteriorada, e o tempo de build pode aumentar consideravelmente.
+
+Isso porque o SKIE percorre todo o código Kotlin e cria seu par em Swift, o que pode ser um processo bem custoso. O SKIE fará isso não só com seu código Kotlin, mas também com todas as depêndencias que você exporta como "api" para o `KotlinShared`.
+
+#### Reduzindo o tempo de build do SKIE utilizando anotações
+
+Uma funcionalidade muito legal do SKIE é possibilidade de escolher quais funcionalidades do SKIE você quer utilizar.
+
+Para isso, o SKIE fornece uma série de [anotações](https://github.com/touchlab/SKIE/tree/main/SKIE/common/configuration/annotations/impl/src/commonMain/kotlin/co/touchlab/skie/configuration/annotations) que permitem customizar a exportação de código Kotlin para Swift. Isso nos possibilita escolher a dedo qual código queremos exportar para o Swift, e reduzir o tempo de build do SKIE.
+
+## Conclusões finais
+
+Com esse artigo, conseguimos entender como utilizar código Kotlin no Swift, suas características e limitações, e como melhorar a interoperabilidade entre Kotlin e Swift com uma escrita alternativa de código Kotlin ou utilizando o SKIE.
+
+O KMP é craque em exportar código Objective-C, mas estamos atualmente limitados na exportação de código Swift. Com o SKIE, conseguimos melhorar essa limitação e exportar código Kotlin de uma forma mais idiomática ao Swift. E, as próximas versões do Kotlin, a interoperabilidade entre Kotlin e Swift será ainda mais robusta e nativa.
+
+Espero que tenham gostado do artigo! 🚀
+
+Até a próxima 🤙
