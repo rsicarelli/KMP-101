@@ -1,4 +1,4 @@
-## KMP-102 - Características do XCFramework e desafios para modularizar o KMP no iOS. 
+## KMP-102 - Características do XCFramework no KMP 
 
 No post anterior, aprendemos sobre como o Kotlin/Native exporta uma coleção de `.frameworks` no formato XCFramework.
 
