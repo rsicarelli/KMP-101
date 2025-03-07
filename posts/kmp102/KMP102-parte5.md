@@ -30,8 +30,29 @@ Com essa estrutura, conseguimos:
 ## Pavimentando flexibilidade de UI
 Uma dos super poderes do KMP é compartilhar muito, ou pouco código. Essa habilidade implica que podemos  escolher qual UI iremos utilizar em cada plataforma. Dependendo da sua estratégia de construção de UI, você irá precisar de uma abordagem específica de módulos para criar essa flexibilidade.
 
-Para isso, eu gosto de separar cada tela em um "frontend" e "backend". Seguindo o padrão de arquitetura MVVM, o "frontend" seria a nossa UI (Compose, SwiftUI) e o "backend" seria a nossa lógica de negócio (ViewModel/UiModel + Domain + Data). Ou seja, partes da camada de apresentação pode ser compartilhada, mas damos a liberdade para cada plataforma de escolher a sua UI.
+Vamos pensar que cada feature pode ser separada em  um "frontend" e "backend". Seguindo o padrão de arquitetura MVVM, o "frontend" seria a nossa UI (Compose, SwiftUI) e o "backend" seria a nossa lógica de negócio (ViewModel/UiModel + Domain + Data). Ou seja, partes da camada de apresentação pode ser compartilhada, mas damos a liberdade para cada plataforma de escolher a sua UI.
 
-Com isso em mente, uma abordagem é a seguinte separação de módulos:
+Com isso em mente, uma abordagem que pode ser utilizada é a seguinte:
+
+<img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-modularization-pt2.png?raw=true" />
+
+Aqui, nós separamos cada feature que possuí uma tela em 3 módulos:
+- `common`, nosso "backend" que contém a lógica de negócio da feature.
+- `android-ui`, nosso "frontend" apenas em Android, que contém a UI da feature.
+- `common-ui`, nosso "frontend" multiplataforma, que contém a UI da feature compartilhada entre as plataformas.
+
+Com essa abordagem, é possível:
+- Iniciar migrações de telas em SwiftUI gradualmente, sem a necessidade de migrar toda a feature de uma vez.
+- Flexibilidade de migrar features Jetpack Compose (apenas Android) enquanto compartilha o "backend" com outras plataformas.
+- Flexibilidade de iniciar telas em Compose Multiplatform (Android, iOS, Desktop, ...) enquanto compartilha o "backend" com outras plataformas.
+
+## Exportando para o XCFramework
+Agora que exploramos um modelo de modularização que permite flexibilidade na escolha da UI, podemos avançar e exportar nosso código Kotlin para o XCFramework.
+
+Para utilizarmos nosso código Kotlin no iOS, precisamos de um módulo que represente nosso XCFramework. Esse é um módulo "cola", ou seja, um módulo que coleta vários módulos que serão exportados para o XCFramework.
+
+Esse módulo não será utilizado diretamente pelo app Android, mas irá representar nossa exportação para o iOS. Esse módulo comumente é chamado de `ios-interop`:
+
+<img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-modularization-pt3.png?raw=true" />
 
 
