@@ -27,7 +27,7 @@ Com essa estrutura, conseguimos:
 - Ter uma granulalidade no que será exportado para as outras plataformas, especialmente para o XCFramework.
 - Ter a independencia de domínio para times específicos, evitando conflitos de código e responsabilidades. Por exemplo, times podem criar um `CODEOWNER` para um módulo específico, e serem responsáveis por manter e evoluir esse módulo.
 
-## Pavimentando flexibilidade de UI
+## Pavimentando flexibilidade da UI
 Uma dos super poderes do KMP é compartilhar muito, ou pouco código. Essa habilidade implica que podemos  escolher qual UI iremos utilizar em cada plataforma. Dependendo da sua estratégia de construção de UI, você irá precisar de uma abordagem específica de módulos para criar essa flexibilidade.
 
 Vamos pensar que cada feature pode ser separada em  um "frontend" e "backend". Seguindo o padrão de arquitetura MVVM, o "frontend" seria a nossa UI (Compose, SwiftUI) e o "backend" seria a nossa lógica de negócio (ViewModel/UiModel + Domain + Data). Ou seja, partes da camada de apresentação pode ser compartilhada, mas damos a liberdade para cada plataforma de escolher a sua UI.
@@ -51,8 +51,19 @@ Agora que exploramos um modelo de modularização que permite flexibilidade na e
 
 Para utilizarmos nosso código Kotlin no iOS, precisamos de um módulo que represente nosso XCFramework. Esse é um módulo "cola", ou seja, um módulo que coleta vários módulos que serão exportados para o XCFramework.
 
-Esse módulo não será utilizado diretamente pelo app Android, mas irá representar nossa exportação para o iOS. Esse módulo comumente é chamado de `ios-interop`:
+Esse módulo não será utilizado diretamente pelo app Android ou outras plataformas, mas irá representar nossa exportação para o iOS. Esse módulo comumente é chamado de `ios-interop`.
 
-<img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-modularization-pt3.png?raw=true" />
+Para exemplificar o poder da modularização e a flexibilidade do KMP, vamos explorar alguns cenários de compartilhamento:
 
+### Cenário 1: "backend" KMP compartilhado, "frontend" flexível
 
+Nesse cenário, temos um módulo `common` que contém a lógica de negócio da feature. O módulo `android-ui` contém a UI da feature apenas para Android que é utilizada pelo app Android.
+
+Características desse modelo:
+1. A lógica de negócio é compartilhada entre as plataformas.
+2. A UI é específica para Android utilizando Jetpack Compose.
+3. A UI não é compartilhada entre as plataformas.
+4. No iOS, a lógica de negócio é utilizada, mas a UI é específica para iOS utilizando SwiftUI.
+5. Esse modelo é ideal para projetos que desejam migrar para Compose gradualmente, ou para projetos que desejam manter a UI específica para cada plataforma.
+
+<img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-modularization-scenario-1.png?raw=true" />
