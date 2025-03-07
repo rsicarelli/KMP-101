@@ -97,8 +97,35 @@ Nesse cenário, temos um módulo `common` que contém a lógica de negócio da f
 Aqui, não temos distinção por plataforma, e toda a UI é compartilhada entre as plataformas utilizando Compose Multiplatform.
 
 Características desse modelo:
+
 1. A lógica de negócio é compartilhada entre as plataformas.
 2. A UI é compartilhada entre as plataformas utilizando Compose Multiplatform.
 3. Esse modelo é ideal para projetos que desejam compartilhar toda a UI entre as plataformas, sem distinção.
 
 <img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-modularization-scenario-3.png?raw=true" />
+
+## Explorando os benefícios de modularização no KMP
+
+Como vocês puderam ver, a modularização no KMP é uma prática essencial para escalar projetos de forma eficiente e organizada.
+
+Mas tem um ponto crucial que queria martelar: a modularização ajuda a ter uma granulalidade do que queremos exportar para o XCFramework, mais especificamente, para os Obj-C headers.
+
+Como vimos no último post, ser seletivo no código que exportamos para o Obj-C headers está diretamente ligado a eficiência do tempo de build (ou seja, compilação do XCFramework mais eficiente).
+
+Por exemplo, se você segue o modelo 1), garantimos que apenas o `login:common` seja exposto para os headers do Obj-C, enquanto garantimos que nada de `android-ui` seja exposto.
+
+No modelo 3), garantimos que nada do "backend" da jornada seja exposto para o Obj-C headers, apenas o "frontend" multiplataforma.
+
+Essa estratégia é fundamental para a saúde e evolução do repositorio, e garante que o time de iOS possa consumir o XCFramework de forma eficiente e sem problemas de dependências.
+
+## Conclusão
+
+Nesse artigo, exploramos a modularização no KMP e como isso pode ser feito de forma eficiente e organizada. Aprendemos como a modularização pode ser utilizada para escalar projetos de forma eficiente e um spoiler de como isso impacta diretamente na autonomia e independência dos times internos.
+
+Geralmente, em exemplos KMP, temos apenas um módulo `shared`. O cenário de projetos reais, que querem escalar e ter uma estratégia de UI flexível, é muito mais complexo e desafiador.
+
+A modularização é uma peça chave para o sucesso de projetos KMP, e é importante que seja feita de forma eficiente e organizada!
+
+No próximo artigo, vamos explorar estratégias de construção do XCFramework em projetos existentes, garantindo autonomia e independencia para os times internos.
+
+Nos vemos na próxima!
