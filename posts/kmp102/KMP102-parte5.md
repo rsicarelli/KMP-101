@@ -89,3 +89,16 @@ Características desse modelo:
 5. Esse modelo é ideal para projetos que desejam iniciar a migração para Compose Multiplatform, com a habilidade de migrar partes da UI gradualmente.
 
 <img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-modularization-scenario-2.png?raw=true" />
+
+### Cenário 3: 100% Compose Multiplatform
+
+Nesse cenário, temos um módulo `common` que contém a lógica de negócio da feature. O módulo `common-ui` contém a UI da feature compartilhada entre as plataformas.
+
+Aqui, não temos distinção por plataforma, e toda a UI é compartilhada entre as plataformas utilizando Compose Multiplatform.
+
+Características desse modelo:
+1. A lógica de negócio é compartilhada entre as plataformas.
+2. A UI é compartilhada entre as plataformas utilizando Compose Multiplatform.
+3. Esse modelo é ideal para projetos que desejam compartilhar toda a UI entre as plataformas, sem distinção.
+
+<img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-modularization-scenario-3.png?raw=true" />
