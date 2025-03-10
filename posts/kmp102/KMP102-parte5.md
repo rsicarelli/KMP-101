@@ -4,17 +4,17 @@ No último artigo, entramos em detalhes e aprendemos sobre as peculiaridades do 
 Neste artigo, vamos entender melhor o comportamento da modularização em projetos KMP, e como isso pode ser feito de forma eficiente e organizada.
 
 --- 
-<!-- TOC -->
-  * [O que é modularização?](#o-que-é-modularização)
-  * [Modularização no KMP](#modularização-no-kmp)
-  * [Pavimentando flexibilidade da UI](#pavimentando-flexibilidade-da-ui)
-  * [Exportando para o XCFramework](#exportando-para-o-xcframework)
+* [O que é modularização?](#o-que-é-modularização)
+* [Modularização no KMP](#modularização-no-kmp)
+* [Pavimentando flexibilidade da UI](#pavimentando-flexibilidade-da-ui)
+* [Exportando para o XCFramework](#exportando-para-o-xcframework)
     * [Cenário 1: "backend" KMP compartilhado, "frontend" flexível](#cenário-1-backend-kmp-compartilhado-frontend-flexível)
     * [Cenário 2: Híbrido, migrando para Compose Multiplatform](#cenário-2-híbrido-migrando-para-compose-multiplatform)
     * [Cenário 3: 100% Compose Multiplatform](#cenário-3-100-compose-multiplatform)
-  * [Explorando os benefícios da modularização no KMP](#explorando-os-benefícios-da-modularização-no-kmp)
-  * [Conclusão](#conclusão)
-<!-- TOC -->
+* [Explorando os benefícios da modularização no KMP](#explorando-os-benefícios-da-modularização-no-kmp)
+* [Conclusão](#conclusão)
+
+---
 
 ## O que é modularização?
 
@@ -22,7 +22,7 @@ Não irei me alongar muito neste tópico, pois já abordamos esse assunto no [An
 
 Em resumo, modularização é a prática de dividir um projeto em módulos menores e independentes, que podem ser desenvolvidos, testados e mantidos separadamente.
 
-Essa prática é crucial para escalar projetos KMP, já que a modularização impacta diretamente na autonomia e independência dos times internos, evitando que um time dependa do outro para realizar suas tarefas.
+Essa prática é crucial para escalar projetos KMP, já que a modularização impacta diretamente na autonomia e independência dos times, evitando que um time dependa do outro para realizar suas tarefas.
 
 ## Modularização no KMP
 
@@ -68,7 +68,7 @@ Agora que exploramos um modelo de modularização que permite flexibilidade na e
 
 Para utilizar nosso código Kotlin no iOS, precisamos de um módulo que represente nosso XCFramework. Esse é um módulo "cola", ou seja, um módulo que agrega vários módulos que serão exportados para o XCFramework.
 
-Esse módulo não será utilizado diretamente pelo app Android ou outras plataformas, mas*representará nossa exportação para o iOS. Esse módulo é comumente chamado de `ios-interop`.
+Esse módulo não será utilizado diretamente pelo app Android ou outras plataformas, mas representará nossa exportação para o iOS. Esse módulo é comumente chamado de `ios-interop`.
 
 Para exemplificar o poder da modularização e a flexibilidade do KMP, vamos explorar alguns cenários de compartilhamento:
 
@@ -128,16 +128,16 @@ Por exemplo:
 - No **Modelo 1**, garantimos que apenas o `login:common` seja exposto nos headers do Objective-C, enquanto evitamos que qualquer parte do `android-ui` seja exposta.
 - No **Modelo 3**, garantimos que nada do "backend" da jornada seja exposto nos headers, apenas o "frontend" multiplataforma.
 
-Essa estratégia é fundamental para a saúde e evolução do repositório, e garante que o time de iOS possa consumir o XCFramework de forma eficiente e sem conflitos de dependências.
+Essa estratégia é fundamental para a saúde e evolução do repositório, e garante que DEVs KMP possam consumir o XCFramework de forma eficiente e sem conflitos de dependências.
 
 ## Conclusão
 
-Neste artigo, exploramos a modularização no KMP e como isso pode ser feito de forma eficiente e organizada. Aprendemos como essa prática pode ser utilizada para escalar projetos e obtivemos uma prévia de como isso impacta diretamente na autonomia e independência dos times internos.
+Neste artigo, exploramos a modularização no KMP e como isso pode ser feito de forma eficiente e organizada. Aprendemos como essa prática pode ser utilizada para escalar projetos e obtivemos uma prévia de como isso impacta diretamente na autonomia e independência dos times.
 
 Geralmente, em exemplos KMP básicos, temos apenas um módulo `shared`. Porém, em cenários reais - onde projetos precisam escalar e adotar estratégias de UI flexíveis - a complexidade é muito maior.
 
 A modularização é uma peça-chave para o sucesso de projetos KMP, e é crucial que seja implementada de forma estruturada e organizada!
 
-No próximo artigo, vamos explorar estratégias de construção do XCFramework em projetos existentes, garantindo autonomia e independência para os times internos.
+No próximo artigo, vamos explorar estratégias de construção do XCFramework em projetos existentes, garantindo autonomia e independência para os times.
 
 Até a próxima!
