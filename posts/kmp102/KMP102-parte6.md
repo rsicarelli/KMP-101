@@ -24,3 +24,15 @@ Esse cenário reflete a realidade de projetos existentes que querem adicionar ou
 4. O código KMP é compilado em um XCFramework e importado no projeto iOS via Swift Package Manager, CocoaPods ou manualmente (Build Phase/scripting)
 
 <img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ios-integration-scenario1.png?raw=true" />
+
+### Desafios do cenário 1
+Esse cenário é o menos ideal, pois além de termos que lidar com a complexidade de gerenciar um projeto multi-repo, temos que lidar com a complexidade operacional dessa integração. Vamos explorar melhor esse desafio.
+
+Considere o seguinte cenário: temos 3 times, cada um responsável por uma parte do app:
+1. Time 1: realiza mudanças no módulo  `navigation`.
+2. Time 2: realiza mudanças no módulo `login`.
+3. Time 3: realiza mudanças no módulo `home`.
+
+Exemplificando esse cenário a seguir. Para simplificar, omiti as mudanças nos outros módulos:
+
+<img src="https://github.com/rsicarelli/KMP-101/blob/main/posts/assets/kmp-ios-integration-scenario1-breaking-change.png?raw=true" />
